@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "siteName": "Firmalo",
+    "siteDescription": "Firma tu PDF online gratis. Sin registro, sin marca de agua. Tu archivo nunca sale de tu dispositivo."
+  },
+  "header": {
+    "logo": "Firmalo",
+    "cta": "Firmar PDF"
+  },
+  "hero": {
+    "title": "Firma tu PDF online gratis",
+    "subtitle": "Sin registro. Sin marca de agua. Tu archivo nunca sale de tu dispositivo.",
+    "trustBadge": "100% privado — procesamiento local"
+  },
+  "dropzone": {
+    "title": "Arrastra tu PDF aquí",
+    "or": "o",
+    "button": "Seleccionar archivo",
+    "hint": "PDF · Máximo 50 MB",
+    "dragging": "Suelta tu archivo aquí",
+    "error": {
+      "invalidType": "Solo archivos PDF",
+      "tooLarge": "El archivo supera los 50 MB",
+      "corrupted": "No se pudo procesar el archivo. Prueba con otro PDF."
+    }
+  },
+  "signature": {
+    "title": "Crear firma",
+    "tabs": {
+      "draw": "Dibujar",
+      "type": "Escribir",
+      "upload": "Subir imagen"
+    },
+    "placeholder": "Escribe tu nombre",
+    "clear": "Borrar",
+    "apply": "Aplicar firma",
+    "dragHint": "Arrastra para posicionar la firma"
+  },
+  "export": {
+    "button": "Descargar PDF firmado",
+    "processing": "Procesando...",
+    "success": "¡Listo! Tu PDF firmado se ha descargado.",
+    "error": "Error al exportar. Inténtalo de nuevo."
+  },
+  "howItWorks": {
+    "title": "Cómo firmar un PDF online",
+    "steps": [
+      {
+        "title": "Sube tu PDF",
+        "description": "Arrastra o selecciona el archivo PDF que necesitas firmar."
+      },
+      {
+        "title": "Crea tu firma",
+        "description": "Dibuja, escribe o sube una imagen de tu firma."
+      },
+      {
+        "title": "Descarga firmado",
+        "description": "Posiciona la firma y descarga tu PDF firmado al instante."
+      }
+    ]
+  },
+  "benefits": {
+    "title": "¿Por qué usar Firmalo?",
+    "items": [
+      {
+        "title": "100% gratuito",
+        "description": "Sin costos ocultos ni suscripciones. Firma todos los PDF que necesites."
+      },
+      {
+        "title": "Privacidad total",
+        "description": "Tu archivo se procesa en tu navegador. Nunca se sube a ningún servidor."
+      },
+      {
+        "title": "Sin registro",
+        "description": "No necesitas crear una cuenta. Abre la página y firma."
+      },
+      {
+        "title": "Sin marca de agua",
+        "description": "Tu PDF firmado queda limpio y profesional, sin logos ni marcas."
+      },
+      {
+        "title": "Funciona en móvil",
+        "description": "Firma desde tu celular o tablet con la misma facilidad que en desktop."
+      },
+      {
+        "title": "Rápido e instantáneo",
+        "description": "Sin esperas ni colas de procesamiento. Resultado en segundos."
+      }
+    ]
+  },
+  "security": {
+    "title": "Seguridad y privacidad",
+    "description": "Firmalo procesa tu documento directamente en tu navegador usando tecnología de cifrado moderna. Tu archivo nunca se sube a nuestros servidores. No almacenamos, leemos ni compartimos tus documentos. Tu privacidad es nuestra prioridad.",
+    "features": [
+      "Procesamiento 100% local en tu dispositivo",
+      "Sin almacenamiento en servidores",
+      "Conexión cifrada con HTTPS",
+      "Sin acceso de terceros a tus documentos"
+    ]
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "question": "¿Es realmente gratis firmar un PDF?",
+        "answer": "Sí, Firmalo es 100% gratuito y sin límites. Puedes firmar todos los documentos que necesites sin pagar nada."
+      },
+      {
+        "question": "¿Mis documentos son seguros?",
+        "answer": "Totalmente. Tu archivo se procesa localmente en tu navegador y nunca se sube a ningún servidor. Nadie más tiene acceso a tus documentos."
+      },
+      {
+        "question": "¿Necesito crear una cuenta?",
+        "answer": "No. Firmalo funciona sin registro. Simplemente abre la página, sube tu PDF, firma y descarga."
+      },
+      {
+        "question": "¿Funciona en celular?",
+        "answer": "Sí. Firmalo está optimizado para funcionar en cualquier dispositivo: celular, tablet o computadora."
+      },
+      {
+        "question": "¿La firma tiene validez legal?",
+        "answer": "Firmalo coloca una firma visual en tu PDF. Para documentos que requieren firma electrónica avanzada o certificada, consulta la legislación de tu país."
+      },
+      {
+        "question": "¿Qué tamaño máximo de archivo puedo firmar?",
+        "answer": "Puedes firmar archivos PDF de hasta 50 MB. Como el procesamiento es local, no hay límites de velocidad del servidor."
+      }
+    ]
+  },
+  "geo": {
+    "title": "Firmar PDF online en tu país",
+    "countries": [
+      { "name": "México", "flag": "🇲🇽" },
+      { "name": "Colombia", "flag": "🇨🇴" },
+      { "name": "Argentina", "flag": "🇦🇷" },
+      { "name": "Chile", "flag": "🇨🇱" },
+      { "name": "Perú", "flag": "🇵🇪" }
+    ],
+    "description": "Firmalo funciona para cualquier documento PDF sin importar tu ubicación. Miles de usuarios en {country} ya confían en Firmalo para firmar contratos, formularios y documentos oficiales."
+  },
+  "footer": {
+    "privacy": "Política de privacidad",
+    "terms": "Términos de uso",
+    "contact": "Contacto",
+    "copyright": "© {year} Firmalo. Todos los derechos reservados.",
+    "tagline": "Firma PDF online gratis"
+  },
+  "cta": {
+    "primary": "Firmar ahora",
+    "secondary": "Subir PDF",
+    "tertiary": "Probar gratis"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "siteName": "Firmalo",
+    "siteDescription": "Assine seu PDF online grátis. Sem cadastro, sem marca d'água. Seu arquivo nunca sai do seu dispositivo."
+  },
+  "header": {
+    "logo": "Firmalo",
+    "cta": "Assinar PDF"
+  },
+  "hero": {
+    "title": "Assine seu PDF online grátis",
+    "subtitle": "Sem cadastro. Sem marca d'água. Seu arquivo nunca sai do seu dispositivo.",
+    "trustBadge": "100% privado — processamento local"
+  },
+  "dropzone": {
+    "title": "Arraste seu PDF aqui",
+    "or": "ou",
+    "button": "Selecionar arquivo",
+    "hint": "PDF · Máximo 50 MB",
+    "dragging": "Solte seu arquivo aqui",
+    "error": {
+      "invalidType": "Apenas arquivos PDF",
+      "tooLarge": "O arquivo excede 50 MB",
+      "corrupted": "Não foi possível processar o arquivo. Tente outro PDF."
+    }
+  },
+  "signature": {
+    "title": "Criar assinatura",
+    "tabs": {
+      "draw": "Desenhar",
+      "type": "Digitar",
+      "upload": "Enviar imagem"
+    },
+    "placeholder": "Digite seu nome",
+    "clear": "Limpar",
+    "apply": "Aplicar assinatura",
+    "dragHint": "Arraste para posicionar a assinatura"
+  },
+  "export": {
+    "button": "Baixar PDF assinado",
+    "processing": "Processando...",
+    "success": "Pronto! Seu PDF assinado foi baixado.",
+    "error": "Erro ao exportar. Tente novamente."
+  },
+  "howItWorks": {
+    "title": "Como assinar um PDF online",
+    "steps": [
+      {
+        "title": "Envie seu PDF",
+        "description": "Arraste ou selecione o arquivo PDF que precisa assinar."
+      },
+      {
+        "title": "Crie sua assinatura",
+        "description": "Desenhe, digite ou envie uma imagem da sua assinatura."
+      },
+      {
+        "title": "Baixe assinado",
+        "description": "Posicione a assinatura e baixe seu PDF assinado instantaneamente."
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Por que usar o Firmalo?",
+    "items": [
+      {
+        "title": "100% gratuito",
+        "description": "Sem custos ocultos nem assinaturas. Assine todos os PDFs que precisar."
+      },
+      {
+        "title": "Privacidade total",
+        "description": "Seu arquivo é processado no navegador. Nunca é enviado para nenhum servidor."
+      },
+      {
+        "title": "Sem cadastro",
+        "description": "Não precisa criar conta. Abra a página e assine."
+      },
+      {
+        "title": "Sem marca d'água",
+        "description": "Seu PDF assinado fica limpo e profissional, sem logos nem marcas."
+      },
+      {
+        "title": "Funciona no celular",
+        "description": "Assine do celular ou tablet com a mesma facilidade que no computador."
+      },
+      {
+        "title": "Rápido e instantâneo",
+        "description": "Sem esperas nem filas de processamento. Resultado em segundos."
+      }
+    ]
+  },
+  "security": {
+    "title": "Segurança e privacidade",
+    "description": "O Firmalo processa seu documento diretamente no navegador usando tecnologia de criptografia moderna. Seu arquivo nunca é enviado para nossos servidores. Não armazenamos, lemos nem compartilhamos seus documentos. Sua privacidade é nossa prioridade.",
+    "features": [
+      "Processamento 100% local no seu dispositivo",
+      "Sem armazenamento em servidores",
+      "Conexão criptografada com HTTPS",
+      "Sem acesso de terceiros aos seus documentos"
+    ]
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "items": [
+      {
+        "question": "É realmente grátis assinar um PDF?",
+        "answer": "Sim, o Firmalo é 100% gratuito e sem limites. Você pode assinar todos os documentos que precisar sem pagar nada."
+      },
+      {
+        "question": "Meus documentos estão seguros?",
+        "answer": "Totalmente. Seu arquivo é processado localmente no navegador e nunca é enviado a nenhum servidor. Ninguém mais tem acesso aos seus documentos."
+      },
+      {
+        "question": "Preciso criar uma conta?",
+        "answer": "Não. O Firmalo funciona sem cadastro. Basta abrir a página, enviar seu PDF, assinar e baixar."
+      },
+      {
+        "question": "Funciona no celular?",
+        "answer": "Sim. O Firmalo é otimizado para funcionar em qualquer dispositivo: celular, tablet ou computador."
+      },
+      {
+        "question": "A assinatura tem validade legal?",
+        "answer": "O Firmalo coloca uma assinatura visual no PDF. Para documentos que exigem assinatura eletrônica avançada ou certificada, consulte a legislação do seu país."
+      },
+      {
+        "question": "Qual o tamanho máximo de arquivo que posso assinar?",
+        "answer": "Você pode assinar arquivos PDF de até 50 MB. Como o processamento é local, não há limites de velocidade do servidor."
+      }
+    ]
+  },
+  "geo": {
+    "title": "Assinar PDF online no Brasil",
+    "countries": [
+      { "name": "Brasil", "flag": "🇧🇷" }
+    ],
+    "description": "O Firmalo funciona para qualquer documento PDF independente da sua localização. Milhares de usuários no {country} já confiam no Firmalo para assinar contratos, formulários e documentos oficiais."
+  },
+  "footer": {
+    "privacy": "Política de privacidade",
+    "terms": "Termos de uso",
+    "contact": "Contato",
+    "copyright": "© {year} Firmalo. Todos os direitos reservados.",
+    "tagline": "Assine PDF online grátis"
+  },
+  "cta": {
+    "primary": "Assinar agora",
+    "secondary": "Enviar PDF",
+    "tertiary": "Testar grátis"
+  }
+}
