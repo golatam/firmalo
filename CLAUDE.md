@@ -67,7 +67,11 @@ src/
 └── middleware.ts               # Language detection redirect
 ```
 
-## Domain
+## Hosting & Domain
 
-- **Domain:** firmalo.io (pending registration)
+- **Domain:** firmalo.io (Namecheap, DNS → Railway)
+- **Hosting:** Railway (project: firmalo, workspace: Go Latam!)
+- **Production URL:** https://firmalo.io
+- **Railway URL:** https://firmalo-production.up.railway.app
+- **Deploy:** `railway up` from repo root (auto-detects Next.js)
 - **Repo:** github.com/golatam/firmalo
