@@ -6,7 +6,13 @@ import type { Dictionary } from "@/lib/dictionaries";
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
 
-export function DropZone({ dict, lang }: { dict: Dictionary; lang: Locale }) {
+interface DropZoneProps {
+  dict: Dictionary;
+  lang: Locale;
+  onFileAccepted?: (file: File) => void;
+}
+
+export function DropZone({ dict, lang, onFileAccepted }: DropZoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -34,8 +40,7 @@ export function DropZone({ dict, lang }: { dict: Dictionary; lang: Locale }) {
         return;
       }
       setFileName(file.name);
-      // TODO: Pass file to PDF viewer/signer
-      console.log("File accepted:", file.name, file.size);
+      onFileAccepted?.(file);
     },
     [validateFile]
   );

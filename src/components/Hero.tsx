@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
-import { DropZone } from "./DropZone";
+import { SigningToolLoader } from "./SigningToolLoader";
 
 export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   return (
@@ -31,9 +31,9 @@ export function Hero({ dict, lang }: { dict: Dictionary; lang: Locale }) {
           {dict.hero.trustBadge}
         </div>
 
-        {/* Drop zone — the tool IS the hero */}
+        {/* The signing tool — IS the landing page */}
         <div className="mt-8">
-          <DropZone dict={dict} lang={lang} />
+          <SigningToolLoader dict={dict} lang={lang} />
         </div>
       </div>
     </section>
