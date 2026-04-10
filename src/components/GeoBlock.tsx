@@ -8,11 +8,11 @@ export function GeoBlock({ dict }: { dict: Dictionary }) {
           {dict.geo.title}
         </h2>
 
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
           {dict.geo.countries.map((country) => (
             <div
               key={country.name}
-              className="flex flex-col items-center gap-2 p-4 rounded-xl bg-surface border border-border hover:border-primary/30 transition-colors"
+              className="flex flex-col items-center gap-2 p-4 w-[calc(50%-0.5rem)] sm:w-auto sm:min-w-[140px] rounded-xl bg-surface border border-border hover:border-primary/30 transition-colors"
             >
               <span className="text-3xl">{country.flag}</span>
               <span className="text-sm font-medium text-text">

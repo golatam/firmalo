@@ -6,9 +6,16 @@ export async function exportSignedPdf(
   signatureDataUrl: string,
   placement: SignaturePlacement
 ): Promise<Blob> {
-  // Load original PDF
   const arrayBuffer = await originalFile.arrayBuffer();
-  const pdfDoc = await PDFDocument.load(arrayBuffer);
+
+  // Load original PDF — ignores encryption flag so visually-encrypted
+  // (but not truly locked) files still work
+  let pdfDoc: PDFDocument;
+  try {
+    pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  } catch {
+    throw new Error("PDF_LOAD_FAILED");
+  }
 
   // Get the target page (0-indexed)
   const pages = pdfDoc.getPages();

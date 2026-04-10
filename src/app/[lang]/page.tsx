@@ -6,6 +6,7 @@ import { Benefits } from "@/components/Benefits";
 import { Security } from "@/components/Security";
 import { GeoBlock } from "@/components/GeoBlock";
 import { FAQ } from "@/components/FAQ";
+import { PopularGuides } from "@/components/PopularGuides";
 
 export default async function HomePage({
   params,
@@ -22,6 +23,7 @@ export default async function HomePage({
       <HowItWorks dict={dict} />
       <Benefits dict={dict} />
       <Security dict={dict} />
+      <PopularGuides dict={dict} lang={lang} />
       <GeoBlock dict={dict} />
       <FAQ dict={dict} />
     </>

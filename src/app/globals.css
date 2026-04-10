@@ -29,6 +29,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent pull-to-refresh / overscroll when signing tool is active */
+.signing-active {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+}
+
 /* Drop zone animations */
 .dropzone-active {
   border-color: var(--color-primary) !important;

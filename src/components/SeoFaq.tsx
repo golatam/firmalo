@@ -1,15 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import type { Dictionary } from "@/lib/dictionaries";
+import type { SeoPageData } from "@/lib/seo-pages";
 
-function FAQItem({
-  question,
-  answer,
-}: {
-  question: string;
-  answer: string;
-}) {
+function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,7 +16,7 @@ function FAQItem({
           {question}
         </span>
         <svg
-          className={`w-5 h-5 text-text-muted flex-shrink-0 transition-transform duration-200 ${
+          className={`w-5 h-5 text-text-muted shrink-0 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
@@ -48,21 +42,42 @@ function FAQItem({
   );
 }
 
-export function FAQ({ dict }: { dict: Dictionary }) {
+export function SeoFaq({
+  faq,
+  title,
+}: {
+  faq: SeoPageData["faq"];
+  title: string;
+}) {
+  // JSON-LD FAQPage structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
-    <section className="py-16 sm:py-20 bg-surface">
+    <section className="py-12 sm:py-16 bg-surface-alt">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-text">
-          {dict.faq.title}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        <h2 className="text-xl sm:text-2xl font-bold text-center text-text">
+          {title}
         </h2>
 
-        <div className="mt-10 bg-surface border border-border rounded-xl p-6">
-          {dict.faq.items.map((item, i) => (
-            <FAQItem
-              key={i}
-              question={item.question}
-              answer={item.answer}
-            />
+        <div className="mt-8 bg-surface border border-border rounded-xl p-6">
+          {faq.map((item, i) => (
+            <FaqItem key={i} question={item.question} answer={item.answer} />
           ))}
         </div>
       </div>

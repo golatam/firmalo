@@ -28,13 +28,13 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
               <Link
                 key={locale}
                 href={getLocalizedPath(locale)}
-                className={`px-2 py-1 rounded-md transition-colors ${
+                className={`px-2 py-1 min-h-[44px] flex items-center rounded-md transition-colors ${
                   locale === lang
                     ? "bg-primary text-white font-medium"
                     : "text-text-secondary hover:bg-primary-light"
                 }`}
               >
-                {localeFlags[locale]} {localeNames[locale]}
+                {localeFlags[locale]} <span className="hidden sm:inline ml-1">{localeNames[locale]}</span>
               </Link>
             ))}
           </div>

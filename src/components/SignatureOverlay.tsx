@@ -150,7 +150,9 @@ export function SignatureOverlay({
         left: `${position.x}%`,
         top: `${position.y}%`,
         width: `${width}%`,
-        transform: "translate(-50%, -50%)",
+        transform: `translate(-50%, -50%)${isDragging ? " scale(1.03)" : ""}`,
+        transition: isDragging ? "none" : "transform 0.15s ease",
+        touchAction: "none",
         zIndex: 20,
       }}
       onMouseDown={(e) => {
@@ -158,6 +160,7 @@ export function SignatureOverlay({
         handleDragStart(e.clientX, e.clientY);
       }}
       onTouchStart={(e) => {
+        e.preventDefault();
         handleDragStart(e.touches[0].clientX, e.touches[0].clientY);
       }}
     >
@@ -176,28 +179,28 @@ export function SignatureOverlay({
           draggable={false}
         />
 
-        {/* Remove button */}
+        {/* Remove button — larger on mobile */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
-          className="absolute -top-2.5 -right-2.5 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-sm"
+          className="absolute -top-3.5 -right-3.5 sm:-top-2.5 sm:-right-2.5 w-8 h-8 sm:w-6 sm:h-6 bg-error text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-sm"
           onMouseDown={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
         >
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-3 sm:h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        {/* Resize handle */}
+        {/* Resize handle — larger on mobile */}
         <div
-          className="absolute -bottom-1.5 -right-1.5 w-5 h-5 bg-primary rounded-full cursor-se-resize flex items-center justify-center shadow-sm"
+          className="absolute -bottom-2.5 -right-2.5 sm:-bottom-1.5 sm:-right-1.5 w-8 h-8 sm:w-5 sm:h-5 bg-primary rounded-full cursor-se-resize flex items-center justify-center shadow-sm"
           onMouseDown={handleResizeStart}
           onTouchStart={handleResizeStart}
         >
-          <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3.5 h-3.5 sm:w-2.5 sm:h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 20L20 4" />
           </svg>
         </div>

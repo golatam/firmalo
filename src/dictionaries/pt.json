@@ -34,7 +34,9 @@
     "placeholder": "Digite seu nome",
     "clear": "Limpar",
     "apply": "Aplicar assinatura",
-    "dragHint": "Arraste para posicionar a assinatura"
+    "dragHint": "Arraste para posicionar a assinatura",
+    "onPage": "Sua assinatura está na página {page}",
+    "goToPage": "Ir para página {page}"
   },
   "export": {
     "button": "Baixar PDF assinado",
