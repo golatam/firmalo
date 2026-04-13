@@ -42,7 +42,8 @@
     "button": "Baixar PDF assinado",
     "processing": "Processando...",
     "success": "Pronto! Seu PDF assinado foi baixado.",
-    "error": "Erro ao exportar. Tente novamente."
+    "error": "Erro ao exportar. Tente novamente.",
+    "rateLimited": "Você atingiu o limite de {max} downloads por hora. Tente novamente em {minutes} minutos."
   },
   "howItWorks": {
     "title": "Como assinar um PDF online",

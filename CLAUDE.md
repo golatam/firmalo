@@ -11,8 +11,8 @@
 | Day 3: Mobile polish + edge cases | ✅ Done |
 | Day 4: 20 SEO pages (10 ES + 10 PT) | ✅ Done |
 | Day 5: GA4 + Search Console + SEO position tracking | ✅ Done |
-| Day 6: Rate limit + legal pages | Pending |
-| Day 7: QA + launch | Pending |
+| Day 6: Rate limit + legal pages | ✅ Done |
+| Day 7: QA + launch | 🔄 In Progress |
 
 ## Architecture
 
@@ -65,6 +65,7 @@ src/
 │   ├── dictionaries.ts        # Dictionary loader
 │   ├── pdf-worker.ts          # pdf.js worker setup
 │   ├── pdf-export.ts          # pdf-lib export + download
+│   ├── rate-limit.ts          # Client-side export rate limiting (localStorage)
 │   └── seo-pages.ts           # SEO page data (20 pages, 10 ES + 10 PT)
 └── middleware.ts               # Language detection redirect
 ```

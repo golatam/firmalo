@@ -11,6 +11,7 @@ import {
   type SignaturePlacement,
 } from "./SignatureOverlay";
 import { exportSignedPdf, downloadBlob } from "@/lib/pdf-export";
+import { recordExport, minutesUntilReset } from "@/lib/rate-limit";
 
 type Step = "upload" | "sign" | "done";
 
@@ -77,6 +78,17 @@ export function SigningTool({
 
     setExporting(true);
     setExportError(null);
+
+    if (!recordExport()) {
+      const mins = minutesUntilReset();
+      setExportError(
+        dict.export.rateLimited
+          .replace("{max}", "10")
+          .replace("{minutes}", String(mins))
+      );
+      setExporting(false);
+      return;
+    }
 
     try {
       const blob = await exportSignedPdf(file, signatureDataUrl, placement);

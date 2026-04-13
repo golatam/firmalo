@@ -42,7 +42,8 @@
     "button": "Descargar PDF firmado",
     "processing": "Procesando...",
     "success": "¡Listo! Tu PDF firmado se ha descargado.",
-    "error": "Error al exportar. Inténtalo de nuevo."
+    "error": "Error al exportar. Inténtalo de nuevo.",
+    "rateLimited": "Has alcanzado el límite de {max} descargas por hora. Intenta de nuevo en {minutes} minutos."
   },
   "howItWorks": {
     "title": "Cómo firmar un PDF online",
