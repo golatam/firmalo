@@ -10,7 +10,8 @@
 | Day 2: PDF viewer + signature modal + export | ✅ Done |
 | Day 3: Mobile polish + edge cases | ✅ Done |
 | Day 4: 20 SEO pages (10 ES + 10 PT) | ✅ Done |
-| Day 5-6: Analytics + rate limit + legal | Pending |
+| Day 5: GA4 + Search Console + SEO position tracking | ✅ Done |
+| Day 6: Rate limit + legal pages | Pending |
 | Day 7: QA + launch | Pending |
 
 ## Architecture
@@ -53,6 +54,7 @@ src/
 │   ├── SeoContent.tsx         # SEO page content sections
 │   ├── SeoFaq.tsx             # SEO page FAQ with JSON-LD
 │   ├── RelatedPages.tsx       # Internal linking between SEO pages
+│   ├── GoogleAnalytics.tsx     # GA4 client component (next/script)
 │   ├── Header.tsx             # Header + lang switcher
 │   └── Footer.tsx             # Footer
 ├── dictionaries/
@@ -75,3 +77,12 @@ src/
 - **Railway URL:** https://firmalo-production.up.railway.app
 - **Deploy:** `railway up` from repo root (auto-detects Next.js)
 - **Repo:** github.com/golatam/firmalo
+
+## Analytics & SEO Tracking
+
+- **GA4:** `G-C5ZMVHWP4Z` via `GoogleAnalytics` component + `NEXT_PUBLIC_GA_ID` env var
+- **Google Search Console:** domain property `firmalo.io`, verified via DNS
+- **SEO Position Tracking:** `seo-tracking/` — weekly GSC data collection + Slack reports
+  - `semantic-core.json` — 20 pages, 63 keywords (ES + PT), 4 clusters
+  - GitHub Actions: every Monday 12:00 UTC → snapshot → Slack report
+  - Commands: `npm run seo:weekly`, `npm run seo:report`, `npm run seo:slack-test`

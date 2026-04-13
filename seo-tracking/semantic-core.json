@@ -1,0 +1,209 @@
+{
+  "site": "firmalo.io",
+  "updated": "2026-04-13",
+  "pages": [
+    {
+      "url": "/es/firmar-pdf-online-gratis",
+      "title": "Firmar PDF online gratis",
+      "category": "core",
+      "keywords": [
+        { "keyword": "firmar pdf online gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf online", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firma pdf online", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar documentos pdf online", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/firmar-pdf-sin-registro",
+      "title": "Firmar PDF sin registro",
+      "category": "core",
+      "keywords": [
+        { "keyword": "firmar pdf sin registro", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf sin crear cuenta", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firma digital sin registro", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/firmar-pdf-sin-marca-de-agua",
+      "title": "Firmar PDF sin marca de agua",
+      "category": "core",
+      "keywords": [
+        { "keyword": "firmar pdf sin marca de agua", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf gratis sin marca de agua", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firma pdf sin watermark", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/anadir-firma-a-pdf",
+      "title": "Anadir firma a PDF",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "anadir firma a pdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "informational" },
+        { "keyword": "como firmar un pdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "informational" },
+        { "keyword": "poner firma en pdf", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "informational" },
+        { "keyword": "agregar firma a documento pdf", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "informational" }
+      ]
+    },
+    {
+      "url": "/es/crear-firma-online",
+      "title": "Crear firma online",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "crear firma online", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "crear firma digital gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "hacer firma electronica", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "crear firma para documentos", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/firmar-pdf-desde-celular",
+      "title": "Firmar PDF desde celular",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "firmar pdf desde celular", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf en celular", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar documentos desde el celular", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf iphone", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar pdf android", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/firmar-contrato-alquiler-pdf",
+      "title": "Firmar contrato de alquiler PDF",
+      "category": "usecase",
+      "keywords": [
+        { "keyword": "firmar contrato alquiler pdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar contrato de arrendamiento online", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar contrato pdf online", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/firmar-pdf-para-visa",
+      "title": "Firmar PDF para visa",
+      "category": "usecase",
+      "keywords": [
+        { "keyword": "firmar pdf para visa", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firmar documentos para visa", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "firma digital para tramite de visa", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/es/alternativa-smallpdf-firmar-pdf",
+      "title": "Alternativa a SmallPDF para firmar PDF",
+      "category": "competitor",
+      "keywords": [
+        { "keyword": "alternativa smallpdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "alternativa a smallpdf gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "smallpdf alternativa sin marca de agua", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "commercial" }
+      ]
+    },
+    {
+      "url": "/es/alternativa-docusign-gratis",
+      "title": "Alternativa a DocuSign gratis",
+      "category": "competitor",
+      "keywords": [
+        { "keyword": "alternativa docusign gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "alternativa a docusign", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "docusign alternativa gratuita", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "commercial" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-pdf-online-gratis",
+      "title": "Assinar PDF online gratis",
+      "category": "core",
+      "keywords": [
+        { "keyword": "assinar pdf online gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar pdf online", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar pdf gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinatura digital pdf gratis", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-pdf-sem-cadastro",
+      "title": "Assinar PDF sem cadastro",
+      "category": "core",
+      "keywords": [
+        { "keyword": "assinar pdf sem cadastro", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar pdf sem criar conta", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinatura digital sem registro", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-pdf-sem-marca-dagua",
+      "title": "Assinar PDF sem marca d'agua",
+      "category": "core",
+      "keywords": [
+        { "keyword": "assinar pdf sem marca dagua", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar pdf gratis sem marca dagua", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/adicionar-assinatura-no-pdf",
+      "title": "Adicionar assinatura no PDF",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "adicionar assinatura no pdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "informational" },
+        { "keyword": "como assinar um pdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "informational" },
+        { "keyword": "colocar assinatura em pdf", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "informational" }
+      ]
+    },
+    {
+      "url": "/pt/criar-assinatura-online",
+      "title": "Criar assinatura online",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "criar assinatura online", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "criar assinatura digital gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "fazer assinatura eletronica", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-pdf-no-celular",
+      "title": "Assinar PDF no celular",
+      "category": "feature",
+      "keywords": [
+        { "keyword": "assinar pdf no celular", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar pdf pelo celular", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar documento no celular", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-contrato-pdf-online",
+      "title": "Assinar contrato PDF online",
+      "category": "usecase",
+      "keywords": [
+        { "keyword": "assinar contrato pdf online", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar contrato de aluguel online", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar contrato digital", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/assinar-pdf-para-visto",
+      "title": "Assinar PDF para visto",
+      "category": "usecase",
+      "keywords": [
+        { "keyword": "assinar pdf para visto", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "transactional" },
+        { "keyword": "assinar documentos para visto", "engines": ["google"], "priority": "medium", "tracked": true, "volume": null, "intent": "transactional" }
+      ]
+    },
+    {
+      "url": "/pt/alternativa-smallpdf-assinar-pdf",
+      "title": "Alternativa ao SmallPDF",
+      "category": "competitor",
+      "keywords": [
+        { "keyword": "alternativa smallpdf", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "alternativa ao smallpdf gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" }
+      ]
+    },
+    {
+      "url": "/pt/alternativa-docusign-gratis",
+      "title": "Alternativa ao DocuSign gratis",
+      "category": "competitor",
+      "keywords": [
+        { "keyword": "alternativa docusign gratis", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" },
+        { "keyword": "alternativa ao docusign", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" }
+      ]
+    }
+  ]
+}

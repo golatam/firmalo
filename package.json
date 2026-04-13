@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:weekly": "node seo-tracking/scripts/weekly-check.mjs",
+    "seo:report": "node seo-tracking/scripts/report.mjs",
+    "seo:slack-test": "node seo-tracking/scripts/notify-slack.mjs --test"
   },
   "dependencies": {
     "next": "16.2.3",

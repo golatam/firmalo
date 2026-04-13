@@ -3,6 +3,7 @@ import { locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -32,6 +33,11 @@ export async function generateMetadata({
         "x-default": "/es",
       },
     },
+    ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION && {
+      verification: {
+        google: process.env.NEXT_PUBLIC_GSC_VERIFICATION,
+      },
+    }),
   };
 }
 
@@ -57,6 +63,7 @@ export default async function LangLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-surface text-text">
+        <GoogleAnalytics />
         <Header lang={lang} dict={dict} />
         <main className="flex-1">{children}</main>
         <Footer lang={lang} dict={dict} />
