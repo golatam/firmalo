@@ -151,5 +151,96 @@
     "primary": "Firmar ahora",
     "secondary": "Subir PDF",
     "tertiary": "Probar gratis"
+  },
+  "legal": {
+    "lastUpdated": "Última actualización: 13 de abril de 2026",
+    "backHome": "Volver al inicio",
+    "privacy": {
+      "title": "Política de Privacidad",
+      "metaDescription": "Política de privacidad de Firmalo. Tu archivo nunca sale de tu dispositivo. Sin cookies de seguimiento, sin almacenamiento de datos personales.",
+      "intro": "En Firmalo, tu privacidad es nuestra prioridad absoluta. Esta política explica qué datos recopilamos (casi ninguno) y cómo protegemos tu información.",
+      "sections": [
+        {
+          "title": "Procesamiento 100% local",
+          "content": "Firmalo procesa todos los documentos PDF directamente en tu navegador. Tus archivos nunca se suben a nuestros servidores. No tenemos acceso a tus documentos, firmas ni ningún dato contenido en ellos."
+        },
+        {
+          "title": "Datos que recopilamos",
+          "content": "No recopilamos datos personales identificables. Utilizamos Google Analytics (GA4) para entender el uso general de la plataforma (páginas visitadas, duración de la sesión, país de origen). Estos datos son anónimos y agregados."
+        },
+        {
+          "title": "Cookies",
+          "content": "Firmalo utiliza únicamente cookies esenciales para el funcionamiento del sitio y cookies de Google Analytics. No utilizamos cookies de publicidad ni de seguimiento de terceros."
+        },
+        {
+          "title": "Almacenamiento local",
+          "content": "Tu firma puede guardarse temporalmente en el almacenamiento local de tu navegador para mayor comodidad. Estos datos permanecen exclusivamente en tu dispositivo y puedes eliminarlos en cualquier momento limpiando los datos del navegador."
+        },
+        {
+          "title": "Servicios de terceros",
+          "content": "Solo utilizamos Google Analytics para estadísticas anónimas de uso. No compartimos, vendemos ni transferimos ningún dato a terceros."
+        },
+        {
+          "title": "Seguridad",
+          "content": "Toda la comunicación con firmalo.io se realiza a través de HTTPS con cifrado TLS. Como no almacenamos tus archivos, no existe riesgo de filtraciones de datos de documentos."
+        },
+        {
+          "title": "Cambios a esta política",
+          "content": "Podemos actualizar esta política ocasionalmente. Cualquier cambio se publicará en esta página con la fecha de actualización."
+        },
+        {
+          "title": "Contacto",
+          "content": "Si tienes preguntas sobre nuestra política de privacidad, puedes contactarnos en contacto@firmalo.io."
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contacto",
+      "metaDescription": "Contacta al equipo de Firmalo. Preguntas, sugerencias o reportar problemas con la herramienta de firma de PDF online.",
+      "intro": "¿Tienes preguntas, sugerencias o encontraste algún problema? Nos encantaría escucharte.",
+      "email": "contacto@firmalo.io",
+      "emailLabel": "Correo electrónico",
+      "emailDescription": "Respondemos en un plazo de 48 horas hábiles.",
+      "subjectHint": "Por favor incluye una descripción clara del tema para que podamos ayudarte mejor."
+    },
+    "terms": {
+      "title": "Términos de Uso",
+      "metaDescription": "Términos de uso de Firmalo. Herramienta gratuita para firmar PDF online. Sin garantías legales sobre la validez de firmas electrónicas.",
+      "intro": "Al usar Firmalo, aceptas los siguientes términos y condiciones. Firmalo es una herramienta gratuita para agregar firmas visuales a documentos PDF.",
+      "sections": [
+        {
+          "title": "Descripción del servicio",
+          "content": "Firmalo es una herramienta web gratuita que permite agregar firmas visuales a documentos PDF. Todo el procesamiento se realiza en tu navegador — no almacenamos ni procesamos tus archivos en nuestros servidores."
+        },
+        {
+          "title": "Uso permitido",
+          "content": "Puedes usar Firmalo para agregar firmas visuales a documentos PDF personales y profesionales. No debes usar el servicio para actividades ilegales, falsificación de documentos o cualquier propósito que viole las leyes aplicables."
+        },
+        {
+          "title": "Naturaleza de la firma",
+          "content": "Firmalo agrega una representación visual de firma a tu PDF. Esta firma NO constituye una firma electrónica avanzada ni cualificada según las leyes de firma electrónica vigentes. Para documentos que requieran validez legal certificada, consulta la legislación de tu país y utiliza servicios de firma electrónica certificada."
+        },
+        {
+          "title": "Sin garantías",
+          "content": "Firmalo se proporciona \"tal cual\" sin garantías de ningún tipo. No garantizamos la disponibilidad continua del servicio, la compatibilidad con todos los archivos PDF ni la idoneidad para ningún propósito particular."
+        },
+        {
+          "title": "Limitación de responsabilidad",
+          "content": "Firmalo y sus creadores no serán responsables de ningún daño directo, indirecto, incidental o consecuente derivado del uso o la imposibilidad de uso del servicio."
+        },
+        {
+          "title": "Propiedad intelectual",
+          "content": "El nombre, logotipo y código fuente de Firmalo son propiedad de sus creadores. Tus documentos y firmas son exclusivamente tuyos — no reclamamos ningún derecho sobre ellos."
+        },
+        {
+          "title": "Modificaciones",
+          "content": "Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios se publicarán en esta página con la fecha de actualización."
+        },
+        {
+          "title": "Contacto",
+          "content": "Para consultas sobre estos términos, escríbenos a contacto@firmalo.io."
+        }
+      ]
+    }
   }
 }

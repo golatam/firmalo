@@ -64,5 +64,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
+  // Legal pages
+  const legalPages = ["privacidad", "terminos", "contacto"];
+  for (const locale of locales) {
+    for (const page of legalPages) {
+      const alternates: Record<string, string> = {};
+      for (const altLocale of locales) {
+        const langKey = altLocale === "pt" ? "pt-BR" : altLocale;
+        alternates[langKey] = `${BASE_URL}/${altLocale}/${page}`;
+      }
+      entries.push({
+        url: `${BASE_URL}/${locale}/${page}`,
+        lastModified: new Date(),
+        changeFrequency: "yearly",
+        priority: 0.3,
+        alternates: { languages: alternates },
+      });
+    }
+  }
+
   return entries;
 }
