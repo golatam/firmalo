@@ -20,15 +20,32 @@ const SIGNATURE_FONTS = [
   "'Great Vibes', cursive",
 ];
 
+const SIGNATURE_FONTS_URL =
+  "https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Caveat:wght@400;700&family=Sacramento&family=Great+Vibes&display=swap";
+
+let fontsLoaded = false;
+function loadSignatureFonts() {
+  if (fontsLoaded) return;
+  fontsLoaded = true;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = SIGNATURE_FONTS_URL;
+  document.head.appendChild(link);
+}
+
 export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) {
   const [activeTab, setActiveTab] = useState<Tab>("draw");
   const [typedName, setTypedName] = useState("");
   const [selectedFont, setSelectedFont] = useState(SIGNATURE_FONTS[0]);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [hasDrawn, setHasDrawn] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sigPadRef = useRef<SignaturePad | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load signature fonts on mount (lazy — not render-blocking)
+  useEffect(() => { loadSignatureFonts(); }, []);
 
   // Initialize and resize signature pad
   const initCanvas = useCallback(() => {
@@ -48,8 +65,10 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
         minWidth: 1.5,
         maxWidth: 3,
       });
+      sigPadRef.current.addEventListener("endStroke", () => setHasDrawn(true));
     } else {
       sigPadRef.current.clear();
+      setHasDrawn(false);
     }
   }, []);
 
@@ -87,6 +106,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   const handleClear = useCallback(() => {
     if (activeTab === "draw" && sigPadRef.current) {
       sigPadRef.current.clear();
+      setHasDrawn(false);
     } else if (activeTab === "type") {
       setTypedName("");
     } else if (activeTab === "upload") {
@@ -146,7 +166,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   ];
 
   const canApply =
-    (activeTab === "draw" && sigPadRef.current && !sigPadRef.current?.isEmpty()) ||
+    (activeTab === "draw" && hasDrawn) ||
     (activeTab === "type" && typedName.trim().length > 0) ||
     (activeTab === "upload" && uploadedImage !== null);
 
@@ -167,6 +187,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
           </h3>
           <button
             onClick={onClose}
+            aria-label="Close"
             className="p-2 -m-1 rounded-lg hover:bg-surface-alt transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
           >
             <svg className="w-5 h-5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -289,6 +310,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
           </button>
           <button
             onClick={handleApply}
+            disabled={!canApply}
             className="px-6 py-2.5 min-h-[44px] bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {dict.signature.apply}

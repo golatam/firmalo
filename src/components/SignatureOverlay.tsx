@@ -185,6 +185,7 @@ export function SignatureOverlay({
             e.stopPropagation();
             onRemove();
           }}
+          aria-label="Remove signature"
           className="absolute -top-3.5 -right-3.5 sm:-top-2.5 sm:-right-2.5 w-8 h-8 sm:w-6 sm:h-6 bg-error text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-sm"
           onMouseDown={(e) => e.stopPropagation()}
           onTouchStart={(e) => e.stopPropagation()}
@@ -196,6 +197,8 @@ export function SignatureOverlay({
 
         {/* Resize handle — larger on mobile */}
         <div
+          role="slider"
+          aria-label="Resize signature"
           className="absolute -bottom-2.5 -right-2.5 sm:-bottom-1.5 sm:-right-1.5 w-8 h-8 sm:w-5 sm:h-5 bg-primary rounded-full cursor-se-resize flex items-center justify-center shadow-sm"
           onMouseDown={handleResizeStart}
           onTouchStart={handleResizeStart}

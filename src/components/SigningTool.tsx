@@ -199,7 +199,7 @@ export function SigningTool({
 
       {/* Error */}
       {(exportError || pdfError) && (
-        <div className="mb-4 p-3 bg-red-50 text-error text-sm rounded-lg text-center">
+        <div className="mb-4 p-3 bg-error/5 text-error text-sm rounded-lg text-center" role="alert">
           {exportError || pdfError}
           {pdfError && (
             <button

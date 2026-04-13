@@ -139,18 +139,20 @@ export function PdfViewer({
           <button
             onClick={() => onPageChange(Math.max(1, currentPage - 1))}
             disabled={currentPage <= 1}
+            aria-label="Previous page"
             className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded hover:bg-border disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <span className="text-sm font-medium text-text tabular-nums">
+          <span className="text-sm font-medium text-text tabular-nums" aria-live="polite">
             {currentPage} / {pageCount}
           </span>
           <button
             onClick={() => onPageChange(Math.min(pageCount, currentPage + 1))}
             disabled={currentPage >= pageCount}
+            aria-label="Next page"
             className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded hover:bg-border disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
