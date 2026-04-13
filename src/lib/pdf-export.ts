@@ -1,4 +1,3 @@
-import { PDFDocument } from "pdf-lib";
 import type { SignaturePlacement } from "@/components/SignatureOverlay";
 
 export async function exportSignedPdf(
@@ -6,11 +5,12 @@ export async function exportSignedPdf(
   signatureDataUrl: string,
   placement: SignaturePlacement
 ): Promise<Blob> {
+  const { PDFDocument } = await import("pdf-lib");
   const arrayBuffer = await originalFile.arrayBuffer();
 
   // Load original PDF — ignores encryption flag so visually-encrypted
   // (but not truly locked) files still work
-  let pdfDoc: PDFDocument;
+  let pdfDoc: Awaited<ReturnType<typeof PDFDocument.load>>;
   try {
     pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
   } catch {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import SignaturePad from "signature_pad";
+import type SignaturePadType from "signature_pad";
 import type { Dictionary } from "@/lib/dictionaries";
 
 type Tab = "draw" | "type" | "upload";
@@ -41,14 +41,14 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   const [hasDrawn, setHasDrawn] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sigPadRef = useRef<SignaturePad | null>(null);
+  const sigPadRef = useRef<SignaturePadType | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load signature fonts on mount (lazy — not render-blocking)
   useEffect(() => { loadSignatureFonts(); }, []);
 
   // Initialize and resize signature pad
-  const initCanvas = useCallback(() => {
+  const initCanvas = useCallback(async () => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const dpr = window.devicePixelRatio || 1;
@@ -59,6 +59,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
     if (ctx) ctx.scale(dpr, dpr);
 
     if (!sigPadRef.current) {
+      const { default: SignaturePad } = await import("signature_pad");
       sigPadRef.current = new SignaturePad(canvas, {
         backgroundColor: "rgba(255, 255, 255, 0)",
         penColor: "#1e293b",
@@ -75,7 +76,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   useEffect(() => {
     if (activeTab === "draw") {
       // Small delay to let the DOM settle (modal animation)
-      requestAnimationFrame(initCanvas);
+      requestAnimationFrame(() => { initCanvas(); });
     }
 
     return () => {

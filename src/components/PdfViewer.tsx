@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import "@/lib/pdf-worker";
-import { getDocument, type PDFDocumentProxy } from "pdfjs-dist";
+import type { PDFDocumentProxy } from "pdfjs-dist";
 import type { Dictionary } from "@/lib/dictionaries";
 
 const LARGE_FILE_THRESHOLD = 10 * 1024 * 1024; // 10 MB
@@ -39,6 +38,8 @@ export function PdfViewer({
     async function loadPdf() {
       setLoading(true);
       try {
+        await import("@/lib/pdf-worker");
+        const { getDocument } = await import("pdfjs-dist");
         const arrayBuffer = await file.arrayBuffer();
         const doc = await getDocument({ data: arrayBuffer }).promise;
         if (cancelled) {

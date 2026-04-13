@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -53,11 +59,9 @@ export default async function LangLayout({
   const dict = await getDictionary(lang);
 
   return (
-    <html lang={lang === "pt" ? "pt-BR" : "es"} className="h-full antialiased">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
+    <html lang={lang === "pt" ? "pt-BR" : "es"} className={`h-full antialiased ${inter.className}`}>
+      <head />
+
       <body className="min-h-full flex flex-col bg-surface text-text">
         <GoogleAnalytics />
         <Header lang={lang} dict={dict} />
