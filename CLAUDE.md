@@ -12,7 +12,7 @@
 | Day 4: 20 SEO pages (10 ES + 10 PT) | ✅ Done |
 | Day 5: GA4 + Search Console + SEO position tracking | ✅ Done |
 | Day 6: Rate limit + legal pages | ✅ Done |
-| Day 7: QA + launch | 🔄 In Progress |
+| Day 7: QA + launch | ✅ Done |
 
 ## Architecture
 
@@ -28,6 +28,7 @@
 src/
 ├── app/
 │   ├── layout.tsx            # Root layout (metadata)
+│   ├── icon.svg              # Favicon (SVG)
 │   ├── globals.css           # Theme tokens, utility classes
 │   ├── [lang]/
 │   │   ├── layout.tsx        # Lang layout (header/footer, hreflang)
@@ -67,7 +68,7 @@ src/
 │   ├── pdf-export.ts          # pdf-lib export + download
 │   ├── rate-limit.ts          # Client-side export rate limiting (localStorage)
 │   └── seo-pages.ts           # SEO page data (20 pages, 10 ES + 10 PT)
-└── middleware.ts               # Language detection redirect
+└── proxy.ts                    # Language detection redirect (Next.js 16 proxy)
 ```
 
 ## Hosting & Domain
