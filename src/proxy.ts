@@ -23,10 +23,11 @@ export function proxy(request: NextRequest) {
   const acceptLang = request.headers.get("accept-language") || "";
   const preferred = acceptLang.includes("pt") ? "pt" : defaultLocale;
 
-  // Redirect to localized path
+  // Redirect to localized path (308 = permanent, so Google caches the redirect
+  // and stops re-crawling the source URL)
   const url = request.nextUrl.clone();
   url.pathname = `/${preferred}${pathname}`;
-  return NextResponse.redirect(url);
+  return NextResponse.redirect(url, { status: 308 });
 }
 
 export const config = {

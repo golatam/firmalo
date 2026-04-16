@@ -34,6 +34,14 @@ export async function generateMetadata({
     const altLangKey = alternate.lang === "pt" ? "pt-BR" : "es";
     languages[altLangKey] = `${BASE_URL}/${alternate.lang}/${alternate.slug}`;
   }
+  // x-default → Spanish version (project fallback). Use the ES slug if this
+  // page has an ES alternate, otherwise fall back to the current URL.
+  languages["x-default"] =
+    lang === "es"
+      ? `${BASE_URL}/${lang}/${slug}`
+      : alternate && alternate.lang === "es"
+        ? `${BASE_URL}/${alternate.lang}/${alternate.slug}`
+        : `${BASE_URL}/${lang}/${slug}`;
 
   return {
     title: pageData.title,

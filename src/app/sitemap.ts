@@ -51,6 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
           alternates[langKey] = `${BASE_URL}${altPage ? `/${altLocale}/${altPage}` : `/${altLocale}`}`;
         }
       }
+      // x-default → Spanish version (project-wide fallback for unmatched locales)
+      const esPages = seoPages.es || [];
+      const esPage = esPages[pages.indexOf(page)];
+      if (esPage !== undefined) {
+        alternates["x-default"] = `${BASE_URL}${esPage ? `/es/${esPage}` : `/es`}`;
+      }
 
       entries.push({
         url: `${BASE_URL}${path}`,
@@ -73,6 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const langKey = altLocale === "pt" ? "pt-BR" : altLocale;
         alternates[langKey] = `${BASE_URL}/${altLocale}/${page}`;
       }
+      alternates["x-default"] = `${BASE_URL}/es/${page}`;
       entries.push({
         url: `${BASE_URL}/${locale}/${page}`,
         lastModified: new Date(),

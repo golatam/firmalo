@@ -26,6 +26,7 @@ export async function generateMetadata({
       languages: {
         es: `${BASE_URL}/es/contacto`,
         "pt-BR": `${BASE_URL}/pt/contacto`,
+        "x-default": `${BASE_URL}/es/contacto`,
       },
     },
   };
