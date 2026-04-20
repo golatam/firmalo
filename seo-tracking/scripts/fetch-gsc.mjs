@@ -26,7 +26,7 @@ const daysBack = parseInt(args.find(a => a.startsWith('--days='))?.split('=')[1]
 
 // ─── OAuth2 with Refresh Token ──────────────────────────────────────
 
-async function getAccessToken(clientId, clientSecret, refreshToken) {
+export async function getAccessToken(clientId, clientSecret, refreshToken) {
   const res = await fetch(TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

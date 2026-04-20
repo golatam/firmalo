@@ -130,6 +130,32 @@ async function main() {
     console.log(`${DIM}GSC skipped — GSC_CLIENT_ID not set${RESET}\n`);
   }
 
+  // 2b. Fetch index status for each unique page
+  let indexStatus = [];
+  const uniquePaths = [...new Set(core.pages.map((p) => p.url))];
+  if (uniquePaths.length > 0 && process.env.GSC_CLIENT_ID) {
+    console.log(`${BOLD}Google URL Inspection${RESET}`);
+    try {
+      indexStatus = await withRetry(async () => {
+        const { fetchIndexStatus } = await import('./inspect-index.mjs');
+        return await fetchIndexStatus(uniquePaths);
+      }, 'URL Inspection');
+
+      const indexed = indexStatus.filter((s) => s.verdict === 'PASS').length;
+      const partial = indexStatus.filter((s) => s.verdict === 'PARTIAL').length;
+      const failed = indexStatus.filter((s) => s.verdict === 'FAIL').length;
+      const neutral = indexStatus.filter((s) => s.verdict === 'NEUTRAL').length;
+      const errors = indexStatus.filter((s) => s.error).length;
+      console.log(
+        `   ${GREEN}indexed: ${indexed}${RESET} / partial: ${partial} / ${RED}failed: ${failed}${RESET} / neutral: ${neutral}` +
+        (errors ? ` / ${RED}errors: ${errors}${RESET}` : '') +
+        ` (total: ${indexStatus.length})\n`
+      );
+    } catch (e) {
+      console.log(`   ${YELLOW}URL Inspection unavailable after ${MAX_RETRIES} attempts: ${e.message}${RESET}\n`);
+    }
+  }
+
   // 3. Fill missing tracked keywords with position: null
   let filledCount = 0;
   for (const [key, info] of trackedKeywordMap) {
@@ -160,6 +186,7 @@ async function main() {
     source: 'api',
     comment: 'weekly auto-check',
     entries,
+    indexStatus,
   };
 
   if (dryRun) {
