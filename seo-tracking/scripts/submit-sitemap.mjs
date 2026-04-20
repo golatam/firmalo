@@ -48,17 +48,29 @@ export async function ensureSitemapSubmitted() {
 
   if (!existing) {
     console.log(`   Submitting ${SITEMAP_URL} (first time)...`);
-    await submitSitemap(token, SITEMAP_URL);
-    return {
-      url: SITEMAP_URL,
-      submitted: true,
-      alreadyRegistered: false,
-      lastSubmitted: null,
-      lastDownloaded: null,
-      warnings: 0,
-      errors: 0,
-      isPending: true,
-    };
+    try {
+      await submitSitemap(token, SITEMAP_URL);
+      return {
+        url: SITEMAP_URL,
+        submitted: true,
+        alreadyRegistered: false,
+        lastSubmitted: null,
+        lastDownloaded: null,
+        warnings: 0,
+        errors: 0,
+        isPending: true,
+      };
+    } catch (e) {
+      const isScopeIssue = /ACCESS_TOKEN_SCOPE_INSUFFICIENT|insufficientPermissions/.test(e.message);
+      console.log(`   ${isScopeIssue ? 'Submit needs write scope (https://www.googleapis.com/auth/webmasters) — skipping' : 'Submit failed: ' + e.message}`);
+      return {
+        url: SITEMAP_URL,
+        submitted: false,
+        alreadyRegistered: false,
+        scopeError: isScopeIssue,
+        submitError: isScopeIssue ? null : e.message,
+      };
+    }
   }
 
   console.log(`   Already registered — last downloaded: ${existing.lastDownloaded ?? 'never'}`);

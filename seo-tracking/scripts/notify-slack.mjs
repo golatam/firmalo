@@ -108,6 +108,10 @@ function indexationBlocks(indexStatus, sitemap) {
       line = `:satellite: Sitemap: *just submitted* (${sitemap.url})`;
     } else if (sitemap.alreadyRegistered) {
       line = `:satellite: Sitemap: registered, last downloaded *${lastDl}* — ${sitemap.errors} errors, ${sitemap.warnings} warnings`;
+    } else if (sitemap.scopeError) {
+      line = `:warning: Sitemap: *not registered* — submit needs OAuth write scope, please submit manually in GSC UI`;
+    } else if (sitemap.submitError) {
+      line = `:warning: Sitemap: submit failed — ${sitemap.submitError}`;
     } else {
       line = `:satellite: Sitemap: status unknown`;
     }
