@@ -88,3 +88,7 @@ src/
   - `semantic-core.json` — 20 pages, 63 keywords (ES + PT), 4 clusters
   - GitHub Actions: every Monday 12:00 UTC → snapshot → Slack report
   - Commands: `npm run seo:weekly`, `npm run seo:report`, `npm run seo:slack-test`
+  - `weekly-check.mjs` orchestrates four API calls: sitemaps.list+submit, searchAnalytics.query, urlInspection.index:inspect, plus Slack Block Kit post
+  - `scripts/inspect-index.mjs` — URL Inspection per page → `snapshot.indexStatus` (verdict, coverageState, lastCrawlTime, googleCanonical)
+  - `scripts/submit-sitemap.mjs` — idempotent sitemap submit; gracefully degrades on 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` (current OAuth token is read-only)
+  - `scripts/notify-slack.mjs` includes an Indexation section (PASS / NEUTRAL / FAIL / Unknown to Google + sitemap status)
