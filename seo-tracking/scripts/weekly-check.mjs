@@ -130,6 +130,21 @@ async function main() {
     console.log(`${DIM}GSC skipped — GSC_CLIENT_ID not set${RESET}\n`);
   }
 
+  // 2a. Ensure sitemap is registered in GSC
+  let sitemap = null;
+  if (process.env.GSC_CLIENT_ID) {
+    console.log(`${BOLD}Sitemap${RESET}`);
+    try {
+      sitemap = await withRetry(async () => {
+        const { ensureSitemapSubmitted } = await import('./submit-sitemap.mjs');
+        return await ensureSitemapSubmitted();
+      }, 'Sitemap');
+      console.log('');
+    } catch (e) {
+      console.log(`   ${YELLOW}Sitemap check failed: ${e.message}${RESET}\n`);
+    }
+  }
+
   // 2b. Fetch index status for each unique page
   let indexStatus = [];
   const uniquePaths = [...new Set(core.pages.map((p) => p.url))];
@@ -187,6 +202,7 @@ async function main() {
     comment: 'weekly auto-check',
     entries,
     indexStatus,
+    sitemap,
   };
 
   if (dryRun) {
@@ -280,6 +296,8 @@ async function main() {
     previousDate: prevSnapshot.date,
     summary,
     changes,
+    indexStatus,
+    sitemap,
   };
 
   // Print console summary

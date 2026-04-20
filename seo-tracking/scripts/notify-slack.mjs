@@ -76,10 +76,51 @@ function posChangeText(c) {
   return `${c.previousPosition} -> *${c.currentPosition}* ${arrow}${changeStr}`;
 }
 
+function indexationBlocks(indexStatus, sitemap) {
+  const blocks = [];
+  const hasIndex = Array.isArray(indexStatus) && indexStatus.length > 0;
+  if (!hasIndex && !sitemap) return blocks;
+
+  blocks.push({ type: 'divider' });
+  blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*Indexation*' } });
+
+  if (hasIndex) {
+    const total = indexStatus.length;
+    const indexed = indexStatus.filter((s) => s.verdict === 'PASS').length;
+    const neutral = indexStatus.filter((s) => s.verdict === 'NEUTRAL').length;
+    const failed = indexStatus.filter((s) => s.verdict === 'FAIL' || s.verdict === 'PARTIAL').length;
+    const unknown = indexStatus.filter((s) => s.coverageState === 'URL is unknown to Google').length;
+
+    const fields = [
+      { type: 'mrkdwn', text: `:white_check_mark: *Indexed:* ${indexed}/${total}` },
+      { type: 'mrkdwn', text: `:hourglass_flowing_sand: *Awaiting crawl:* ${neutral}` },
+      { type: 'mrkdwn', text: `:x: *Failed:* ${failed}` },
+    ];
+    if (unknown > 0) fields.push({ type: 'mrkdwn', text: `:grey_question: *Unknown to Google:* ${unknown}` });
+
+    blocks.push({ type: 'section', fields });
+  }
+
+  if (sitemap) {
+    const lastDl = sitemap.lastDownloaded ? sitemap.lastDownloaded.split('T')[0] : 'never';
+    let line;
+    if (sitemap.submitted) {
+      line = `:satellite: Sitemap: *just submitted* (${sitemap.url})`;
+    } else if (sitemap.alreadyRegistered) {
+      line = `:satellite: Sitemap: registered, last downloaded *${lastDl}* — ${sitemap.errors} errors, ${sitemap.warnings} warnings`;
+    } else {
+      line = `:satellite: Sitemap: status unknown`;
+    }
+    blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: line }] });
+  }
+
+  return blocks;
+}
+
 // ─── Format report for Slack Block Kit ──────────────────────────────
 
 export function formatReport(report) {
-  const { summary, changes, currentDate, previousDate } = report;
+  const { summary, changes, currentDate, previousDate, indexStatus, sitemap } = report;
   const blocks = [];
 
   blocks.push({
@@ -111,6 +152,8 @@ export function formatReport(report) {
 
   blocks.push({ type: 'section', text: { type: 'mrkdwn', text: '*Summary*' } });
   blocks.push({ type: 'section', fields: summaryFields.slice(0, 10) });
+
+  for (const b of indexationBlocks(indexStatus, sitemap)) blocks.push(b);
 
   // Alerts
   const alerts = changes.filter(c =>
@@ -204,7 +247,7 @@ export function formatReport(report) {
 }
 
 export function formatSnapshot(snapshot) {
-  const { date, entries, comment } = snapshot;
+  const { date, entries, comment, indexStatus, sitemap } = snapshot;
   const inTop10 = entries.filter(e => e.position !== null && e.position <= 10).length;
   const inTop30 = entries.filter(e => e.position !== null && e.position <= 30).length;
   const outOfTop = entries.filter(e => e.position === null).length;
@@ -222,9 +265,12 @@ export function formatSnapshot(snapshot) {
         { type: 'mrkdwn', text: `N/A: *${outOfTop}*` },
       ],
     },
-    { type: 'divider' },
-    { type: 'context', elements: [{ type: 'mrkdwn', text: '_Firmalo.io SEO tracker_' }] },
   ];
+
+  for (const b of indexationBlocks(indexStatus, sitemap)) blocks.push(b);
+
+  blocks.push({ type: 'divider' });
+  blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: '_Firmalo.io SEO tracker_' }] });
 
   return { blocks, attachments: [], text: `Position snapshot ${date}: ${entries.length} keywords, TOP-10: ${inTop10}` };
 }
