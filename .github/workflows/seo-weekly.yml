@@ -1,37 +1,37 @@
+# Caller workflow for the seo-tracker reusable package.
+#
+# This file is INACTIVE — GitHub Actions only triggers on *.yml / *.yaml.
+# To activate the migration:
+#   1. Ensure golatam/seo-tracker exists on GitHub (private; Settings → Actions →
+#      General → Access → "Accessible from repositories owned by the organization").
+#   2. seo-tracker's main branch is pushed (this caller tracks @main as a canary).
+#   3. Existing secrets in firmar still cover GSC_* and SLACK_* — no rotation needed.
+#   4. Rename this file to seo-weekly.yml AND delete the old seo-weekly.yml in the
+#      same commit, so only one workflow runs on the Monday cron.
+#   5. After 1-2 successful runs with identical Slack output, delete seo-tracking/scripts/.
+#   6. After golatam is also migrated (Phase 2), tag v1.0.0 in seo-tracker and
+#      switch both refs below from @main to @v1.
+
 name: SEO Weekly Position Check
 
 on:
   schedule:
     # Every Monday at 12:00 UTC (9:00 AM LATAM / 15:00 MSK)
     - cron: '0 12 * * 1'
-  workflow_dispatch: # Manual trigger from GitHub UI
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  check-positions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Run weekly SEO check
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
-          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
-          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
-          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
-        run: node seo-tracking/scripts/weekly-check.mjs
-
-      - name: Commit snapshot
-        run: |
-          git config user.name "SEO Bot"
-          git config user.email "seo-bot@firmalo.io"
-          git add seo-tracking/snapshots/
-          git diff --staged --quiet || git commit -m "chore: weekly SEO position snapshot $(date +%Y-%m-%d)"
-          git push
+  check:
+    uses: golatam/seo-tracker/.github/workflows/weekly-check.yml@main
+    secrets: inherit
+    with:
+      site_url: https://firmalo.io
+      site_property: sc-domain:firmalo.io
+      notifier: slack
+      enable_yandex: false
+      core_path: seo-tracking/semantic-core.json
+      snapshots_dir: seo-tracking/snapshots
+      package_ref: main

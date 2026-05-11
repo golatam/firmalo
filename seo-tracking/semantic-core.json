@@ -205,5 +205,12 @@
         { "keyword": "alternativa ao docusign", "engines": ["google"], "priority": "high", "tracked": true, "volume": null, "intent": "commercial" }
       ]
     }
-  ]
+  ],
+  "clusters": {
+    "core":       { "label": "Firma PDF",    "emoji": ":page_facing_up:", "order": 1 },
+    "feature":    { "label": "Funciones",    "emoji": ":wrench:",         "order": 2 },
+    "usecase":    { "label": "Casos de uso", "emoji": ":briefcase:",      "order": 3 },
+    "competitor": { "label": "Alternativas", "emoji": ":vs:",             "order": 4 },
+    "unknown":    { "label": "Otro",         "emoji": ":grey_question:",  "order": 99 }
+  }
 }
