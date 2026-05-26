@@ -1,16 +1,5 @@
-# Caller workflow for the seo-tracker reusable package.
-#
-# This file is INACTIVE — GitHub Actions only triggers on *.yml / *.yaml.
-# To activate the migration:
-#   1. Ensure golatam/seo-tracker exists on GitHub (private; Settings → Actions →
-#      General → Access → "Accessible from repositories owned by the organization").
-#   2. seo-tracker's main branch is pushed (this caller tracks @main as a canary).
-#   3. Existing secrets in firmar still cover GSC_* and SLACK_* — no rotation needed.
-#   4. Rename this file to seo-weekly.yml AND delete the old seo-weekly.yml in the
-#      same commit, so only one workflow runs on the Monday cron.
-#   5. After 1-2 successful runs with identical Slack output, delete seo-tracking/scripts/.
-#   6. After golatam is also migrated (Phase 2), tag v1.0.0 in seo-tracker and
-#      switch both refs below from @main to @v1.
+# Caller for the golatam/seo-tracker reusable workflow.
+# Tracks @main (canary) until both consumers are stable, then switches to @v1.
 
 name: SEO Weekly Position Check
 
@@ -30,7 +19,7 @@ jobs:
     with:
       site_url: https://firmalo.io
       site_property: sc-domain:firmalo.io
-      notifier: slack
+      notifier: telegram
       enable_yandex: false
       core_path: seo-tracking/semantic-core.json
       snapshots_dir: seo-tracking/snapshots
