@@ -3,6 +3,13 @@ import { locales } from "@/lib/i18n";
 
 const BASE_URL = "https://firmalo.io";
 
+// Stable, accurate <lastmod> dates. Using `new Date()` made every URL claim it
+// was modified at build time (down to the millisecond, changing on every fetch),
+// which Google treats as an untrustworthy signal and ignores. Bump SEO_CONTENT_DATE
+// whenever landing-page content is meaningfully updated.
+const SEO_CONTENT_DATE = new Date("2026-06-08"); // last major content expansion
+const LEGAL_PAGE_DATE = new Date("2026-04-13"); // legal pages rarely change
+
 // SEO pages per locale
 const seoPages: Record<string, string[]> = {
   es: [
@@ -60,7 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       entries.push({
         url: `${BASE_URL}${path}`,
-        lastModified: new Date(),
+        lastModified: SEO_CONTENT_DATE,
         changeFrequency: page === "" ? "weekly" : "monthly",
         priority: page === "" ? 1.0 : 0.8,
         alternates: {
@@ -82,7 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates["x-default"] = `${BASE_URL}/es/${page}`;
       entries.push({
         url: `${BASE_URL}/${locale}/${page}`,
-        lastModified: new Date(),
+        lastModified: LEGAL_PAGE_DATE,
         changeFrequency: "yearly",
         priority: 0.3,
         alternates: { languages: alternates },
