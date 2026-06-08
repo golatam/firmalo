@@ -422,6 +422,18 @@
     {
       "url": "/es/crear-firma-online",
       "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "indexingState": "INDEXING_STATE_UNSPECIFIED",
+      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+      "crawledAs": null,
+      "lastCrawlTime": null,
+      "googleCanonical": null,
+      "userCanonical": null
+    },
+    {
+      "url": "/es/firmar-pdf-desde-celular",
+      "verdict": "NEUTRAL",
       "coverageState": "Discovered - currently not indexed",
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
@@ -432,25 +444,13 @@
       "userCanonical": null
     },
     {
-      "url": "/es/firmar-pdf-desde-celular",
-      "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
-      "indexingState": "INDEXING_STATE_UNSPECIFIED",
-      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "crawledAs": null,
-      "lastCrawlTime": null,
-      "googleCanonical": null,
-      "userCanonical": null
-    },
-    {
       "url": "/es/firmar-contrato-alquiler-pdf",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "crawledAs": null,
+      "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED",
       "lastCrawlTime": null,
       "googleCanonical": null,
       "userCanonical": null
@@ -506,11 +506,11 @@
     {
       "url": "/pt/assinar-pdf-sem-cadastro",
       "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
+      "coverageState": "URL is unknown to Google",
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED",
+      "crawledAs": null,
       "lastCrawlTime": null,
       "googleCanonical": null,
       "userCanonical": null
@@ -554,11 +554,11 @@
     {
       "url": "/pt/assinar-pdf-no-celular",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "crawledAs": null,
+      "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED",
       "lastCrawlTime": null,
       "googleCanonical": null,
       "userCanonical": null
