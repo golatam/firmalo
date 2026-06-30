@@ -75,7 +75,7 @@ export function HomeSeoIntro({ lang }: { lang: Locale }) {
               de três formas —desenhando, digitando ou enviando uma imagem— e depois{" "}
               <L lang={lang} slug="adicionar-assinatura-no-pdf">adicioná-la ao seu PDF</L>{" "}
               na posição exata que precisar. O resultado fica{" "}
-              <L lang={lang} slug="assinar-pdf-sem-marca-dagua">limpo e sem marca d'água</L>,
+              <L lang={lang} slug="assinar-pdf-sem-marca-dagua">limpo e sem marca d&apos;água</L>,
               pronto para enviar. E se você estiver na rua, também dá para{" "}
               <L lang={lang} slug="assinar-pdf-no-celular">assinar pelo celular</L>,
               sem baixar nenhum app.

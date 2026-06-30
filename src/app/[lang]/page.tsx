@@ -5,9 +5,11 @@ import { HomeSeoIntro } from "@/components/HomeSeoIntro";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Benefits } from "@/components/Benefits";
 import { Security } from "@/components/Security";
+import { TrustFacts } from "@/components/TrustFacts";
 import { GeoBlock } from "@/components/GeoBlock";
 import { FAQ } from "@/components/FAQ";
 import { PopularGuides } from "@/components/PopularGuides";
+import { softwareApplicationJsonLd } from "@/lib/structured-data";
 
 export default async function HomePage({
   params,
@@ -17,17 +19,6 @@ export default async function HomePage({
   const { lang: rawLang } = await params;
   const lang = rawLang as Locale;
   const dict = await getDictionary(lang);
-
-  // JSON-LD WebApplication (parity with SEO subpages, which the homepage lacked)
-  const webAppJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Firmalo",
-    url: `https://firmalo.io/${lang}`,
-    applicationCategory: "UtilitiesApplication",
-    operatingSystem: "All",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-  };
 
   // JSON-LD FAQPage built from the homepage FAQ items
   const faqJsonLd = {
@@ -44,7 +35,7 @@ export default async function HomePage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd(lang)) }}
       />
       <script
         type="application/ld+json"
@@ -55,6 +46,7 @@ export default async function HomePage({
       <HomeSeoIntro lang={lang} />
       <HowItWorks dict={dict} />
       <Benefits dict={dict} />
+      <TrustFacts lang={lang} />
       <Security dict={dict} />
       <PopularGuides dict={dict} lang={lang} />
       <GeoBlock dict={dict} />

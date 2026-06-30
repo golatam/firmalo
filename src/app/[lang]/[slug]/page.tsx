@@ -8,6 +8,9 @@ import { SeoContent } from "@/components/SeoContent";
 import { SeoFaq } from "@/components/SeoFaq";
 import { RelatedPages } from "@/components/RelatedPages";
 import { Security } from "@/components/Security";
+import { TrustFacts } from "@/components/TrustFacts";
+import { ComparisonTable } from "@/components/ComparisonTable";
+import { softwareApplicationJsonLd } from "@/lib/structured-data";
 
 export async function generateStaticParams() {
   return getAllSeoPages().map(({ lang, slug }) => ({ lang, slug }));
@@ -76,21 +79,6 @@ export default async function SeoPage({
   const faqTitle = lang === "es" ? "Preguntas frecuentes" : "Perguntas frequentes";
   const relatedTitle = lang === "es" ? "Páginas relacionadas" : "Páginas relacionadas";
 
-  // JSON-LD WebApplication schema
-  const webAppJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Firmalo",
-    url: `https://firmalo.io/${lang}`,
-    applicationCategory: "UtilitiesApplication",
-    operatingSystem: "All",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-  };
-
   // JSON-LD BreadcrumbList
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -115,7 +103,7 @@ export default async function SeoPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd(lang)) }}
       />
       <script
         type="application/ld+json"
@@ -124,6 +112,10 @@ export default async function SeoPage({
 
       <SeoHero pageData={pageData} dict={dict} lang={lang} />
       <SeoContent sections={pageData.sections} />
+      {pageData.comparison && (
+        <ComparisonTable comparison={pageData.comparison} lang={lang} />
+      )}
+      <TrustFacts lang={lang} />
       <SeoFaq faq={pageData.faq} title={faqTitle} />
       <RelatedPages
         relatedSlugs={pageData.relatedSlugs}

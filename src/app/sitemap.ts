@@ -7,7 +7,7 @@ const BASE_URL = "https://firmalo.io";
 // was modified at build time (down to the millisecond, changing on every fetch),
 // which Google treats as an untrustworthy signal and ignores. Bump SEO_CONTENT_DATE
 // whenever landing-page content is meaningfully updated.
-const SEO_CONTENT_DATE = new Date("2026-06-08"); // last major content expansion
+const SEO_CONTENT_DATE = new Date("2026-06-30"); // trust facts + comparison blocks + llms.txt
 const LEGAL_PAGE_DATE = new Date("2026-04-13"); // legal pages rarely change
 
 // SEO pages per locale

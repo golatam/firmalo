@@ -12,6 +12,13 @@ export interface SeoPageData {
   }[];
   faq: { question: string; answer: string }[];
   relatedSlugs: string[];
+  // Optional head-to-head table, used by the "alternativa" pages to compare
+  // Firmalo against a paid/cloud tool. Rendered by <ComparisonTable />.
+  comparison?: {
+    competitor: string;
+    caption?: string;
+    rows: { feature: string; firmalo: string; competitor: string }[];
+  };
 }
 
 // ES slug <-> PT slug pairing (same index = same topic)
@@ -501,6 +508,18 @@ const esPages: SeoPageData[] = [
       { question: "¿Mis archivos se suben a algún servidor como en SmallPDF?", answer: "No. SmallPDF procesa en sus servidores; Firmalo procesa todo en tu navegador, así que el PDF nunca sale de tu dispositivo." },
     ],
     relatedSlugs: ["alternativa-docusign-gratis", "firmar-pdf-sin-marca-de-agua", "firmar-pdf-online-gratis"],
+    comparison: {
+      competitor: "SmallPDF",
+      caption: "Comparación rápida para firmar PDF de uso personal. SmallPDF es una suite completa de PDF; Firmalo se enfoca solo en firmar, sin límites ni nube.",
+      rows: [
+        { feature: "Precio", firmalo: "Gratis siempre", competitor: "Gratis limitado · Pro ~$12/mes" },
+        { feature: "Documentos por día", firmalo: "Sin límite", competitor: "2 al día en la versión gratis" },
+        { feature: "Marca de agua", firmalo: "Nunca", competitor: "En algunas funciones de la versión gratis" },
+        { feature: "Registro", firmalo: "No requiere", competitor: "Requiere cuenta" },
+        { feature: "Privacidad", firmalo: "Se procesa en tu navegador; el archivo no se sube", competitor: "Sube tus archivos a la nube" },
+        { feature: "Instalación", firmalo: "Ninguna (web)", competitor: "Ninguna (web)" },
+      ],
+    },
   },
   {
     slug: "alternativa-docusign-gratis",
@@ -547,6 +566,18 @@ const esPages: SeoPageData[] = [
       { question: "¿Es complicado de usar como DocuSign?", answer: "No. No hay paneles, plantillas ni configuración. Subes el PDF, colocas tu firma y descargas; todo el proceso toma menos de un minuto." },
     ],
     relatedSlugs: ["alternativa-smallpdf-firmar-pdf", "firmar-pdf-online-gratis", "firmar-pdf-sin-registro"],
+    comparison: {
+      competitor: "DocuSign",
+      caption: "DocuSign es ideal para flujos empresariales con varios firmantes. Para firmar tú mismo un documento, esta es la diferencia frente a Firmalo.",
+      rows: [
+        { feature: "Precio", firmalo: "Gratis siempre", competitor: "Desde ~$10–25/mes" },
+        { feature: "Registro", firmalo: "No requiere", competitor: "Requiere cuenta" },
+        { feature: "Privacidad", firmalo: "Procesamiento local en tu navegador", competitor: "Documentos almacenados en la nube" },
+        { feature: "Tiempo de configuración", firmalo: "Segundos", competitor: "Minutos (plantillas, roles)" },
+        { feature: "Varios firmantes / flujos", firmalo: "Firma individual", competitor: "Sí (empresarial)" },
+        { feature: "Ideal para", firmalo: "Uso personal y trámites", competitor: "Equipos y flujos empresariales" },
+      ],
+    },
   },
 ];
 
@@ -997,6 +1028,18 @@ const ptPages: SeoPageData[] = [
       { question: "Meus arquivos são enviados para algum servidor como no SmallPDF?", answer: "Não. O SmallPDF processa nos servidores dele; o Firmalo processa tudo no seu navegador, então o PDF nunca sai do seu dispositivo." },
     ],
     relatedSlugs: ["alternativa-docusign-gratis", "assinar-pdf-sem-marca-dagua", "assinar-pdf-online-gratis"],
+    comparison: {
+      competitor: "SmallPDF",
+      caption: "Comparação rápida para assinar PDF de uso pessoal. O SmallPDF é uma suite completa de PDF; o Firmalo foca só em assinar, sem limites nem nuvem.",
+      rows: [
+        { feature: "Preço", firmalo: "Grátis sempre", competitor: "Grátis limitado · Pro ~$12/mês" },
+        { feature: "Documentos por dia", firmalo: "Sem limite", competitor: "2 por dia na versão grátis" },
+        { feature: "Marca d'água", firmalo: "Nunca", competitor: "Em algumas funções da versão grátis" },
+        { feature: "Cadastro", firmalo: "Não exige", competitor: "Exige conta" },
+        { feature: "Privacidade", firmalo: "Processado no navegador; o arquivo não é enviado", competitor: "Envia seus arquivos para a nuvem" },
+        { feature: "Instalação", firmalo: "Nenhuma (web)", competitor: "Nenhuma (web)" },
+      ],
+    },
   },
   {
     slug: "alternativa-docusign-gratis",

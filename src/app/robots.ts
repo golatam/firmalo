@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        // Do not block Next.js assets: Google needs CSS/JS access for rendering.
+        disallow: ["/api/"],
       },
     ],
     sitemap: "https://firmalo.io/sitemap.xml",
