@@ -12,6 +12,14 @@ export interface SeoPageData {
   }[];
   faq: { question: string; answer: string }[];
   relatedSlugs: string[];
+  /** Above-the-fold CTA + "3 steps" block, shown only when set (action-landing pages). */
+  landingCta?: {
+    primaryLabel: string;
+    secondaryLabel: string;
+    steps: { title: string; description: string }[];
+  };
+  /** Inline CTA cards rendered inside SeoContent, right after the given section index. */
+  ctaBlocks?: { afterSectionIndex: number; heading: string; body: string; label: string }[];
 }
 
 // ES slug <-> PT slug pairing (same index = same topic)
@@ -116,10 +124,33 @@ const esPages: SeoPageData[] = [
   {
     slug: "firmar-pdf-sin-registro",
     lang: "es",
-    title: "Firmar PDF sin registro — Sin cuenta ni email | Firmalo",
+    title: "Firmar PDF sin registro gratis — sin cuenta ni email | Firmalo",
     metaDescription: "Firma tu PDF sin necesidad de crear una cuenta ni proporcionar tu email. Herramienta 100% privada que funciona directamente en tu navegador.",
-    heroTitle: "Firma tu PDF sin registro",
-    heroSubtitle: "No te pedimos cuenta, email ni datos personales. Abre Firmalo, sube tu PDF, firma y descarga. Así de simple.",
+    heroTitle: "Firmar PDF online gratis sin registro",
+    heroSubtitle: "Firma y descarga tu PDF en segundos. Sin cuenta, sin email y sin subir tu archivo a un servidor.",
+    landingCta: {
+      primaryLabel: "Firmar mi PDF ahora",
+      secondaryLabel: "Cómo funciona",
+      steps: [
+        { title: "1. Sube tu PDF", description: "Arrástralo o selecciónalo. No se sube a ningún servidor." },
+        { title: "2. Firma", description: "Dibuja, escribe o sube una imagen de tu firma." },
+        { title: "3. Descarga", description: "Tu PDF firmado queda listo al instante." },
+      ],
+    },
+    ctaBlocks: [
+      {
+        afterSectionIndex: 1,
+        heading: "Firma tu PDF ahora",
+        body: "Sin cuenta, sin email y sin subir tu archivo a un servidor.",
+        label: "Firmar mi PDF ahora",
+      },
+      {
+        afterSectionIndex: 4,
+        heading: "¿Listo para firmar?",
+        body: "Sube tu PDF, firma y descarga en segundos.",
+        label: "Firmar mi PDF ahora",
+      },
+    ],
     sections: [
       {
         title: "¿Por qué firmar sin registro es mejor?",
@@ -170,6 +201,14 @@ const esPages: SeoPageData[] = [
     metaDescription: "Firma tu PDF sin que aparezcan marcas de agua ni logos. Tu documento queda limpio y profesional. Gratis, sin registro y sin límites.",
     heroTitle: "Firma tu PDF sin marca de agua",
     heroSubtitle: "Tu documento firmado queda limpio y profesional. Sin logos, sin textos superpuestos, sin marcas de ningún tipo.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 4,
+        heading: "Firma tu PDF sin marca de agua",
+        body: "Prueba Firmalo ahora: tu documento queda limpio, sin logos ni marcas, listo para enviar.",
+        label: "Firmar mi PDF ahora",
+      },
+    ],
     sections: [
       {
         title: "El problema de las marcas de agua",
@@ -260,7 +299,7 @@ const esPages: SeoPageData[] = [
       { question: "¿La firma se puede borrar o mover después de descargar el PDF?", answer: "No. La firma queda incrustada dentro del PDF como parte de la página, así que se mantiene fija en cualquier lector y dispositivo." },
       { question: "¿Necesito instalar algún programa para añadir la firma?", answer: "No. Todo el proceso ocurre en tu navegador, tanto en celular como en computadora. No hay que instalar ni configurar nada." },
     ],
-    relatedSlugs: ["crear-firma-online", "firmar-pdf-online-gratis", "firmar-pdf-desde-celular"],
+    relatedSlugs: ["crear-firma-online", "firmar-pdf-online-gratis", "firmar-pdf-sin-registro"],
   },
   {
     slug: "crear-firma-online",
@@ -356,7 +395,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Tengo que instalar alguna app para firmar desde el celular?", answer: "No. Firmalo funciona dentro del navegador. No ocupa espacio, no pide permisos y no hay nada que instalar." },
       { question: "¿Puedo firmar un PDF que recibí por WhatsApp?", answer: "Sí. Guarda el PDF desde WhatsApp, súbelo a Firmalo, fírmalo y reenvía el documento firmado por el mismo chat." },
     ],
-    relatedSlugs: ["firmar-pdf-online-gratis", "anadir-firma-a-pdf", "crear-firma-online"],
+    relatedSlugs: ["firmar-pdf-online-gratis", "anadir-firma-a-pdf", "firmar-pdf-sin-registro"],
   },
   {
     slug: "firmar-contrato-alquiler-pdf",
@@ -500,7 +539,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Cuántos documentos puedo firmar gratis en Firmalo?", answer: "Los que quieras. No hay límite diario ni mensual, a diferencia del tope de documentos de la versión gratuita de SmallPDF." },
       { question: "¿Mis archivos se suben a algún servidor como en SmallPDF?", answer: "No. SmallPDF procesa en sus servidores; Firmalo procesa todo en tu navegador, así que el PDF nunca sale de tu dispositivo." },
     ],
-    relatedSlugs: ["alternativa-docusign-gratis", "firmar-pdf-sin-marca-de-agua", "firmar-pdf-online-gratis"],
+    relatedSlugs: ["alternativa-docusign-gratis", "firmar-pdf-sin-marca-de-agua", "firmar-pdf-sin-registro"],
   },
   {
     slug: "alternativa-docusign-gratis",
@@ -560,6 +599,14 @@ const ptPages: SeoPageData[] = [
     metaDescription: "Assine seu PDF online grátis em segundos. Sem cadastro, sem marca d'água, sem enviar arquivos para servidores. 100% privado e seguro.",
     heroTitle: "Assine seu PDF online grátis",
     heroSubtitle: "A ferramenta mais simples para assinar documentos PDF. Sem cadastro, sem marca d'água, sem limites. Seu arquivo nunca sai do seu dispositivo.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 5,
+        heading: "Assine seu PDF agora",
+        body: "Grátis, sem cadastro e sem marca d'água. Comece agora mesmo.",
+        label: "Assinar meu PDF agora",
+      },
+    ],
     sections: [
       {
         title: "Como assinar um PDF online grátis?",
@@ -616,6 +663,14 @@ const ptPages: SeoPageData[] = [
     metaDescription: "Assine seu PDF sem precisar criar conta nem fornecer seu email. Ferramenta 100% privada que funciona diretamente no navegador.",
     heroTitle: "Assine seu PDF sem cadastro",
     heroSubtitle: "Não pedimos conta, email nem dados pessoais. Abra o Firmalo, envie seu PDF, assine e baixe. Simples assim.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 4,
+        heading: "Assine seu PDF sem cadastro",
+        body: "Sem conta, sem email. Assine agora mesmo, direto no navegador.",
+        label: "Assinar meu PDF agora",
+      },
+    ],
     sections: [
       {
         title: "Por que assinar sem cadastro é melhor?",

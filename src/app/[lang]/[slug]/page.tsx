@@ -123,7 +123,7 @@ export default async function SeoPage({
       />
 
       <SeoHero pageData={pageData} dict={dict} lang={lang} />
-      <SeoContent sections={pageData.sections} />
+      <SeoContent sections={pageData.sections} ctaBlocks={pageData.ctaBlocks} />
       <SeoFaq faq={pageData.faq} title={faqTitle} />
       <RelatedPages
         relatedSlugs={pageData.relatedSlugs}

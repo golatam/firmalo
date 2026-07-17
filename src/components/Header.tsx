@@ -4,12 +4,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { locales, localeNames, localeFlags, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
+import { getSeoPage, getAlternateSlug } from "@/lib/seo-pages";
 
 export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const pathname = usePathname();
 
   function getLocalizedPath(targetLang: Locale) {
     const segments = pathname.split("/");
+    const slug = segments[2];
+
+    // SEO landing pages ([lang]/[slug]) have distinct per-language slugs —
+    // never assume the target-language slug is the same string, or the
+    // switch links to a 404 (e.g. /es/firmar-pdf-sin-registro has no
+    // /pt/firmar-pdf-sin-registro; the real pair is /pt/assinar-pdf-sem-cadastro).
+    if (slug && getSeoPage(lang, slug)) {
+      const alternate = getAlternateSlug(lang, slug);
+      return alternate ? `/${alternate.lang}/${alternate.slug}` : `/${targetLang}`;
+    }
+
     segments[1] = targetLang;
     return segments.join("/");
   }
