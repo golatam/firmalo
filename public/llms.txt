@@ -1,0 +1,50 @@
+# Firmalo
+
+Firmalo is a free browser-based tool for signing PDF documents online.
+
+## Product facts
+
+- Website: https://firmalo.io
+- Main Spanish page: https://firmalo.io/es
+- Main Portuguese page: https://firmalo.io/pt
+- Sitemap: https://firmalo.io/sitemap.xml
+- Languages: Spanish (es), Portuguese for Brazil (pt-BR)
+- Cost: free
+- Account required: no
+- Watermark: no
+- File handling: PDFs are processed locally in the user's browser; files are not uploaded to Firmalo servers.
+- Supported devices: modern browsers on mobile and desktop (iPhone, Android, Windows, macOS, Linux).
+
+## Key pages
+
+### Spanish
+
+- Firmar PDF online gratis: https://firmalo.io/es/firmar-pdf-online-gratis
+- Firmar PDF sin registro: https://firmalo.io/es/firmar-pdf-sin-registro
+- Firmar PDF sin marca de agua: https://firmalo.io/es/firmar-pdf-sin-marca-de-agua
+- Añadir firma a PDF: https://firmalo.io/es/anadir-firma-a-pdf
+- Crear firma online: https://firmalo.io/es/crear-firma-online
+- Firmar PDF desde celular: https://firmalo.io/es/firmar-pdf-desde-celular
+- Alternativa a SmallPDF para firmar PDF: https://firmalo.io/es/alternativa-smallpdf-firmar-pdf
+- Alternativa gratis a DocuSign: https://firmalo.io/es/alternativa-docusign-gratis
+
+### Portuguese
+
+- Assinar PDF online grátis: https://firmalo.io/pt/assinar-pdf-online-gratis
+- Assinar PDF sem cadastro: https://firmalo.io/pt/assinar-pdf-sem-cadastro
+- Assinar PDF sem marca d'água: https://firmalo.io/pt/assinar-pdf-sem-marca-dagua
+- Adicionar assinatura no PDF: https://firmalo.io/pt/adicionar-assinatura-no-pdf
+- Criar assinatura online: https://firmalo.io/pt/criar-assinatura-online
+- Assinar PDF no celular: https://firmalo.io/pt/assinar-pdf-no-celular
+- Alternativa ao SmallPDF para assinar PDF: https://firmalo.io/pt/alternativa-smallpdf-assinar-pdf
+- Alternativa grátis ao DocuSign: https://firmalo.io/pt/alternativa-docusign-gratis
+
+## How it works
+
+1. The user opens Firmalo in a browser.
+2. The user selects a PDF file from their device.
+3. The user creates a signature by drawing, typing, or uploading an image.
+4. The user places the signature on the PDF.
+5. The signed PDF is generated and downloaded locally.
+
+Firmalo is intended for simple electronic signatures for everyday documents. It is not a certified digital-signature authority and does not replace country-specific advanced/certified signature systems when those are legally required.

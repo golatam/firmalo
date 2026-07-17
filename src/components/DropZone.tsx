@@ -12,7 +12,7 @@ interface DropZoneProps {
   onFileAccepted?: (file: File) => void;
 }
 
-export function DropZone({ dict, lang, onFileAccepted }: DropZoneProps) {
+export function DropZone({ dict, onFileAccepted }: DropZoneProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export function DropZone({ dict, lang, onFileAccepted }: DropZoneProps) {
       setFileName(file.name);
       onFileAccepted?.(file);
     },
-    [validateFile]
+    [onFileAccepted, validateFile]
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {

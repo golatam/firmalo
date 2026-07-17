@@ -20,6 +20,13 @@ export interface SeoPageData {
   };
   /** Inline CTA cards rendered inside SeoContent, right after the given section index. */
   ctaBlocks?: { afterSectionIndex: number; heading: string; body: string; label: string }[];
+  // Optional head-to-head table, used by the "alternativa" pages to compare
+  // Firmalo against a paid/cloud tool. Rendered by <ComparisonTable />.
+  comparison?: {
+    competitor: string;
+    caption?: string;
+    rows: { feature: string; firmalo: string; competitor: string }[];
+  };
 }
 
 // ES slug <-> PT slug pairing (same index = same topic)
@@ -34,6 +41,10 @@ const ES_SLUGS = [
   "firmar-pdf-para-visa",
   "alternativa-smallpdf-firmar-pdf",
   "alternativa-docusign-gratis",
+  "firmar-pdf-sin-imprimir",
+  "firmar-pdf-privado-sin-subir-archivos",
+  "firmar-contrato-trabajo-pdf",
+  "firmar-autorizacion-pdf",
 ];
 
 const PT_SLUGS = [
@@ -47,6 +58,10 @@ const PT_SLUGS = [
   "assinar-pdf-para-visto",
   "alternativa-smallpdf-assinar-pdf",
   "alternativa-docusign-gratis",
+  "assinar-pdf-sem-imprimir",
+  "assinar-pdf-privado-sem-upload",
+  "assinar-contrato-trabalho-pdf",
+  "assinar-autorizacao-pdf",
 ];
 
 function getPairedSlug(lang: string, slug: string): string | null {
@@ -192,7 +207,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Una firma hecha sin cuenta tiene validez legal?", answer: "Sí. La validez de una firma electrónica no depende del registro en una plataforma, sino del consentimiento. Para la mayoría de contratos y trámites es perfectamente válida." },
       { question: "¿Puedo usar Firmalo sin registro tantas veces como quiera?", answer: "Sí. No hay límite de uso ni de documentos, y nunca se te pedirá crear una cuenta." },
     ],
-    relatedSlugs: ["firmar-pdf-online-gratis", "firmar-pdf-sin-marca-de-agua", "crear-firma-online"],
+    relatedSlugs: ["firmar-pdf-privado-sin-subir-archivos", "firmar-pdf-online-gratis", "firmar-pdf-sin-marca-de-agua"],
   },
   {
     slug: "firmar-pdf-sin-marca-de-agua",
@@ -441,7 +456,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Necesito imprimir y escanear el contrato?", answer: "No. Ese es justamente el paso que Firmalo elimina: firmas directamente sobre el PDF digital, sin impresora ni escáner." },
       { question: "¿Puedo guardar una copia del contrato firmado?", answer: "Sí. Al descargar, el PDF firmado queda en tu dispositivo. Guárdalo o reenvíalo por correo o WhatsApp como cualquier archivo." },
     ],
-    relatedSlugs: ["firmar-pdf-online-gratis", "anadir-firma-a-pdf", "firmar-pdf-para-visa"],
+    relatedSlugs: ["firmar-contrato-trabajo-pdf", "firmar-pdf-sin-imprimir", "anadir-firma-a-pdf", "firmar-pdf-para-visa"],
   },
   {
     slug: "firmar-pdf-para-visa",
@@ -487,7 +502,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Puedo firmar una declaración jurada o una carta de invitación?", answer: "Sí. Son documentos PDF como cualquier otro: súbelos, coloca tu firma en el lugar indicado y descárgalos firmados." },
       { question: "¿Debo usar la misma firma de mi pasaporte?", answer: "Es lo recomendable. Mantener una firma consistente con la de tu pasaporte y documento de identidad evita problemas de coincidencia en el trámite." },
     ],
-    relatedSlugs: ["firmar-pdf-online-gratis", "firmar-contrato-alquiler-pdf", "firmar-pdf-sin-registro"],
+    relatedSlugs: ["firmar-autorizacion-pdf", "firmar-pdf-privado-sin-subir-archivos", "firmar-contrato-alquiler-pdf"],
   },
   {
     slug: "alternativa-smallpdf-firmar-pdf",
@@ -540,6 +555,18 @@ const esPages: SeoPageData[] = [
       { question: "¿Mis archivos se suben a algún servidor como en SmallPDF?", answer: "No. SmallPDF procesa en sus servidores; Firmalo procesa todo en tu navegador, así que el PDF nunca sale de tu dispositivo." },
     ],
     relatedSlugs: ["alternativa-docusign-gratis", "firmar-pdf-sin-marca-de-agua", "firmar-pdf-sin-registro"],
+    comparison: {
+      competitor: "SmallPDF",
+      caption: "Comparación rápida para firmar PDF de uso personal. SmallPDF es una suite completa de PDF; Firmalo se enfoca solo en firmar, sin límites ni nube.",
+      rows: [
+        { feature: "Precio", firmalo: "Gratis siempre", competitor: "Gratis limitado · Pro ~$12/mes" },
+        { feature: "Documentos por día", firmalo: "Sin límite", competitor: "2 al día en la versión gratis" },
+        { feature: "Marca de agua", firmalo: "Nunca", competitor: "En algunas funciones de la versión gratis" },
+        { feature: "Registro", firmalo: "No requiere", competitor: "Requiere cuenta" },
+        { feature: "Privacidad", firmalo: "Se procesa en tu navegador; el archivo no se sube", competitor: "Sube tus archivos a la nube" },
+        { feature: "Instalación", firmalo: "Ninguna (web)", competitor: "Ninguna (web)" },
+      ],
+    },
   },
   {
     slug: "alternativa-docusign-gratis",
@@ -586,6 +613,180 @@ const esPages: SeoPageData[] = [
       { question: "¿Es complicado de usar como DocuSign?", answer: "No. No hay paneles, plantillas ni configuración. Subes el PDF, colocas tu firma y descargas; todo el proceso toma menos de un minuto." },
     ],
     relatedSlugs: ["alternativa-smallpdf-firmar-pdf", "firmar-pdf-online-gratis", "firmar-pdf-sin-registro"],
+    comparison: {
+      competitor: "DocuSign",
+      caption: "DocuSign es ideal para flujos empresariales con varios firmantes. Para firmar tú mismo un documento, esta es la diferencia frente a Firmalo.",
+      rows: [
+        { feature: "Precio", firmalo: "Gratis siempre", competitor: "Desde ~$10–25/mes" },
+        { feature: "Registro", firmalo: "No requiere", competitor: "Requiere cuenta" },
+        { feature: "Privacidad", firmalo: "Procesamiento local en tu navegador", competitor: "Documentos almacenados en la nube" },
+        { feature: "Tiempo de configuración", firmalo: "Segundos", competitor: "Minutos (plantillas, roles)" },
+        { feature: "Varios firmantes / flujos", firmalo: "Firma individual", competitor: "Sí (empresarial)" },
+        { feature: "Ideal para", firmalo: "Uso personal y trámites", competitor: "Equipos y flujos empresariales" },
+      ],
+    },
+  },
+
+  {
+    slug: "firmar-pdf-sin-imprimir",
+    lang: "es",
+    title: "Firmar PDF sin imprimir — Sin escáner ni apps | Firmalo",
+    metaDescription: "Firma un PDF sin imprimir ni escanear. Añade tu firma online desde el navegador, descarga el documento firmado y envíalo en segundos. Gratis y privado.",
+    heroTitle: "Firma tu PDF sin imprimir",
+    heroSubtitle: "Olvídate de imprimir, firmar a mano y escanear. Con Firmalo colocas tu firma directamente sobre el PDF y descargas el documento listo para enviar.",
+    sections: [
+      {
+        title: "Cómo firmar un PDF sin imprimir",
+        content: "El proceso reemplaza por completo el ciclo de impresora y escáner. Abre Firmalo, selecciona tu PDF, crea la firma y colócala en la página correcta. Todo ocurre dentro del navegador, así que no necesitas instalar programas ni convertir el archivo a otro formato.",
+        bulletPoints: [
+          "Sube o arrastra el PDF desde tu celular o computadora",
+          "Dibuja tu firma, escríbela en caligrafía o sube una imagen",
+          "Mueve la firma hasta la línea correspondiente y ajusta el tamaño",
+          "Descarga el PDF firmado sin imprimir ninguna hoja",
+        ],
+      },
+      {
+        title: "Ideal para contratos, formularios y autorizaciones",
+        content: "Firmar sin imprimir sirve para documentos cotidianos: contratos de alquiler o trabajo, formularios de trámites, autorizaciones, cartas, recibos y anexos. Mientras el archivo esté en PDF, puedes añadir una firma visual en el lugar exacto y enviarlo de vuelta por email o WhatsApp.",
+      },
+      {
+        title: "Sin escáner y sin perder calidad",
+        content: "Cuando imprimes y escaneas, el documento suele quedar pesado, borroso o torcido. Firmalo conserva el PDF original y solo añade la firma encima. El resultado se ve limpio, mantiene el formato y es más profesional que una foto del papel firmada a mano.",
+      },
+      {
+        title: "Privacidad: tu PDF no se sube a servidores",
+        content: "El archivo se procesa localmente en tu navegador. Esto es especialmente importante si firmas contratos, documentos de identidad, información médica o trámites con datos personales. No hay cola de procesamiento en la nube ni copias temporales en servidores de terceros.",
+      },
+    ],
+    faq: [
+      { question: "¿Puedo firmar un PDF sin imprimirlo?", answer: "Sí. Firmalo permite colocar una firma visual directamente sobre el PDF y descargarlo firmado, sin impresora ni escáner." },
+      { question: "¿Necesito instalar Adobe u otra aplicación?", answer: "No. Funciona en el navegador, tanto en celular como en computadora." },
+      { question: "¿El documento firmado queda en PDF?", answer: "Sí. Descargas un archivo PDF estándar, listo para enviar o guardar." },
+      { question: "¿Puedo firmar desde el celular?", answer: "Sí. Puedes dibujar la firma con el dedo y colocarla sobre el documento desde iPhone o Android." },
+      { question: "¿Firmar sin imprimir tiene validez legal?", answer: "Para muchos trámites cotidianos y acuerdos entre partes, una firma electrónica simple es válida. Si el trámite exige firma certificada, revisa los requisitos específicos." },
+    ],
+    relatedSlugs: ["firmar-pdf-online-gratis", "firmar-contrato-alquiler-pdf", "firmar-contrato-trabajo-pdf", "firmar-autorizacion-pdf"],
+  },
+  {
+    slug: "firmar-pdf-privado-sin-subir-archivos",
+    lang: "es",
+    title: "Firmar PDF privado sin subir archivos | Firmalo",
+    metaDescription: "Firma PDFs privados sin subirlos a servidores. El documento se procesa en tu navegador: ideal para contratos, datos personales y archivos sensibles.",
+    heroTitle: "Firma PDFs privados sin subir archivos",
+    heroSubtitle: "Tu documento no sale de tu dispositivo. Firmalo añade la firma en el navegador, sin cuentas, sin nube y sin copias en servidores.",
+    sections: [
+      {
+        title: "Qué significa firmar sin subir archivos",
+        content: "En muchas herramientas online, el PDF se envía a servidores externos para procesarlo. Firmalo funciona de otra manera: la edición ocurre localmente en tu navegador. Eso reduce exposición, evita copias temporales en la nube y mantiene tus documentos bajo tu control.",
+      },
+      {
+        title: "Para documentos con información sensible",
+        content: "Usa este flujo cuando el PDF contiene datos personales, contratos, documentos laborales, información médica, pasaportes, declaraciones o acuerdos confidenciales. Si no quieres que un tercero reciba el archivo, lo correcto es usar una herramienta con procesamiento local.",
+        bulletPoints: [
+          "Contratos y anexos con datos de las partes",
+          "Formularios con números de documento o dirección",
+          "Autorizaciones, cartas y declaraciones privadas",
+          "PDFs que no deberían quedar almacenados en otra plataforma",
+        ],
+      },
+      {
+        title: "Sin registro y sin historial de documentos",
+        content: "Firmalo no te pide crear cuenta para firmar. Al no haber cuenta, tampoco hay panel con historial de documentos, archivos recientes o datos asociados a tu email. Abres la página, firmas y cierras: el documento queda contigo.",
+      },
+      {
+        title: "Privacidad sin sacrificar facilidad",
+        content: "La experiencia sigue siendo simple: subes el PDF al navegador, creas la firma, la colocas y descargas el resultado. La diferencia es dónde ocurre el procesamiento: en tu dispositivo, no en servidores externos.",
+      },
+    ],
+    faq: [
+      { question: "¿Mi PDF se sube a Firmalo?", answer: "No. El procesamiento ocurre localmente en tu navegador; el archivo no se envía a nuestros servidores." },
+      { question: "¿Firmalo guarda mis documentos?", answer: "No. No hay almacenamiento de documentos ni historial de archivos firmados." },
+      { question: "¿Puedo firmar documentos confidenciales?", answer: "Sí, es uno de los casos principales: contratos, formularios y PDFs con datos sensibles." },
+      { question: "¿Necesito registrarme para mayor seguridad?", answer: "No. Para este caso, no registrarse reduce la cantidad de datos personales entregados a una plataforma." },
+      { question: "¿El resultado tiene marca de agua?", answer: "No. Descargas el PDF firmado sin logos ni marcas de agua." },
+    ],
+    relatedSlugs: ["firmar-pdf-sin-registro", "firmar-pdf-online-gratis", "firmar-pdf-sin-imprimir", "firmar-pdf-para-visa"],
+  },
+  {
+    slug: "firmar-contrato-trabajo-pdf",
+    lang: "es",
+    title: "Firmar contrato de trabajo PDF online | Firmalo",
+    metaDescription: "Firma un contrato de trabajo en PDF sin imprimir. Añade tu firma desde el navegador, conserva la privacidad del documento y descárgalo listo para enviar.",
+    heroTitle: "Firma tu contrato de trabajo en PDF",
+    heroSubtitle: "Para contratos laborales, anexos y acuerdos de empleo: firma el PDF online sin imprimir, sin escáner y sin subir el archivo a servidores.",
+    sections: [
+      {
+        title: "Firma contratos laborales sin imprimir",
+        content: "Si recibiste un contrato de trabajo por email, no necesitas imprimirlo, firmarlo a mano y escanearlo. Con Firmalo puedes abrir el PDF, colocar tu firma en la página indicada y devolver el archivo firmado en minutos.",
+      },
+      {
+        title: "Qué revisar antes de firmar",
+        content: "Antes de añadir tu firma, revisa los puntos básicos del contrato. Firmalo facilita la firma, pero la decisión legal y laboral sigue siendo tuya.",
+        bulletPoints: [
+          "Nombre legal de la empresa y del trabajador",
+          "Cargo, funciones y lugar de prestación del servicio",
+          "Salario, moneda, beneficios y frecuencia de pago",
+          "Jornada, modalidad remota/presencial y fecha de inicio",
+          "Cláusulas de confidencialidad, exclusividad y terminación",
+        ],
+      },
+      {
+        title: "También sirve para anexos y acuerdos internos",
+        content: "Además del contrato principal, puedes firmar anexos, renovaciones, acuerdos de confidencialidad, autorizaciones de tratamiento de datos, recibos y comunicaciones laborales en PDF. El flujo es el mismo para cualquier documento que necesite una firma visual.",
+      },
+      {
+        title: "Privacidad para información laboral",
+        content: "Los contratos de trabajo contienen datos personales, salario y condiciones privadas. Firmalo procesa el archivo en tu navegador, por lo que el PDF no se sube a una nube de terceros para añadir la firma.",
+      },
+    ],
+    faq: [
+      { question: "¿Puedo firmar un contrato de trabajo en PDF?", answer: "Sí. Puedes colocar tu firma visual en el PDF y descargar el documento firmado." },
+      { question: "¿Sirve para anexos laborales?", answer: "Sí. Funciona para contratos, anexos, acuerdos de confidencialidad, recibos y otros documentos laborales en PDF." },
+      { question: "¿Necesito imprimir el contrato?", answer: "No. La firma se añade directamente sobre el PDF digital." },
+      { question: "¿El contrato se sube a servidores?", answer: "No. El procesamiento se realiza en tu navegador." },
+      { question: "¿Tiene validez legal?", answer: "Una firma electrónica simple suele ser válida para muchos acuerdos laborales, pero verifica la normativa aplicable y las exigencias de tu empleador o país." },
+    ],
+    relatedSlugs: ["firmar-pdf-sin-imprimir", "firmar-contrato-alquiler-pdf", "firmar-pdf-privado-sin-subir-archivos", "firmar-autorizacion-pdf"],
+  },
+  {
+    slug: "firmar-autorizacion-pdf",
+    lang: "es",
+    title: "Firmar autorización en PDF online | Firmalo",
+    metaDescription: "Firma una autorización en PDF desde el navegador. Sin imprimir, sin escáner, sin registro y con procesamiento privado en tu dispositivo.",
+    heroTitle: "Firma una autorización en PDF online",
+    heroSubtitle: "Añade tu firma a autorizaciones, consentimientos y permisos en PDF sin imprimir ni instalar aplicaciones.",
+    sections: [
+      {
+        title: "Para autorizaciones y consentimientos cotidianos",
+        content: "Las autorizaciones suelen pedirse para trámites escolares, médicos, laborales, bancarios o de viaje. Si te enviaron el documento en PDF, puedes firmarlo con Firmalo y devolverlo como archivo firmado sin pasar por papel.",
+        bulletPoints: [
+          "Autorizaciones escolares o de menores",
+          "Consentimientos para trámites o tratamiento de datos",
+          "Permisos de viaje, entrega o representación",
+          "Cartas simples que requieren firma",
+        ],
+      },
+      {
+        title: "Firma rápida desde celular o computadora",
+        content: "Abre el PDF, crea tu firma y colócala en el espacio indicado. Si recibiste el archivo por WhatsApp o email, puedes hacerlo desde el mismo celular y reenviar el PDF firmado en pocos minutos.",
+      },
+      {
+        title: "Sin subir documentos sensibles",
+        content: "Muchas autorizaciones incluyen nombres, documentos de identidad, direcciones o datos de menores. Firmalo procesa el archivo en el navegador, sin enviar el PDF a servidores externos para firmarlo.",
+      },
+      {
+        title: "Resultado limpio y listo para enviar",
+        content: "La firma queda incorporada en el PDF, sin marca de agua ni cambios de formato. Puedes guardar una copia y enviarla por email, mensajería o plataforma de trámites.",
+      },
+    ],
+    faq: [
+      { question: "¿Puedo firmar una autorización en PDF?", answer: "Sí. Sube el PDF, coloca tu firma en el campo correspondiente y descarga el documento firmado." },
+      { question: "¿Sirve para permisos escolares o de viaje?", answer: "Sí, siempre que el documento esté en PDF y el trámite acepte firma electrónica simple." },
+      { question: "¿Puedo hacerlo desde el celular?", answer: "Sí. Firmalo funciona en navegadores móviles y permite dibujar la firma con el dedo." },
+      { question: "¿El PDF queda con marca de agua?", answer: "No. El documento firmado queda limpio, sin logos ni marcas." },
+      { question: "¿Firmalo guarda la autorización?", answer: "No. El archivo se procesa localmente en tu navegador y no se almacena en servidores." },
+    ],
+    relatedSlugs: ["firmar-pdf-sin-imprimir", "firmar-pdf-privado-sin-subir-archivos", "firmar-pdf-para-visa", "firmar-contrato-trabajo-pdf"],
   },
 ];
 
@@ -712,7 +913,7 @@ const ptPages: SeoPageData[] = [
       { question: "Uma assinatura feita sem conta tem validade jurídica?", answer: "Sim. A validade de uma assinatura eletrônica não depende do cadastro em uma plataforma, e sim do consentimento. Para a maioria dos contratos e trâmites ela é perfeitamente válida." },
       { question: "Posso usar o Firmalo sem cadastro quantas vezes quiser?", answer: "Sim. Não há limite de uso nem de documentos, e nunca será pedido para você criar uma conta." },
     ],
-    relatedSlugs: ["assinar-pdf-online-gratis", "assinar-pdf-sem-marca-dagua", "criar-assinatura-online"],
+    relatedSlugs: ["assinar-pdf-privado-sem-upload", "assinar-pdf-online-gratis", "assinar-pdf-sem-marca-dagua"],
   },
   {
     slug: "assinar-pdf-sem-marca-dagua",
@@ -953,7 +1154,7 @@ const ptPages: SeoPageData[] = [
       { question: "Preciso imprimir e digitalizar o contrato?", answer: "Não. É justamente esse passo que o Firmalo elimina: você assina direto sobre o PDF digital, sem impressora nem scanner." },
       { question: "Posso guardar uma cópia do contrato assinado?", answer: "Sim. Ao baixar, o PDF assinado fica no seu dispositivo. Guarde ou reenvie por email ou WhatsApp como qualquer arquivo." },
     ],
-    relatedSlugs: ["assinar-pdf-online-gratis", "adicionar-assinatura-no-pdf", "assinar-pdf-para-visto"],
+    relatedSlugs: ["assinar-contrato-trabalho-pdf", "assinar-pdf-sem-imprimir", "adicionar-assinatura-no-pdf", "assinar-pdf-para-visto"],
   },
   {
     slug: "assinar-pdf-para-visto",
@@ -999,7 +1200,7 @@ const ptPages: SeoPageData[] = [
       { question: "Posso assinar uma declaração ou carta convite?", answer: "Sim. São documentos PDF como qualquer outro: envie, coloque sua assinatura no lugar indicado e baixe-os assinados." },
       { question: "Devo usar a mesma assinatura do meu passaporte?", answer: "É o recomendado. Manter uma assinatura consistente com a do passaporte e documento de identidade evita problemas de correspondência no processo." },
     ],
-    relatedSlugs: ["assinar-pdf-online-gratis", "assinar-contrato-pdf-online", "assinar-pdf-sem-cadastro"],
+    relatedSlugs: ["assinar-autorizacao-pdf", "assinar-pdf-privado-sem-upload", "assinar-contrato-pdf-online"],
   },
   {
     slug: "alternativa-smallpdf-assinar-pdf",
@@ -1052,6 +1253,18 @@ const ptPages: SeoPageData[] = [
       { question: "Meus arquivos são enviados para algum servidor como no SmallPDF?", answer: "Não. O SmallPDF processa nos servidores dele; o Firmalo processa tudo no seu navegador, então o PDF nunca sai do seu dispositivo." },
     ],
     relatedSlugs: ["alternativa-docusign-gratis", "assinar-pdf-sem-marca-dagua", "assinar-pdf-online-gratis"],
+    comparison: {
+      competitor: "SmallPDF",
+      caption: "Comparação rápida para assinar PDF de uso pessoal. O SmallPDF é uma suite completa de PDF; o Firmalo foca só em assinar, sem limites nem nuvem.",
+      rows: [
+        { feature: "Preço", firmalo: "Grátis sempre", competitor: "Grátis limitado · Pro ~$12/mês" },
+        { feature: "Documentos por dia", firmalo: "Sem limite", competitor: "2 por dia na versão grátis" },
+        { feature: "Marca d'água", firmalo: "Nunca", competitor: "Em algumas funções da versão grátis" },
+        { feature: "Cadastro", firmalo: "Não exige", competitor: "Exige conta" },
+        { feature: "Privacidade", firmalo: "Processado no navegador; o arquivo não é enviado", competitor: "Envia seus arquivos para a nuvem" },
+        { feature: "Instalação", firmalo: "Nenhuma (web)", competitor: "Nenhuma (web)" },
+      ],
+    },
   },
   {
     slug: "alternativa-docusign-gratis",
@@ -1098,6 +1311,168 @@ const ptPages: SeoPageData[] = [
       { question: "É complicado de usar como o DocuSign?", answer: "Não. Não há painéis, modelos nem configuração. Você envia o PDF, coloca sua assinatura e baixa; todo o processo leva menos de um minuto." },
     ],
     relatedSlugs: ["alternativa-smallpdf-assinar-pdf", "assinar-pdf-online-gratis", "assinar-pdf-sem-cadastro"],
+  },
+
+  {
+    slug: "assinar-pdf-sem-imprimir",
+    lang: "pt",
+    title: "Assinar PDF sem imprimir — Sem scanner nem apps | Firmalo",
+    metaDescription: "Assine um PDF sem imprimir nem escanear. Adicione sua assinatura no navegador, baixe o documento assinado e envie em segundos. Grátis e privado.",
+    heroTitle: "Assine seu PDF sem imprimir",
+    heroSubtitle: "Esqueça imprimir, assinar à mão e escanear. Com o Firmalo você coloca sua assinatura diretamente no PDF e baixa o documento pronto para enviar.",
+    sections: [
+      {
+        title: "Como assinar um PDF sem imprimir",
+        content: "O processo substitui completamente impressora e scanner. Abra o Firmalo, selecione o PDF, crie sua assinatura e posicione-a na página correta. Tudo acontece no navegador, sem instalar programas nem converter o arquivo.",
+        bulletPoints: [
+          "Envie ou arraste o PDF do celular ou computador",
+          "Desenhe sua assinatura, digite em caligrafia ou envie uma imagem",
+          "Mova a assinatura até a linha correta e ajuste o tamanho",
+          "Baixe o PDF assinado sem imprimir nenhuma folha",
+        ],
+      },
+      {
+        title: "Ideal para contratos, formulários e autorizações",
+        content: "Assinar sem imprimir serve para documentos do dia a dia: contratos de aluguel ou trabalho, formulários de trâmites, autorizações, cartas, recibos e anexos. Enquanto o arquivo estiver em PDF, você pode adicionar uma assinatura visual no lugar exato e enviar de volta por email ou WhatsApp.",
+      },
+      {
+        title: "Sem scanner e sem perder qualidade",
+        content: "Quando você imprime e escaneia, o documento costuma ficar pesado, torto ou com baixa qualidade. O Firmalo preserva o PDF original e apenas adiciona a assinatura. O resultado fica limpo e mais profissional que uma foto do papel assinado.",
+      },
+      {
+        title: "Privacidade: seu PDF não vai para servidores",
+        content: "O arquivo é processado localmente no navegador. Isso importa quando você assina contratos, documentos de identidade, informações médicas ou trâmites com dados pessoais. Não há fila na nuvem nem cópias temporárias em servidores de terceiros.",
+      },
+    ],
+    faq: [
+      { question: "Posso assinar um PDF sem imprimir?", answer: "Sim. O Firmalo permite colocar uma assinatura visual diretamente no PDF e baixar o documento assinado." },
+      { question: "Preciso instalar Adobe ou outro aplicativo?", answer: "Não. Funciona no navegador, tanto no celular quanto no computador." },
+      { question: "O documento assinado continua em PDF?", answer: "Sim. Você baixa um arquivo PDF padrão, pronto para enviar ou guardar." },
+      { question: "Posso assinar pelo celular?", answer: "Sim. Você pode desenhar a assinatura com o dedo e posicioná-la no documento pelo iPhone ou Android." },
+      { question: "Assinar sem imprimir tem validade jurídica?", answer: "Para muitos trâmites cotidianos e acordos entre partes, a assinatura eletrônica simples é válida. Se o trâmite exigir assinatura qualificada, verifique os requisitos." },
+    ],
+    relatedSlugs: ["assinar-pdf-online-gratis", "assinar-contrato-pdf-online", "assinar-contrato-trabalho-pdf", "assinar-autorizacao-pdf"],
+  },
+  {
+    slug: "assinar-pdf-privado-sem-upload",
+    lang: "pt",
+    title: "Assinar PDF privado sem upload de arquivos | Firmalo",
+    metaDescription: "Assine PDFs privados sem enviá-los para servidores. O documento é processado no navegador: ideal para contratos, dados pessoais e arquivos sensíveis.",
+    heroTitle: "Assine PDFs privados sem upload",
+    heroSubtitle: "Seu documento não sai do dispositivo. O Firmalo adiciona a assinatura no navegador, sem conta, sem nuvem e sem cópias em servidores.",
+    sections: [
+      {
+        title: "O que significa assinar sem upload",
+        content: "Em muitas ferramentas online, o PDF é enviado para servidores externos para ser processado. O Firmalo funciona diferente: a edição acontece localmente no navegador. Isso reduz exposição, evita cópias temporárias na nuvem e mantém seus documentos sob seu controle.",
+      },
+      {
+        title: "Para documentos com informação sensível",
+        content: "Use este fluxo quando o PDF contém dados pessoais, contratos, documentos trabalhistas, informações médicas, passaportes, declarações ou acordos confidenciais. Se você não quer que um terceiro receba o arquivo, use uma ferramenta com processamento local.",
+        bulletPoints: [
+          "Contratos e anexos com dados das partes",
+          "Formulários com número de documento ou endereço",
+          "Autorizações, cartas e declarações privadas",
+          "PDFs que não devem ficar armazenados em outra plataforma",
+        ],
+      },
+      {
+        title: "Sem cadastro e sem histórico de documentos",
+        content: "O Firmalo não exige conta para assinar. Sem conta, também não há painel com histórico de documentos, arquivos recentes ou dados vinculados ao seu email. Você abre, assina e fecha: o documento fica com você.",
+      },
+      {
+        title: "Privacidade sem complicar o uso",
+        content: "A experiência continua simples: envie o PDF ao navegador, crie a assinatura, posicione e baixe. A diferença é onde o processamento acontece: no seu dispositivo, não em servidores externos.",
+      },
+    ],
+    faq: [
+      { question: "Meu PDF é enviado ao Firmalo?", answer: "Não. O processamento acontece localmente no navegador; o arquivo não é enviado aos nossos servidores." },
+      { question: "O Firmalo guarda meus documentos?", answer: "Não. Não há armazenamento de documentos nem histórico de arquivos assinados." },
+      { question: "Posso assinar documentos confidenciais?", answer: "Sim. Contratos, formulários e PDFs com dados sensíveis são um dos principais casos de uso." },
+      { question: "Preciso criar conta para ser mais seguro?", answer: "Não. Para este caso, não criar conta reduz a quantidade de dados pessoais entregues a uma plataforma." },
+      { question: "O resultado tem marca d'água?", answer: "Não. Você baixa o PDF assinado sem logos nem marcas d'água." },
+    ],
+    relatedSlugs: ["assinar-pdf-sem-cadastro", "assinar-pdf-online-gratis", "assinar-pdf-sem-imprimir", "assinar-pdf-para-visto"],
+  },
+  {
+    slug: "assinar-contrato-trabalho-pdf",
+    lang: "pt",
+    title: "Assinar contrato de trabalho PDF online | Firmalo",
+    metaDescription: "Assine um contrato de trabalho em PDF sem imprimir. Adicione sua assinatura no navegador, mantenha a privacidade do documento e baixe pronto para enviar.",
+    heroTitle: "Assine seu contrato de trabalho em PDF",
+    heroSubtitle: "Para contratos trabalhistas, anexos e acordos de emprego: assine o PDF online sem imprimir, sem scanner e sem enviar o arquivo a servidores.",
+    sections: [
+      {
+        title: "Assine contratos de trabalho sem imprimir",
+        content: "Se você recebeu um contrato de trabalho por email, não precisa imprimir, assinar à mão e escanear. Com o Firmalo você abre o PDF, coloca sua assinatura na página indicada e devolve o arquivo assinado em minutos.",
+      },
+      {
+        title: "O que revisar antes de assinar",
+        content: "Antes de adicionar a assinatura, confira os pontos básicos do contrato. O Firmalo facilita a assinatura, mas a decisão legal e trabalhista continua sendo sua.",
+        bulletPoints: [
+          "Razão social da empresa e nome do trabalhador",
+          "Cargo, funções e local de trabalho",
+          "Salário, benefícios e frequência de pagamento",
+          "Jornada, modalidade remota/presencial e data de início",
+          "Cláusulas de confidencialidade, exclusividade e rescisão",
+        ],
+      },
+      {
+        title: "Também serve para anexos e acordos internos",
+        content: "Além do contrato principal, você pode assinar anexos, renovações, acordos de confidencialidade, autorizações de tratamento de dados, recibos e comunicações trabalhistas em PDF. O fluxo é o mesmo para qualquer documento que precise de assinatura visual.",
+      },
+      {
+        title: "Privacidade para informação trabalhista",
+        content: "Contratos de trabalho contêm dados pessoais, salário e condições privadas. O Firmalo processa o arquivo no navegador, então o PDF não é enviado para uma nuvem de terceiros para adicionar a assinatura.",
+      },
+    ],
+    faq: [
+      { question: "Posso assinar um contrato de trabalho em PDF?", answer: "Sim. Você pode colocar sua assinatura visual no PDF e baixar o documento assinado." },
+      { question: "Serve para anexos trabalhistas?", answer: "Sim. Funciona para contratos, anexos, acordos de confidencialidade, recibos e outros documentos em PDF." },
+      { question: "Preciso imprimir o contrato?", answer: "Não. A assinatura é adicionada diretamente no PDF digital." },
+      { question: "O contrato é enviado para servidores?", answer: "Não. O processamento acontece no navegador." },
+      { question: "Tem validade jurídica?", answer: "A assinatura eletrônica simples costuma ser válida para muitos acordos trabalhistas, mas verifique a legislação aplicável e as exigências da empresa." },
+    ],
+    relatedSlugs: ["assinar-pdf-sem-imprimir", "assinar-contrato-pdf-online", "assinar-pdf-privado-sem-upload", "assinar-autorizacao-pdf"],
+  },
+  {
+    slug: "assinar-autorizacao-pdf",
+    lang: "pt",
+    title: "Assinar autorização em PDF online | Firmalo",
+    metaDescription: "Assine uma autorização em PDF pelo navegador. Sem imprimir, sem scanner, sem cadastro e com processamento privado no seu dispositivo.",
+    heroTitle: "Assine uma autorização em PDF online",
+    heroSubtitle: "Adicione sua assinatura a autorizações, consentimentos e permissões em PDF sem imprimir nem instalar aplicativos.",
+    sections: [
+      {
+        title: "Para autorizações e consentimentos do dia a dia",
+        content: "Autorizações são comuns em trâmites escolares, médicos, trabalhistas, bancários ou de viagem. Se o documento chegou em PDF, você pode assinar com o Firmalo e devolver como arquivo assinado sem usar papel.",
+        bulletPoints: [
+          "Autorizações escolares ou de menores",
+          "Consentimentos para trâmites ou tratamento de dados",
+          "Permissões de viagem, entrega ou representação",
+          "Cartas simples que exigem assinatura",
+        ],
+      },
+      {
+        title: "Assinatura rápida pelo celular ou computador",
+        content: "Abra o PDF, crie sua assinatura e posicione no espaço indicado. Se recebeu o arquivo por WhatsApp ou email, dá para fazer tudo no próprio celular e reenviar o PDF assinado em poucos minutos.",
+      },
+      {
+        title: "Sem enviar documentos sensíveis",
+        content: "Muitas autorizações incluem nomes, documentos de identidade, endereços ou dados de menores. O Firmalo processa o arquivo no navegador, sem enviar o PDF para servidores externos para assinar.",
+      },
+      {
+        title: "Resultado limpo e pronto para enviar",
+        content: "A assinatura fica incorporada no PDF, sem marca d'água nem alteração de formato. Você pode guardar uma cópia e enviar por email, mensagem ou plataforma de trâmites.",
+      },
+    ],
+    faq: [
+      { question: "Posso assinar uma autorização em PDF?", answer: "Sim. Envie o PDF, coloque sua assinatura no campo correto e baixe o documento assinado." },
+      { question: "Serve para permissões escolares ou de viagem?", answer: "Sim, desde que o documento esteja em PDF e o trâmite aceite assinatura eletrônica simples." },
+      { question: "Posso fazer pelo celular?", answer: "Sim. O Firmalo funciona em navegadores móveis e permite desenhar a assinatura com o dedo." },
+      { question: "O PDF fica com marca d'água?", answer: "Não. O documento assinado fica limpo, sem logos nem marcas." },
+      { question: "O Firmalo guarda a autorização?", answer: "Não. O arquivo é processado localmente no navegador e não é armazenado em servidores." },
+    ],
+    relatedSlugs: ["assinar-pdf-sem-imprimir", "assinar-pdf-privado-sem-upload", "assinar-pdf-para-visto", "assinar-contrato-trabalho-pdf"],
   },
 ];
 
