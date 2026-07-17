@@ -111,7 +111,7 @@ export default async function SeoPage({
       />
 
       <SeoHero pageData={pageData} dict={dict} lang={lang} />
-      <SeoContent sections={pageData.sections} />
+      <SeoContent sections={pageData.sections} ctaBlocks={pageData.ctaBlocks} />
       {pageData.comparison && (
         <ComparisonTable comparison={pageData.comparison} lang={lang} />
       )}
