@@ -1,0 +1,62 @@
+date,keyword,cluster,page,engine,region,device,previous,current,delta,priority,actualUrl
+2026-07-27,assinar pdf gratis,core,/pt/,google,,,48,47,1,high,/pt/
+2026-07-27,assinar pdf online,core,/pt/,google,,,46,46,0,high,/pt/
+2026-07-27,assinar pdf online gratis,core,/pt/,google,,,42,41,1,high,/pt/
+2026-07-27,assinar pdf sem cadastro,core,/pt/,google,,,7,8,-1,high,/pt/
+2026-07-27,firma pdf online,core,/es/,google,,,34,34,0,medium,/es/
+2026-07-27,firmar pdf online,core,/es/,google,,,43,29,14,high,/es/
+2026-07-27,firmar pdf online gratis,core,/es/,google,,,38,38,0,high,/es/
+2026-07-27,firmar pdf sin registro,core,/es/,google,,,11,9,2,high,/es/
+2026-07-27,firmar pdf gratis,core,/es/firmar-pdf-online-gratis,google,,,,,,high,/es/firmar-pdf-online-gratis
+2026-07-27,firmar documentos pdf online,core,/es/firmar-pdf-online-gratis,google,,,,,,medium,/es/firmar-pdf-online-gratis
+2026-07-27,firmar pdf sin crear cuenta,core,/es/firmar-pdf-sin-registro,google,,,,,,medium,/es/firmar-pdf-sin-registro
+2026-07-27,firma digital sin registro,core,/es/firmar-pdf-sin-registro,google,,,,,,medium,/es/firmar-pdf-sin-registro
+2026-07-27,firmar pdf sin marca de agua,core,/es/firmar-pdf-sin-marca-de-agua,google,,,,,,high,/es/firmar-pdf-sin-marca-de-agua
+2026-07-27,firmar pdf gratis sin marca de agua,core,/es/,google,,,,7,,high,/es/
+2026-07-27,firma pdf sin watermark,core,/es/firmar-pdf-sin-marca-de-agua,google,,,,,,medium,/es/firmar-pdf-sin-marca-de-agua
+2026-07-27,anadir firma a pdf,feature,/es/anadir-firma-a-pdf,google,,,,,,high,/es/anadir-firma-a-pdf
+2026-07-27,como firmar un pdf,feature,/es/anadir-firma-a-pdf,google,,,,,,high,/es/anadir-firma-a-pdf
+2026-07-27,poner firma en pdf,feature,/es/anadir-firma-a-pdf,google,,,,,,medium,/es/anadir-firma-a-pdf
+2026-07-27,agregar firma a documento pdf,feature,/es/anadir-firma-a-pdf,google,,,,,,medium,/es/anadir-firma-a-pdf
+2026-07-27,crear firma online,feature,/es/crear-firma-online,google,,,,,,high,/es/crear-firma-online
+2026-07-27,crear firma digital gratis,feature,/es/crear-firma-online,google,,,,,,high,/es/crear-firma-online
+2026-07-27,hacer firma electronica,feature,/es/crear-firma-online,google,,,,,,medium,/es/crear-firma-online
+2026-07-27,crear firma para documentos,feature,/es/crear-firma-online,google,,,,,,medium,/es/crear-firma-online
+2026-07-27,firmar pdf desde celular,feature,/es/firmar-pdf-desde-celular,google,,,,,,high,/es/firmar-pdf-desde-celular
+2026-07-27,firmar pdf en celular,feature,/es/firmar-pdf-desde-celular,google,,,,,,high,/es/firmar-pdf-desde-celular
+2026-07-27,firmar documentos desde el celular,feature,/es/firmar-pdf-desde-celular,google,,,,,,medium,/es/firmar-pdf-desde-celular
+2026-07-27,firmar pdf iphone,feature,/es/firmar-pdf-desde-celular,google,,,,,,medium,/es/firmar-pdf-desde-celular
+2026-07-27,firmar pdf android,feature,/es/firmar-pdf-desde-celular,google,,,,,,medium,/es/firmar-pdf-desde-celular
+2026-07-27,firmar contrato alquiler pdf,usecase,/es/firmar-contrato-alquiler-pdf,google,,,,,,high,/es/firmar-contrato-alquiler-pdf
+2026-07-27,firmar contrato de arrendamiento online,usecase,/es/firmar-contrato-alquiler-pdf,google,,,,,,medium,/es/firmar-contrato-alquiler-pdf
+2026-07-27,firmar contrato pdf online,usecase,/es/firmar-contrato-alquiler-pdf,google,,,,,,medium,/es/firmar-contrato-alquiler-pdf
+2026-07-27,firmar pdf para visa,usecase,/es/firmar-pdf-para-visa,google,,,,,,high,/es/firmar-pdf-para-visa
+2026-07-27,firmar documentos para visa,usecase,/es/firmar-pdf-para-visa,google,,,,,,medium,/es/firmar-pdf-para-visa
+2026-07-27,firma digital para tramite de visa,usecase,/es/firmar-pdf-para-visa,google,,,,,,medium,/es/firmar-pdf-para-visa
+2026-07-27,alternativa smallpdf,competitor,/pt/alternativa-smallpdf-assinar-pdf,google,,,,,,high,/pt/alternativa-smallpdf-assinar-pdf
+2026-07-27,alternativa a smallpdf gratis,competitor,/es/alternativa-smallpdf-firmar-pdf,google,,,,,,high,/es/alternativa-smallpdf-firmar-pdf
+2026-07-27,smallpdf alternativa sin marca de agua,competitor,/es/alternativa-smallpdf-firmar-pdf,google,,,,,,medium,/es/alternativa-smallpdf-firmar-pdf
+2026-07-27,alternativa docusign gratis,competitor,/pt/alternativa-docusign-gratis,google,,,,,,high,/pt/alternativa-docusign-gratis
+2026-07-27,alternativa a docusign,competitor,/es/alternativa-docusign-gratis,google,,,,,,high,/es/alternativa-docusign-gratis
+2026-07-27,docusign alternativa gratuita,competitor,/es/alternativa-docusign-gratis,google,,,,,,medium,/es/alternativa-docusign-gratis
+2026-07-27,assinatura digital pdf gratis,core,/pt/assinar-pdf-online-gratis,google,,,,,,medium,/pt/assinar-pdf-online-gratis
+2026-07-27,assinar pdf sem criar conta,core,/pt/assinar-pdf-sem-cadastro,google,,,,,,medium,/pt/assinar-pdf-sem-cadastro
+2026-07-27,assinatura digital sem registro,core,/pt/assinar-pdf-sem-cadastro,google,,,,,,medium,/pt/assinar-pdf-sem-cadastro
+2026-07-27,assinar pdf sem marca dagua,core,/pt/assinar-pdf-sem-marca-dagua,google,,,,,,high,/pt/assinar-pdf-sem-marca-dagua
+2026-07-27,assinar pdf gratis sem marca dagua,core,/pt/assinar-pdf-sem-marca-dagua,google,,,,,,high,/pt/assinar-pdf-sem-marca-dagua
+2026-07-27,adicionar assinatura no pdf,feature,/pt/adicionar-assinatura-no-pdf,google,,,,,,high,/pt/adicionar-assinatura-no-pdf
+2026-07-27,como assinar um pdf,feature,/pt/adicionar-assinatura-no-pdf,google,,,,,,high,/pt/adicionar-assinatura-no-pdf
+2026-07-27,colocar assinatura em pdf,feature,/pt/adicionar-assinatura-no-pdf,google,,,,,,medium,/pt/adicionar-assinatura-no-pdf
+2026-07-27,criar assinatura online,feature,/pt/criar-assinatura-online,google,,,,,,high,/pt/criar-assinatura-online
+2026-07-27,criar assinatura digital gratis,feature,/pt/criar-assinatura-online,google,,,,,,high,/pt/criar-assinatura-online
+2026-07-27,fazer assinatura eletronica,feature,/pt/criar-assinatura-online,google,,,,,,medium,/pt/criar-assinatura-online
+2026-07-27,assinar pdf no celular,feature,/pt/assinar-pdf-no-celular,google,,,,,,high,/pt/assinar-pdf-no-celular
+2026-07-27,assinar pdf pelo celular,feature,/pt/assinar-pdf-no-celular,google,,,,,,high,/pt/assinar-pdf-no-celular
+2026-07-27,assinar documento no celular,feature,/pt/assinar-pdf-no-celular,google,,,,,,medium,/pt/assinar-pdf-no-celular
+2026-07-27,assinar contrato pdf online,usecase,/pt/assinar-contrato-pdf-online,google,,,,,,high,/pt/assinar-contrato-pdf-online
+2026-07-27,assinar contrato de aluguel online,usecase,/pt/assinar-contrato-pdf-online,google,,,,,,medium,/pt/assinar-contrato-pdf-online
+2026-07-27,assinar contrato digital,usecase,/pt/assinar-contrato-pdf-online,google,,,,,,medium,/pt/assinar-contrato-pdf-online
+2026-07-27,assinar pdf para visto,usecase,/pt/assinar-pdf-para-visto,google,,,,,,high,/pt/assinar-pdf-para-visto
+2026-07-27,assinar documentos para visto,usecase,/pt/assinar-pdf-para-visto,google,,,,,,medium,/pt/assinar-pdf-para-visto
+2026-07-27,alternativa ao smallpdf gratis,competitor,/pt/alternativa-smallpdf-assinar-pdf,google,,,,,,high,/pt/alternativa-smallpdf-assinar-pdf
+2026-07-27,alternativa ao docusign,competitor,/pt/alternativa-docusign-gratis,google,,,,,,high,/pt/alternativa-docusign-gratis
