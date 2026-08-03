@@ -1,5 +1,8 @@
 # Caller for the golatam/seo-tracker reusable workflow.
-# Tracks @main (canary) until both consumers are stable, then switches to @v1.
+# Pinned to a known-good commit (not @main) since 2026-08-03: seo-tracker's
+# main is about to default RANK_SOURCE to 'topvisor', and firmalo has no
+# Topvisor secrets. Un-pin once seo-tracker exposes an explicit rank_source
+# input (or once firmalo gets its own Topvisor project) and re-check.
 
 name: SEO Weekly Position Check
 
@@ -14,7 +17,7 @@ permissions:
 
 jobs:
   check:
-    uses: golatam/seo-tracker/.github/workflows/weekly-check.yml@main
+    uses: golatam/seo-tracker/.github/workflows/weekly-check.yml@ea69f34
     secrets: inherit
     with:
       site_url: https://firmalo.io
@@ -23,4 +26,4 @@ jobs:
       enable_yandex: false
       core_path: seo-tracking/semantic-core.json
       snapshots_dir: seo-tracking/snapshots
-      package_ref: main
+      package_ref: ea69f34
