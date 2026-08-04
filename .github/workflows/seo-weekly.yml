@@ -7,9 +7,14 @@
 name: SEO Weekly Position Check
 
 on:
-  schedule:
-    # Every Monday at 12:00 UTC (9:00 AM LATAM / 15:00 MSK)
-    - cron: '0 12 * * 1'
+  # 2026-08-04: cron commented out, not deleted. Firmalo now has its own
+  # Topvisor project (registered in golatam/seo-tracker) with a weekly cron
+  # running from the Hermes VPS instead — this legacy caller would duplicate
+  # the GSC-based check. workflow_dispatch stays for manual debugging/parity
+  # checks. Keep this file for at least a month before deleting.
+  # schedule:
+  #   # Every Monday at 12:00 UTC (9:00 AM LATAM / 15:00 MSK)
+  #   - cron: '0 12 * * 1'
   workflow_dispatch:
 
 permissions:
