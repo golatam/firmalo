@@ -65,9 +65,9 @@ export function HomeSeoIntro({ lang }: { lang: Locale }) {
               <L lang={lang} slug="assinar-pdf-online-gratis">assinar um PDF online grátis</L>{" "}
               direto do navegador. Você não precisa instalar nada nem{" "}
               <L lang={lang} slug="assinar-pdf-sem-cadastro">criar uma conta</L>: envia seu
-              documento, coloca sua assinatura e baixa em segundos. Seu arquivo é processado
-              localmente e nunca é enviado para um servidor, então você mantém o controle
-              total dos seus documentos.
+              documento, coloca sua assinatura e baixa em segundos. Seu arquivo é{" "}
+              <L lang={lang} slug="assinar-pdf-privado-sem-upload">processado localmente, sem enviar seus arquivos a um servidor</L>,
+              então você mantém o controle total dos seus documentos.
             </p>
             <p className="text-text-secondary leading-relaxed">
               Você pode{" "}

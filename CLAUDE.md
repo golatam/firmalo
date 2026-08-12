@@ -16,6 +16,10 @@
 | Day 6: Rate limit + legal pages | ✅ Done |
 | Day 7: QA + launch | ✅ Done |
 
+## SEO position data — Topvisor direct, not seo-tracker
+
+**CRITICAL — `golatam/seo-tracker` is deprecated as of 2026-08-12 (confirmed by Kirill).** Don't use it, don't trust its `STATUS.md`/descriptors as current truth, and don't expect it to auto-open GitHub issues anymore — the `seo-tz` issue-queue rule that used to live here is gone; there is no automated alert channel right now. Getting a fresh position read is a manual step: Kirill runs the paid check via the Topvisor UI himself, then Claude Code pulls the resulting data directly via the Topvisor API — see skill `~/.claude/skills/topvisor-api/SKILL.md` (credentials, endpoints, and a critical `depth`-vs-`--` gotcha that caused a false "data is broken" diagnosis on 2026-08-12). Project ID `29754841` (`firmalo.io`, 80 keywords, 19 LATAM+ES regions). For an SEO plan/analysis, loop in Hermes/Clavito via skill `ask-clavito-seo` — see `docs/TZ-seo-optimization-plan-2026-08-12.md` for the first cycle of this (real position trends + a P0-P3 plan).
+
 ## Architecture
 
 - **Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS

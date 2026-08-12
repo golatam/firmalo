@@ -256,6 +256,16 @@ const esPages: SeoPageData[] = [
           "El PDF conserva su resolución y formato originales",
         ],
       },
+      {
+        title: "Alternativa a SmallPDF sin marca de agua",
+        content: "Si buscas específicamente evitar la marca de agua de SmallPDF, esta es la comparación que importa: SmallPDF agrega marca de agua en su plan gratuito (o limita a 2 documentos diarios, según la función) y sube tu archivo a sus servidores para procesarlo; su plan sin esas restricciones ronda los $12/mes. Firmalo nunca agrega marca de agua, no pide cuenta, procesa el PDF en tu propio navegador y es gratis sin límite de documentos.",
+        bulletPoints: [
+          "Marca de agua: SmallPDF la agrega en su versión gratuita — Firmalo, nunca",
+          "Cuenta: SmallPDF puede pedir registro — Firmalo no pide cuenta",
+          "Precio: SmallPDF Pro ronda los $12/mes — Firmalo es gratis siempre",
+          "Subida de archivos: SmallPDF sube tu PDF a un servidor — Firmalo lo procesa en tu navegador",
+        ],
+      },
     ],
     faq: [
       { question: "¿Firmalo agrega algún tipo de marca a mi PDF?", answer: "No. Tu PDF firmado es exactamente igual al original, solo con tu firma añadida. No agregamos marcas de agua, logos ni textos." },
@@ -263,6 +273,7 @@ const esPages: SeoPageData[] = [
       { question: "¿El PDF firmado mantiene la misma calidad?", answer: "Sí. No comprimimos ni alteramos la calidad de tu documento. Solo añadimos tu firma en la posición que elijas." },
       { question: "¿Por qué otras herramientas gratuitas ponen marca de agua?", answer: "Suelen usarla como publicidad o para empujarte a pagar la versión de pago. Firmalo no necesita hacerlo porque procesa todo en tu navegador, sin costos de servidor." },
       { question: "¿Tendré que pagar para quitar la marca de agua?", answer: "No. En Firmalo nunca hay marca de agua, así que no hay nada que pagar para quitarla. Es gratis y limpio desde el primer documento." },
+      { question: "¿Cómo firmar un PDF sin watermark?", answer: "Sube tu PDF a Firmalo, añade tu firma —dibujada, escrita o una imagen— y descárgalo: no agregamos ningún watermark ni marca de agua, sin importar cuántos documentos firmes." },
     ],
     relatedSlugs: ["firmar-pdf-online-gratis", "alternativa-smallpdf-firmar-pdf", "alternativa-docusign-gratis"],
   },
@@ -612,7 +623,7 @@ const esPages: SeoPageData[] = [
       { question: "¿Firmalo sirve para uso personal y no empresarial?", answer: "Exacto. Está pensado para firmar tus propios documentos —contratos, formularios, cartas— de forma rápida y gratuita. Para flujos empresariales con varios firmantes, DocuSign sigue siendo más adecuado." },
       { question: "¿Es complicado de usar como DocuSign?", answer: "No. No hay paneles, plantillas ni configuración. Subes el PDF, colocas tu firma y descargas; todo el proceso toma menos de un minuto." },
     ],
-    relatedSlugs: ["alternativa-smallpdf-firmar-pdf", "firmar-pdf-online-gratis", "firmar-pdf-sin-registro"],
+    relatedSlugs: ["alternativa-smallpdf-firmar-pdf", "firmar-pdf-online-gratis", "firmar-pdf-sin-registro", "firmar-pdf-sin-marca-de-agua"],
     comparison: {
       competitor: "DocuSign",
       caption: "DocuSign es ideal para flujos empresariales con varios firmantes. Para firmar tú mismo un documento, esta es la diferencia frente a Firmalo.",
@@ -1390,6 +1401,7 @@ const ptPages: SeoPageData[] = [
       { question: "Posso assinar documentos confidenciais?", answer: "Sim. Contratos, formulários e PDFs com dados sensíveis são um dos principais casos de uso." },
       { question: "Preciso criar conta para ser mais seguro?", answer: "Não. Para este caso, não criar conta reduz a quantidade de dados pessoais entregues a uma plataforma." },
       { question: "O resultado tem marca d'água?", answer: "Não. Você baixa o PDF assinado sem logos nem marcas d'água." },
+      { question: "Dá para assinar PDF sem enviar arquivos para nenhum site?", answer: "Sim — é exatamente esse o ponto do Firmalo: você assina sem enviar arquivos a servidor nenhum, tudo acontece no seu navegador." },
     ],
     relatedSlugs: ["assinar-pdf-sem-cadastro", "assinar-pdf-online-gratis", "assinar-pdf-sem-imprimir", "assinar-pdf-para-visto"],
   },

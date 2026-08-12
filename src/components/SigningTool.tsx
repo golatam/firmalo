@@ -12,6 +12,7 @@ import {
 } from "./SignatureOverlay";
 import { exportSignedPdf, downloadBlob } from "@/lib/pdf-export";
 import { recordExport, minutesUntilReset } from "@/lib/rate-limit";
+import { trackEvent, fileSizeBucket } from "@/lib/analytics";
 
 type Step = "upload" | "sign" | "done";
 
@@ -52,12 +53,18 @@ export function SigningTool({
     setPlacement(null);
     setExportError(null);
     setPdfError(null);
-  }, []);
+    trackEvent("pdf_upload_started", {
+      ui_language: lang,
+      flow_step: "upload",
+      file_size_bucket: fileSizeBucket(f.size),
+    });
+  }, [lang]);
 
   const handleSignatureApply = useCallback((dataUrl: string) => {
     setSignatureDataUrl(dataUrl);
     setShowSignatureModal(false);
-  }, []);
+    trackEvent("signature_created", { ui_language: lang, flow_step: "signature_modal" });
+  }, [lang]);
 
   const handlePlacementChange = useCallback((p: SignaturePlacement) => {
     setPlacement(p);
@@ -94,13 +101,14 @@ export function SigningTool({
       const blob = await exportSignedPdf(file, signatureDataUrl, placement);
       const signedName = file.name.replace(/\.pdf$/i, "-firmado.pdf");
       downloadBlob(blob, signedName);
+      trackEvent("pdf_signed_downloaded", { ui_language: lang, flow_step: "export" });
       setStep("done");
     } catch {
       setExportError(dict.export.error);
     } finally {
       setExporting(false);
     }
-  }, [file, signatureDataUrl, placement, dict]);
+  }, [file, signatureDataUrl, placement, dict, lang]);
 
   const handleReset = useCallback(() => {
     setStep("upload");

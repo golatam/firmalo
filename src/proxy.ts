@@ -1,8 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "@/lib/i18n";
 
+const WWW_HOST = "www.firmalo.io";
+const APEX_HOST = "firmalo.io";
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Canonicalize www -> apex first, before locale logic, so a www request
+  // never gets a second redirect stacked on top (single 308, any path).
+  // www.firmalo.io currently serves full 200 responses directly (only
+  // saved from duplicate indexing by canonical tags) — this is the actual
+  // fix for that, not just a redirect-chain nitpick.
+  const host = request.headers.get("host");
+  if (host === WWW_HOST) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https";
+    url.host = APEX_HOST;
+    url.port = "";
+    return NextResponse.redirect(url, { status: 308 });
+  }
 
   // Check if path already starts with a locale
   const hasLocale = locales.some(
@@ -31,5 +48,8 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico|robots.txt|sitemap.xml).*)"],
+  // Only _next build assets are excluded — the www->apex host check above
+  // must run on robots.txt/sitemap.xml/favicon.ico too, not just page
+  // routes; the locale logic below still skips those via pathname checks.
+  matcher: ["/((?!_next).*)"],
 };
