@@ -26,6 +26,7 @@
   },
   "signature": {
     "title": "Crear firma",
+    "addAnother": "Añadir otra firma",
     "tabs": {
       "draw": "Dibujar",
       "type": "Escribir",
@@ -36,7 +37,12 @@
     "apply": "Aplicar firma",
     "dragHint": "Arrastra para posicionar la firma",
     "onPage": "Tu firma está en la página {page}",
-    "goToPage": "Ir a página {page}"
+    "goToPage": "Ir a página {page}",
+    "saved": {
+      "label": "Tu firma guardada",
+      "use": "Usar esta firma",
+      "forget": "Olvidar"
+    }
   },
   "export": {
     "button": "Descargar PDF firmado",

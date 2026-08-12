@@ -1,9 +1,13 @@
 import type { SignaturePlacement } from "@/components/SignatureOverlay";
 
+export interface SignatureToPlace {
+  dataUrl: string;
+  placement: SignaturePlacement;
+}
+
 export async function exportSignedPdf(
   originalFile: File,
-  signatureDataUrl: string,
-  placement: SignaturePlacement
+  signatures: SignatureToPlace[]
 ): Promise<Blob> {
   const { PDFDocument } = await import("pdf-lib");
   const arrayBuffer = await originalFile.arrayBuffer();
@@ -17,45 +21,41 @@ export async function exportSignedPdf(
     throw new Error("PDF_LOAD_FAILED");
   }
 
-  // Get the target page (0-indexed)
   const pages = pdfDoc.getPages();
-  const pageIndex = placement.page - 1;
-  if (pageIndex < 0 || pageIndex >= pages.length) {
-    throw new Error("Invalid page number");
-  }
-  const page = pages[pageIndex];
-  const { width: pageWidth, height: pageHeight } = page.getSize();
 
-  // Decode the signature image
-  let signatureImage;
-  if (signatureDataUrl.startsWith("data:image/png")) {
-    const base64 = signatureDataUrl.split(",")[1];
+  for (const { dataUrl, placement } of signatures) {
+    const pageIndex = placement.page - 1;
+    if (pageIndex < 0 || pageIndex >= pages.length) {
+      throw new Error("Invalid page number");
+    }
+    const page = pages[pageIndex];
+    const { width: pageWidth, height: pageHeight } = page.getSize();
+
+    // Decode the signature image
+    const base64 = dataUrl.split(",")[1];
     const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
-    signatureImage = await pdfDoc.embedPng(bytes);
-  } else {
-    const base64 = signatureDataUrl.split(",")[1];
-    const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
-    signatureImage = await pdfDoc.embedJpg(bytes);
+    const signatureImage = dataUrl.startsWith("data:image/png")
+      ? await pdfDoc.embedPng(bytes)
+      : await pdfDoc.embedJpg(bytes);
+
+    // Calculate dimensions in PDF coordinate space
+    // placement.x/y are percentages (0-100) from top-left
+    // PDF coordinates start from bottom-left
+    const sigWidthPdf = (placement.width / 100) * pageWidth;
+    const aspectRatio = signatureImage.height / signatureImage.width;
+    const sigHeightPdf = sigWidthPdf * aspectRatio;
+
+    const sigX = (placement.x / 100) * pageWidth - sigWidthPdf / 2;
+    // Flip Y: placement.y is from top, PDF is from bottom
+    const sigY = pageHeight - (placement.y / 100) * pageHeight - sigHeightPdf / 2;
+
+    page.drawImage(signatureImage, {
+      x: Math.max(0, sigX),
+      y: Math.max(0, sigY),
+      width: sigWidthPdf,
+      height: sigHeightPdf,
+    });
   }
-
-  // Calculate dimensions in PDF coordinate space
-  // placement.x/y are percentages (0-100) from top-left
-  // PDF coordinates start from bottom-left
-  const sigWidthPdf = (placement.width / 100) * pageWidth;
-  const aspectRatio = signatureImage.height / signatureImage.width;
-  const sigHeightPdf = sigWidthPdf * aspectRatio;
-
-  const sigX = (placement.x / 100) * pageWidth - sigWidthPdf / 2;
-  // Flip Y: placement.y is from top, PDF is from bottom
-  const sigY = pageHeight - (placement.y / 100) * pageHeight - sigHeightPdf / 2;
-
-  // Draw signature on the page
-  page.drawImage(signatureImage, {
-    x: Math.max(0, sigX),
-    y: Math.max(0, sigY),
-    width: sigWidthPdf,
-    height: sigHeightPdf,
-  });
 
   // Save the modified PDF
   const pdfBytes = await pdfDoc.save();

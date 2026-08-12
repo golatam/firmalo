@@ -26,6 +26,7 @@
   },
   "signature": {
     "title": "Criar assinatura",
+    "addAnother": "Adicionar outra assinatura",
     "tabs": {
       "draw": "Desenhar",
       "type": "Digitar",
@@ -36,7 +37,12 @@
     "apply": "Aplicar assinatura",
     "dragHint": "Arraste para posicionar a assinatura",
     "onPage": "Sua assinatura está na página {page}",
-    "goToPage": "Ir para página {page}"
+    "goToPage": "Ir para página {page}",
+    "saved": {
+      "label": "Sua assinatura salva",
+      "use": "Usar esta assinatura",
+      "forget": "Esquecer"
+    }
   },
   "export": {
     "button": "Baixar PDF assinado",

@@ -16,6 +16,12 @@ import { trackEvent, fileSizeBucket } from "@/lib/analytics";
 
 type Step = "upload" | "sign" | "done";
 
+interface PlacedSignature {
+  id: string;
+  dataUrl: string;
+  placement: SignaturePlacement;
+}
+
 export function SigningTool({
   dict,
   lang,
@@ -28,9 +34,7 @@ export function SigningTool({
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [showSignatureModal, setShowSignatureModal] = useState(false);
-  const [signatureDataUrl, setSignatureDataUrl] = useState<string | null>(null);
-  const [placement, setPlacement] = useState<SignaturePlacement | null>(null);
-  const [signaturePage, setSignaturePage] = useState<number>(1);
+  const [signatures, setSignatures] = useState<PlacedSignature[]>([]);
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
   const [pdfError, setPdfError] = useState<string | null>(null);
@@ -49,8 +53,7 @@ export function SigningTool({
     setFile(f);
     setStep("sign");
     setCurrentPage(1);
-    setSignatureDataUrl(null);
-    setPlacement(null);
+    setSignatures([]);
     setExportError(null);
     setPdfError(null);
     trackEvent("pdf_upload_started", {
@@ -61,19 +64,31 @@ export function SigningTool({
   }, [lang]);
 
   const handleSignatureApply = useCallback((dataUrl: string) => {
-    setSignatureDataUrl(dataUrl);
+    setSignatures((prev) => {
+      // Stagger signatures placed on the same page so a second/third one
+      // doesn't land exactly on top of the previous — still draggable
+      // apart either way, this just saves a step.
+      const onThisPage = prev.filter((s) => s.placement.page === currentPage).length;
+      const offset = Math.min(onThisPage * 8, 24);
+      return [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          dataUrl,
+          placement: { x: 50 + offset, y: 70 - offset, width: 25, page: currentPage },
+        },
+      ];
+    });
     setShowSignatureModal(false);
     trackEvent("signature_created", { ui_language: lang, flow_step: "signature_modal" });
-  }, [lang]);
+  }, [lang, currentPage]);
 
-  const handlePlacementChange = useCallback((p: SignaturePlacement) => {
-    setPlacement(p);
-    setSignaturePage(p.page);
+  const handlePlacementChange = useCallback((id: string, p: SignaturePlacement) => {
+    setSignatures((prev) => prev.map((s) => (s.id === id ? { ...s, placement: p } : s)));
   }, []);
 
-  const handleRemoveSignature = useCallback(() => {
-    setSignatureDataUrl(null);
-    setPlacement(null);
+  const handleRemoveSignature = useCallback((id: string) => {
+    setSignatures((prev) => prev.filter((s) => s.id !== id));
   }, []);
 
   const handlePdfError = useCallback((message: string) => {
@@ -81,7 +96,7 @@ export function SigningTool({
   }, []);
 
   const handleExport = useCallback(async () => {
-    if (!file || !signatureDataUrl || !placement) return;
+    if (!file || signatures.length === 0) return;
 
     setExporting(true);
     setExportError(null);
@@ -98,23 +113,29 @@ export function SigningTool({
     }
 
     try {
-      const blob = await exportSignedPdf(file, signatureDataUrl, placement);
+      const blob = await exportSignedPdf(
+        file,
+        signatures.map((s) => ({ dataUrl: s.dataUrl, placement: s.placement }))
+      );
       const signedName = file.name.replace(/\.pdf$/i, "-firmado.pdf");
       downloadBlob(blob, signedName);
-      trackEvent("pdf_signed_downloaded", { ui_language: lang, flow_step: "export" });
+      trackEvent("pdf_signed_downloaded", {
+        ui_language: lang,
+        flow_step: "export",
+        signature_count: signatures.length,
+      });
       setStep("done");
     } catch {
       setExportError(dict.export.error);
     } finally {
       setExporting(false);
     }
-  }, [file, signatureDataUrl, placement, dict, lang]);
+  }, [file, signatures, dict, lang]);
 
   const handleReset = useCallback(() => {
     setStep("upload");
     setFile(null);
-    setSignatureDataUrl(null);
-    setPlacement(null);
+    setSignatures([]);
     setCurrentPage(1);
     setPageCount(0);
     setExportError(null);
@@ -147,8 +168,9 @@ export function SigningTool({
   }
 
   // --- Sign step ---
-  const showOverlay = signatureDataUrl && (!placement || signaturePage === currentPage);
-  const signatureOnOtherPage = signatureDataUrl && placement && signaturePage !== currentPage;
+  const signaturesOnCurrentPage = signatures.filter((s) => s.placement.page === currentPage);
+  const otherPageSignatures = signatures.filter((s) => s.placement.page !== currentPage);
+  const nearestOtherPage = otherPageSignatures[0]?.placement.page;
 
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -171,20 +193,20 @@ export function SigningTool({
         </div>
 
         <div className="flex items-center gap-2">
-          {!signatureDataUrl ? (
-            <button
-              onClick={() => setShowSignatureModal(true)}
-              className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 min-h-[44px] bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-              </svg>
-              {dict.signature.title}
-            </button>
-          ) : (
+          <button
+            onClick={() => setShowSignatureModal(true)}
+            className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 min-h-[44px] bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            {signatures.length === 0 ? dict.signature.title : dict.signature.addAnother}
+          </button>
+
+          {signatures.length > 0 && (
             <button
               onClick={handleExport}
-              disabled={exporting || !placement}
+              disabled={exporting}
               className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 min-h-[44px] bg-success text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {exporting ? (
@@ -220,23 +242,23 @@ export function SigningTool({
         </div>
       )}
 
-      {/* Signature on another page banner */}
-      {signatureOnOtherPage && (
+      {/* Signatures on another page banner */}
+      {otherPageSignatures.length > 0 && nearestOtherPage != null && (
         <div className="mb-3 flex items-center justify-center gap-2 py-2 px-3 bg-primary-light rounded-lg text-sm text-primary">
           <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>{dict.signature.onPage.replace("{page}", String(signaturePage))}</span>
+          <span>{dict.signature.onPage.replace("{page}", String(nearestOtherPage))}</span>
           <button
-            onClick={() => setCurrentPage(signaturePage)}
+            onClick={() => setCurrentPage(nearestOtherPage)}
             className="underline underline-offset-2 font-medium"
           >
-            {dict.signature.goToPage.replace("{page}", String(signaturePage))}
+            {dict.signature.goToPage.replace("{page}", String(nearestOtherPage))}
           </button>
         </div>
       )}
 
-      {/* PDF canvas area with signature overlay */}
+      {/* PDF canvas area with signature overlays */}
       <div ref={pdfContainerRef} className="relative overflow-hidden">
         {file && (
           <PdfViewer
@@ -250,20 +272,24 @@ export function SigningTool({
           />
         )}
 
-        {/* Signature overlay — only on the page where it was placed */}
-        {showOverlay && (
+        {/* One overlay per signature placed on the current page — each
+            draggable/removable independently */}
+        {signaturesOnCurrentPage.map((sig) => (
           <SignatureOverlay
-            signatureDataUrl={signatureDataUrl}
+            key={sig.id}
+            signatureDataUrl={sig.dataUrl}
             containerRef={pdfContainerRef}
-            onPlacementChange={handlePlacementChange}
+            onPlacementChange={(p) => handlePlacementChange(sig.id, p)}
             currentPage={currentPage}
-            onRemove={handleRemoveSignature}
+            onRemove={() => handleRemoveSignature(sig.id)}
+            initialPosition={{ x: sig.placement.x, y: sig.placement.y }}
+            initialWidth={sig.placement.width}
           />
-        )}
+        ))}
       </div>
 
       {/* Hint */}
-      {signatureDataUrl && !signatureOnOtherPage && (
+      {signatures.length > 0 && otherPageSignatures.length === 0 && (
         <p className="text-center text-xs text-text-muted mt-3">
           {dict.signature.dragHint}
         </p>

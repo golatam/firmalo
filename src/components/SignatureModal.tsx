@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import type SignaturePadType from "signature_pad";
 import type { Dictionary } from "@/lib/dictionaries";
+import { getSavedSignature, saveSignature, clearSavedSignature } from "@/lib/signature-storage";
 
 type Tab = "draw" | "type" | "upload";
 
@@ -39,6 +40,19 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   const [selectedFont, setSelectedFont] = useState(SIGNATURE_FONTS[0]);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [hasDrawn, setHasDrawn] = useState(false);
+  const [savedSignature, setSavedSignature] = useState<string | null>(null);
+
+  // Read the locally-cached signature on mount — client-only, avoids SSR mismatch.
+  useEffect(() => { setSavedSignature(getSavedSignature()); }, []);
+
+  const handleUseSaved = useCallback(() => {
+    if (savedSignature) onApply(savedSignature);
+  }, [savedSignature, onApply]);
+
+  const handleForgetSaved = useCallback(() => {
+    clearSavedSignature();
+    setSavedSignature(null);
+  }, []);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sigPadRef = useRef<SignaturePadType | null>(null);
@@ -142,6 +156,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
     }
 
     if (dataUrl) {
+      saveSignature(dataUrl);
       onApply(dataUrl);
     }
   }, [activeTab, typedName, selectedFont, uploadedImage, onApply]);
@@ -196,6 +211,34 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
             </svg>
           </button>
         </div>
+
+        {/* Saved signature — locally cached, no account, offered on top of the tabs */}
+        {savedSignature && (
+          <div className="flex items-center gap-3 p-4 border-b border-border bg-primary-light/30">
+            <div className="p-1.5 bg-white border border-border rounded-lg shrink-0">
+              <img
+                src={savedSignature}
+                alt={dict.signature.saved.label}
+                className="h-10 w-20 object-contain"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-text-muted">{dict.signature.saved.label}</p>
+              <button
+                onClick={handleUseSaved}
+                className="text-sm font-medium text-primary hover:underline underline-offset-2"
+              >
+                {dict.signature.saved.use}
+              </button>
+            </div>
+            <button
+              onClick={handleForgetSaved}
+              className="px-2 py-2 min-h-[44px] text-xs text-text-muted hover:text-text transition-colors shrink-0"
+            >
+              {dict.signature.saved.forget}
+            </button>
+          </div>
+        )}
 
         {/* Tabs */}
         <div className="flex border-b border-border">

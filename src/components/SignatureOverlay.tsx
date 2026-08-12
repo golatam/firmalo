@@ -15,6 +15,9 @@ interface SignatureOverlayProps {
   onPlacementChange: (placement: SignaturePlacement) => void;
   currentPage: number;
   onRemove: () => void;
+  /** Seed position/width for this instance — lets multiple overlays start staggered instead of stacked. Defaults match the original single-signature behavior. */
+  initialPosition?: { x: number; y: number };
+  initialWidth?: number;
 }
 
 export function SignatureOverlay({
@@ -23,9 +26,11 @@ export function SignatureOverlay({
   onPlacementChange,
   currentPage,
   onRemove,
+  initialPosition,
+  initialWidth,
 }: SignatureOverlayProps) {
-  const [position, setPosition] = useState({ x: 50, y: 70 }); // default: center-bottom
-  const [width, setWidth] = useState(25); // 25% of container
+  const [position, setPosition] = useState(initialPosition ?? { x: 50, y: 70 });
+  const [width, setWidth] = useState(initialWidth ?? 25); // percent of container width
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const dragStart = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
