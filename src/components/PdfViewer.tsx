@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import type { PDFDocumentProxy } from "pdfjs-dist";
+import type { PDFDocumentProxy, RenderTask } from "pdfjs-dist";
 import type { Dictionary } from "@/lib/dictionaries";
 
 const LARGE_FILE_THRESHOLD = 10 * 1024 * 1024; // 10 MB
@@ -26,6 +26,7 @@ export function PdfViewer({
   onError,
 }: PdfViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const renderTaskRef = useRef<RenderTask | null>(null);
   const [pdfDoc, setPdfDoc] = useState<PDFDocumentProxy | null>(null);
   const [pageCount, setPageCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -67,6 +68,16 @@ export function PdfViewer({
   // Render current page
   const renderPage = useCallback(async () => {
     if (!pdfDoc || !canvasRef.current || !containerRef.current) return;
+
+    // pdf.js does not allow two render() calls on the same canvas at once —
+    // cancel any in-flight render before starting a new one (can happen if
+    // this fires twice in quick succession, e.g. a resize right after a
+    // page/doc change).
+    if (renderTaskRef.current) {
+      renderTaskRef.current.cancel();
+      renderTaskRef.current = null;
+    }
+
     setRendering(true);
 
     try {
@@ -91,12 +102,18 @@ export function PdfViewer({
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      await page.render({
+      const task = page.render({
         canvasContext: ctx,
         viewport: scaledViewport,
         canvas: canvas,
-      }).promise;
-    } catch {
+      });
+      renderTaskRef.current = task;
+      await task.promise;
+      renderTaskRef.current = null;
+    } catch (err) {
+      // A cancelled render throws by design — not a real error, don't
+      // surface "file corrupted" to the user for it.
+      if (err instanceof Error && err.name === "RenderingCancelledException") return;
       onError?.(dict.dropzone.error.corrupted);
     } finally {
       setRendering(false);
@@ -105,6 +122,10 @@ export function PdfViewer({
 
   useEffect(() => {
     renderPage();
+    return () => {
+      renderTaskRef.current?.cancel();
+      renderTaskRef.current = null;
+    };
   }, [renderPage]);
 
   // Re-render on resize (debounced)
