@@ -15,6 +15,8 @@
 | Day 5: GA4 + Search Console + SEO position tracking | ✅ Done |
 | Day 6: Rate limit + legal pages | ✅ Done |
 | Day 7: QA + launch | ✅ Done |
+| SEO optimization plan (www redirect, watermark content, PT links, GA4 events) | ✅ Done (2026-08-12) — see `docs/TZ-seo-optimization-plan-2026-08-12.md` |
+| Signing tool: crash fix (same-URL Link mid-session) + signature caching + multi-signature | ✅ Done (2026-08-12) |
 
 ## SEO position data — Topvisor direct, not seo-tracker
 
@@ -27,6 +29,7 @@
 - **i18n:** `[lang]` dynamic segment with SSG, dictionaries in `src/dictionaries/`
 - **Key pattern:** SigningTool loaded via `dynamic(ssr: false)` — SEO content renders server-side, tool loads client-side only
 - **All PDF processing is 100% client-side** — files never leave the browser
+- **Signatures:** `SigningTool` holds `signatures: PlacedSignature[]` (id/dataUrl/placement), not a single value — multiple independent signatures per document are supported (each own drag/resize/remove). The last-used signature is cached in `localStorage` (`signature-storage.ts`) so it doesn't need redrawing — deliberately **not** a user-account system: accounts would contradict the "sin registro"/"sem cadastro" positioning that's the headline argument on dozens of SEO pages, and there's no backend to support it. Don't reintroduce a single-signature scalar or propose accounts without surfacing that tension first.
 
 ## Structure
 
@@ -74,8 +77,10 @@ src/
 │   ├── i18n.ts                # Locale config
 │   ├── dictionaries.ts        # Dictionary loader
 │   ├── pdf-worker.ts          # pdf.js worker setup
-│   ├── pdf-export.ts          # pdf-lib export + download
+│   ├── pdf-export.ts          # pdf-lib export + download — exportSignedPdf() takes SignatureToPlace[], draws each
 │   ├── rate-limit.ts          # Client-side export rate limiting (localStorage)
+│   ├── signature-storage.ts   # Locally-cached last-used signature (localStorage, no account — see note below)
+│   ├── analytics.ts           # GA4 product events (pdf_upload_started/signature_created/pdf_signed_downloaded), no PII
 │   ├── structured-data.ts     # JSON-LD builders (SoftwareApplication, etc.)
 │   └── seo-pages.ts           # SEO page data (28 pages) — validate with `node scripts/validate-seo-pages.mjs`
 └── proxy.ts                    # Language detection redirect (Next.js 16 proxy)
@@ -92,9 +97,10 @@ src/
 
 ## Analytics & SEO Tracking
 
-- **GA4:** `G-C5ZMVHWP4Z` via `GoogleAnalytics` component + `NEXT_PUBLIC_GA_ID` env var
+- **GA4:** `G-C5ZMVHWP4Z` via `GoogleAnalytics` component + `NEXT_PUBLIC_GA_ID` env var. Product events (`pdf_upload_started`/`signature_created`/`pdf_signed_downloaded`) added 2026-08-12, see `analytics.ts`.
 - **Google Search Console:** domain property `firmalo.io`, verified via DNS
-- **SEO Position Tracking:** `seo-tracking/` — weekly GSC data collection
+- **SEO position data:** see "SEO position data — Topvisor direct, not seo-tracker" above — that's the current, authoritative source. Everything below this point describes the now-defunct `golatam/seo-tracker` GitHub Actions pipeline; kept for history, not current truth.
+- **SEO Position Tracking (superseded, historical):** `seo-tracking/` — weekly GSC data collection
   - **Production (GitHub Actions cron, every Monday 12:00 UTC):** `seo-weekly.yml` calls the reusable `golatam/seo-tracker` workflow, pinned to commit `@ea69f34` (not `@main`, since 2026-08-03) with `notifier: telegram` — weekly reports are delivered via **Telegram**, not Slack. Pin reason: seo-tracker's `main` is about to default `RANK_SOURCE` to `topvisor`, and firmalo has no Topvisor secrets — tracking `@main` would silently break this cron. Un-pin once seo-tracker exposes an explicit `rank_source` input, or firmalo gets its own Topvisor project.
   - **Local rollback copies were deleted 2026-08-03** after three months of stable package-driven cron runs. `weekly-check.mjs`, `fetch-gsc.mjs`, `inspect-index.mjs`, `submit-sitemap.mjs`, `notify-slack.mjs` and `env.mjs` are gone — they were an older Slack-based duplicate of what the package already does, and had drifted from it. Recover via `git log -- seo-tracking/scripts` if ever needed. To run the pipeline off-schedule: `gh workflow run seo-weekly.yml -R golatam/firmalo`.
   - **What remains local:** `scripts/report.mjs` (`npm run seo:report` — console comparison over `snapshots/`) and `config.mjs` (thresholds it imports). Both are outside the weekly pipeline.
