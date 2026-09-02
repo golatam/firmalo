@@ -1,13 +1,45 @@
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
+import Link from "next/link";
 import type { SeoPageData } from "@/lib/seo-pages";
 import { ToolCtaBlock } from "./ToolCtaBlock";
+
+function renderContent(
+  content: string,
+  links: { text: string; slug: string }[] | undefined,
+  lang: string
+) {
+  if (!links || links.length === 0) return content;
+
+  // Apply each link to the first occurrence of its anchor text only.
+  let remaining = content;
+  const parts: (string | ReactNode)[] = [];
+  for (const { text, slug } of links) {
+    const idx = remaining.indexOf(text);
+    if (idx === -1) continue;
+    parts.push(remaining.slice(0, idx));
+    parts.push(
+      <Link
+        key={slug}
+        href={`/${lang}/${slug}`}
+        className="text-primary underline underline-offset-2 hover:no-underline"
+      >
+        {text}
+      </Link>
+    );
+    remaining = remaining.slice(idx + text.length);
+  }
+  parts.push(remaining);
+  return parts;
+}
 
 export function SeoContent({
   sections,
   ctaBlocks,
+  lang,
 }: {
   sections: SeoPageData["sections"];
   ctaBlocks?: SeoPageData["ctaBlocks"];
+  lang: string;
 }) {
   return (
     <article className="py-12 sm:py-16 bg-surface">
@@ -19,7 +51,7 @@ export function SeoContent({
                 {section.title}
               </h2>
               <p className="mt-4 text-text-secondary leading-relaxed">
-                {section.content}
+                {renderContent(section.content, section.links, lang)}
               </p>
               {section.bulletPoints && (
                 <ul className="mt-4 space-y-2">

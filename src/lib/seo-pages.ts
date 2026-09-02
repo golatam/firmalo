@@ -9,6 +9,8 @@ export interface SeoPageData {
     title: string;
     content: string;
     bulletPoints?: string[];
+    /** Inline contextual links: `text` must appear verbatim in `content` and is wrapped in a <Link> to `/${lang}/${slug}`. */
+    links?: { text: string; slug: string }[];
   }[];
   faq: { question: string; answer: string }[];
   relatedSlugs: string[];
@@ -122,6 +124,7 @@ const esPages: SeoPageData[] = [
       {
         title: "Firmar PDF gratis vs. herramientas de pago",
         content: "No necesitas pagar una suscripción de DocuSign, Adobe o Smallpdf para firmar un documento. Esas plataformas son útiles para flujos empresariales con múltiples firmantes, pero para firmar tú mismo un contrato, un formulario o una carta resultan caras y lentas. Firmalo cubre ese caso en segundos, sin cuenta y sin enviar tu archivo a la nube.",
+        links: [{ text: "sin cuenta", slug: "firmar-pdf-sin-registro" }],
       },
     ],
     faq: [
@@ -287,7 +290,8 @@ const esPages: SeoPageData[] = [
     sections: [
       {
         title: "Paso 1: Sube tu documento PDF",
-        content: "Arrastra tu archivo PDF a la zona de carga o haz clic para seleccionarlo desde tu dispositivo. Firmalo acepta archivos de hasta 50 MB y funciona con cualquier PDF estándar. Tu archivo no se sube a ningún servidor — se procesa directamente en tu navegador.",
+        content: "Arrastra tu archivo PDF a la zona de carga o haz clic para seleccionarlo desde tu dispositivo. Firmalo acepta archivos de hasta 50 MB y funciona con cualquier PDF estándar, sin registro previo. Tu archivo no se sube a ningún servidor — se procesa directamente en tu navegador.",
+        links: [{ text: "sin registro", slug: "firmar-pdf-sin-registro" }],
       },
       {
         title: "Paso 2: Crea tu firma",
@@ -359,7 +363,8 @@ const esPages: SeoPageData[] = [
       },
       {
         title: "Usa tu firma en cualquier documento",
-        content: "La firma que creas en Firmalo sirve para todo: contratos, formularios, autorizaciones escolares, recibos o cartas. Una vez creada, la colocas sobre el PDF, la ajustas de tamaño y la descargas incrustada en el documento. Como todo ocurre en tu navegador, puedes repetir el proceso las veces que quieras, sin límites ni costo.",
+        content: "La firma que creas en Firmalo sirve para todo: contratos, formularios, autorizaciones escolares, recibos o cartas. Una vez creada, la colocas sobre el PDF, la ajustas de tamaño y la descargas incrustada en el documento. Como todo ocurre en tu navegador, puedes repetir el proceso las veces que quieras, sin límites, sin costo y sin email.",
+        links: [{ text: "sin email", slug: "firmar-pdf-sin-registro" }],
       },
     ],
     faq: [
@@ -645,6 +650,14 @@ const esPages: SeoPageData[] = [
     metaDescription: "Firma un PDF sin imprimir ni escanear. Añade tu firma online desde el navegador, descarga el documento firmado y envíalo en segundos. Gratis y privado.",
     heroTitle: "Firma tu PDF sin imprimir",
     heroSubtitle: "Olvídate de imprimir, firmar a mano y escanear. Con Firmalo colocas tu firma directamente sobre el PDF y descargas el documento listo para enviar.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 1,
+        heading: "Firma tu PDF sin imprimir",
+        body: "Sube tu documento, coloca tu firma y descárgalo listo para enviar — sin impresora ni escáner.",
+        label: "Firmar mi PDF ahora",
+      },
+    ],
     sections: [
       {
         title: "Cómo firmar un PDF sin imprimir",
@@ -685,6 +698,14 @@ const esPages: SeoPageData[] = [
     metaDescription: "Firma PDFs privados sin subirlos a servidores. El documento se procesa en tu navegador: ideal para contratos, datos personales y archivos sensibles.",
     heroTitle: "Firma PDFs privados sin subir archivos",
     heroSubtitle: "Tu documento no sale de tu dispositivo. Firmalo añade la firma en el navegador, sin cuentas, sin nube y sin copias en servidores.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 1,
+        heading: "Firma tu PDF de forma privada",
+        body: "Tu documento se procesa en tu navegador, sin subirlo a ningún servidor.",
+        label: "Firmar mi PDF ahora",
+      },
+    ],
     sections: [
       {
         title: "Qué significa firmar sin subir archivos",
@@ -854,6 +875,7 @@ const ptPages: SeoPageData[] = [
       {
         title: "Assinar PDF grátis vs. ferramentas pagas",
         content: "Você não precisa pagar uma assinatura do DocuSign, Adobe ou Smallpdf para assinar um documento. Essas plataformas são úteis para fluxos empresariais com vários signatários, mas, para assinar você mesmo um contrato, um formulário ou uma carta, são caras e lentas. O Firmalo resolve esse caso em segundos, sem conta e sem enviar seu arquivo para a nuvem.",
+        links: [{ text: "sem conta", slug: "assinar-pdf-sem-cadastro" }],
       },
     ],
     faq: [
@@ -985,7 +1007,8 @@ const ptPages: SeoPageData[] = [
     sections: [
       {
         title: "Passo 1: Envie seu documento PDF",
-        content: "Arraste seu arquivo PDF para a zona de upload ou clique para selecioná-lo do seu dispositivo. O Firmalo aceita arquivos de até 50 MB e funciona com qualquer PDF padrão. Seu arquivo não é enviado para nenhum servidor — é processado diretamente no navegador.",
+        content: "Arraste seu arquivo PDF para a zona de upload ou clique para selecioná-lo do seu dispositivo. O Firmalo aceita arquivos de até 50 MB e funciona com qualquer PDF padrão, sem cadastro prévio. Seu arquivo não é enviado para nenhum servidor — é processado diretamente no navegador.",
+        links: [{ text: "sem cadastro", slug: "assinar-pdf-sem-cadastro" }],
       },
       {
         title: "Passo 2: Crie sua assinatura",
@@ -1057,7 +1080,8 @@ const ptPages: SeoPageData[] = [
       },
       {
         title: "Use sua assinatura em qualquer documento",
-        content: "A assinatura que você cria no Firmalo serve para tudo: contratos, formulários, autorizações escolares, recibos ou cartas. Depois de criada, você a coloca sobre o PDF, ajusta o tamanho e baixa o documento com a assinatura incorporada. Como tudo acontece no seu navegador, dá para repetir o processo quantas vezes quiser, sem limites nem custo.",
+        content: "A assinatura que você cria no Firmalo serve para tudo: contratos, formulários, autorizações escolares, recibos ou cartas. Depois de criada, você a coloca sobre o PDF, ajusta o tamanho e baixa o documento com a assinatura incorporada. Como tudo acontece no seu navegador, dá para repetir o processo quantas vezes quiser, sem limites, sem custo e sem e-mail.",
+        links: [{ text: "sem e-mail", slug: "assinar-pdf-sem-cadastro" }],
       },
     ],
     faq: [
@@ -1331,6 +1355,14 @@ const ptPages: SeoPageData[] = [
     metaDescription: "Assine um PDF sem imprimir nem escanear. Adicione sua assinatura no navegador, baixe o documento assinado e envie em segundos. Grátis e privado.",
     heroTitle: "Assine seu PDF sem imprimir",
     heroSubtitle: "Esqueça imprimir, assinar à mão e escanear. Com o Firmalo você coloca sua assinatura diretamente no PDF e baixa o documento pronto para enviar.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 1,
+        heading: "Assine seu PDF sem imprimir",
+        body: "Envie o documento, adicione sua assinatura e baixe pronto para enviar — sem impressora nem scanner.",
+        label: "Assinar meu PDF agora",
+      },
+    ],
     sections: [
       {
         title: "Como assinar um PDF sem imprimir",
@@ -1371,6 +1403,14 @@ const ptPages: SeoPageData[] = [
     metaDescription: "Assine PDFs privados sem enviá-los para servidores. O documento é processado no navegador: ideal para contratos, dados pessoais e arquivos sensíveis.",
     heroTitle: "Assine PDFs privados sem upload",
     heroSubtitle: "Seu documento não sai do dispositivo. O Firmalo adiciona a assinatura no navegador, sem conta, sem nuvem e sem cópias em servidores.",
+    ctaBlocks: [
+      {
+        afterSectionIndex: 1,
+        heading: "Assine seu PDF com privacidade",
+        body: "Seu documento é processado no navegador, sem envio para nenhum servidor.",
+        label: "Assinar meu PDF agora",
+      },
+    ],
     sections: [
       {
         title: "O que significa assinar sem upload",
