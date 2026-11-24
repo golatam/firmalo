@@ -48,6 +48,9 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   function getLocalizedPath(targetLang: Locale) {
     if (targetLang === lang) return pathname;
 
+    // /blog has no per-language twin: send the switcher to the target home page.
+    if (pathname === "/blog" || pathname.startsWith("/blog/")) return `/${targetLang}`;
+
     const segments = pathname.split("/");
     const slug = segments[2];
 

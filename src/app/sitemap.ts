@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
+import { articleUrl, getArticles } from "@/lib/seo-factory";
 
 const BASE_URL = "https://firmalo.io";
 
@@ -40,8 +41,27 @@ const seoPages: Record<string, string[]> = {
   ],
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
+
+  // Blog: index + SEO Factory articles (lastmod = updated_at).
+  const articles = await getArticles();
+  entries.push({
+    url: `${BASE_URL}/blog`,
+    lastModified: articles[0] ? new Date(articles[0].updated_at) : SEO_CONTENT_DATE,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  });
+  for (const a of articles) {
+    entries.push({
+      url: articleUrl(a.slug),
+      lastModified: new Date(a.updated_at),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  }
 
   for (const locale of locales) {
     const pages = seoPages[locale] || [];
