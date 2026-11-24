@@ -21,6 +21,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, { status: 308 });
   }
 
+  // The blog lives at /blog/{slug} without a locale segment (SEO Factory URL template).
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) return;
+
   // Check if path already starts with a locale
   const hasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`

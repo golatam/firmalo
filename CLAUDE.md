@@ -88,12 +88,17 @@ src/
 
 ## Hosting & Domain
 
-- **Domain:** firmalo.io (Namecheap, DNS → Railway)
-- **Hosting:** Railway (project: firmalo, workspace: Go Latam!)
+- **Domain:** firmalo.io (Namecheap)
+- **Hosting:** сервер **vds1** (netcup) через Coolify, приложение `firmalo`, uuid `mdsyf3vqc1pk7vxflsxa6zwl`, сборка nixpacks, `next start` на порту 3000, ветка `main`. **Не Railway** (раньше был там; упоминания Railway в старых заметках устарели). Деплой — skill `deploy-vds1`, только после явного «да».
 - **Production URL:** https://firmalo.io
-- **Railway URL:** https://firmalo-production.up.railway.app
-- **Deploy:** `railway up` from repo root (auto-detects Next.js)
 - **Repo:** github.com/golatam/firmalo
+
+## Блог (SEO Factory)
+
+- `/blog/` и `/blog/{slug}` (без языка в адресе, статьи считаются испанскими; canonical без слэша в конце, как у остальных страниц) подтягивают опубликованные статьи из API `https://seo.golatam.group` (`src/lib/seo-factory.ts`). ISR 300 с, Deploy Hook не нужен. Статьи в sitemap (`sitemap.ts`).
+- Ключ — только переменная `SEO_FACTORY_API_KEY` (в Coolify как runtime-переменная, локально в `.env.local`). Без ключа блог собирается пустым с предупреждением; 401 — явная ошибка; при 5xx в рантайме ISR отдаёт последнюю хорошую версию.
+- `proxy.ts` пропускает `/blog` без редиректа на `/es`. Свой `<html>`-layout у `src/app/blog/layout.tsx`.
+- Для локальной проверки без API: `SEO_FACTORY_API_URL=http://127.0.0.1:PORT`.
 
 ## Analytics & SEO Tracking
 
