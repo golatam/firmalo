@@ -41,7 +41,8 @@ const seoPages: Record<string, string[]> = {
   ],
 };
 
-export const revalidate = 300;
+// Per request (not build time): the build has no API key, see blog/page.tsx.
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];

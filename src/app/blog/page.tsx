@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatDate, getArticles } from "@/lib/seo-factory";
 
-export const revalidate = 300; // must be a literal (same as BLOG_REVALIDATE)
+// Render per request, never at build time: the build has no API key, so a
+// prerendered list would ship empty after every deploy. API calls stay cheap
+// because the fetch itself is cached for 300s (see seo-factory.ts).
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog",
