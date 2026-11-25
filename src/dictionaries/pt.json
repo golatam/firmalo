@@ -6,7 +6,17 @@
   "header": {
     "logo": "Firmalo",
     "cta": "Assinar PDF",
-    "blog": "Blog"
+    "blog": "Blog",
+    "tools": "Ferramentas",
+    "guides": "Guias",
+    "language": "Idioma",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "viewAllGuides": "Ver todos os guias",
+    "available": "Disponível agora",
+    "mobileNote": "Sem cadastro · Sem marca d'água",
+    "mainNav": "Navegação principal",
+    "guidesAll": "Blog e guias"
   },
   "hero": {
     "title": "Assine seu PDF online grátis",
@@ -140,7 +150,10 @@
   "geo": {
     "title": "Assinar PDF online no Brasil",
     "countries": [
-      { "name": "Brasil", "flag": "🇧🇷" }
+      {
+        "name": "Brasil",
+        "flag": "🇧🇷"
+      }
     ],
     "description": "O Firmalo funciona para qualquer documento PDF independente da sua localização. Milhares de usuários no {country} já confiam no Firmalo para assinar contratos, formulários e documentos oficiais."
   },
@@ -150,7 +163,13 @@
     "terms": "Termos de uso",
     "contact": "Contato",
     "copyright": "© {year} Firmalo. Todos os direitos reservados.",
-    "tagline": "Assine PDF online grátis"
+    "tagline": "Assine PDF online grátis",
+    "toolsTitle": "Ferramentas",
+    "allGuidesTitle": "Guias para assinar PDF",
+    "guidesTitle": "Guias e blog",
+    "legalTitle": "Legal",
+    "languageTitle": "Idioma",
+    "product": "Assine PDF online grátis. Sem cadastro. Seu arquivo nunca sai do seu dispositivo."
   },
   "cta": {
     "primary": "Assinar agora",
@@ -246,6 +265,60 @@
           "content": "Para dúvidas sobre estes termos, escreva para contato@firmalo.io."
         }
       ]
+    }
+  },
+  "tools": {
+    "soon": "Em breve",
+    "groups": {
+      "sign": "Assinar",
+      "convert": "Converter",
+      "organize": "Organizar",
+      "optimize": "Otimizar"
+    },
+    "tag": "Ferramentas",
+    "title": "Tudo o que você precisa para seus PDFs",
+    "subtitle": "Em breve, mais ferramentas. Mesma regra: sem cadastro.",
+    "available": "Disponível agora"
+  },
+  "fields": {
+    "panelTitle": "Adicionar ao documento",
+    "cancel": "Cancelar",
+    "add": "Adicionar",
+    "close": "Fechar",
+    "error": "Não foi possível criar o campo. Tente outro arquivo ou texto.",
+    "signature": {
+      "button": "Assinatura",
+      "title": "Criar assinatura"
+    },
+    "initials": {
+      "button": "Iniciais",
+      "title": "Criar iniciais",
+      "apply": "Adicionar iniciais"
+    },
+    "name": {
+      "button": "Nome",
+      "title": "Adicionar nome",
+      "label": "Nome completo",
+      "placeholder": "Seu nome completo"
+    },
+    "date": {
+      "button": "Data",
+      "title": "Adicionar data",
+      "label": "Data",
+      "placeholder": "dd/mm/aaaa"
+    },
+    "text": {
+      "button": "Texto",
+      "title": "Adicionar texto",
+      "label": "Texto",
+      "placeholder": "Digite o texto"
+    },
+    "stamp": {
+      "button": "Carimbo",
+      "title": "Adicionar carimbo",
+      "hint": "PNG, JPG ou SVG com o carimbo da sua empresa",
+      "choose": "Escolher imagem",
+      "change": "Trocar imagem"
     }
   }
 }

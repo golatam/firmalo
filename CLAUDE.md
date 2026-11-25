@@ -68,7 +68,10 @@ src/
 │   ├── TrustFacts.tsx         # Privacy/security trust block on SEO pages
 │   ├── ToolCtaBlock.tsx       # Inline CTA card, rendered after a given content section
 │   ├── GoogleAnalytics.tsx     # GA4 client component (next/script, strategy=lazyOnload — never appears in curl'd/SSR HTML, only after client hydration)
-│   ├── Header.tsx             # Header + lang switcher
+│   ├── FieldsPanel.tsx        # Panel "Añadir al documento": Firma/Iniciales/Nombre/Fecha/Texto/Sello
+│   ├── FieldModal.tsx         # Dialog for text fields (name/date/text) and stamp upload; all fields become PNGs (lib/field-image.ts) so export stays image-only
+│   ├── ToolsGrid.tsx          # Home tools grid; tools are data in lib/tools.ts (add a tool = one entry)
+│   ├── Header.tsx             # Header: Herramientas mega-menu, Guías, Blog, ES/PT selector
 │   └── Footer.tsx             # Footer
 ├── dictionaries/
 │   ├── es.json                # Spanish translations

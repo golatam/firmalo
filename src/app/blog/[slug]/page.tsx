@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articleUrl, formatDate, getArticle } from "@/lib/seo-factory";
 
@@ -49,6 +50,9 @@ export default async function ArticlePage({ params }: Props) {
         />
       )}
       <div className="max-w-3xl mx-auto px-4">
+        <nav aria-label="Ruta de navegación" className="mb-4 text-sm text-text-muted">
+          <Link href="/blog" className="text-primary hover:underline">Blog</Link>
+        </nav>
         <h1 className="text-3xl sm:text-4xl font-bold text-text">{a.title}</h1>
 
         <p className="mt-4 text-sm text-text-muted">
@@ -103,6 +107,17 @@ export default async function ArticlePage({ params }: Props) {
           // body_html is sanitized by SEO Factory (trusted, per integration contract).
           dangerouslySetInnerHTML={{ __html: a.body_html }}
         />
+
+        <aside className="mt-10 p-6 rounded-xl bg-primary/5 border border-primary/20 text-center">
+          <p className="text-lg font-semibold text-text">Firma tu PDF ahora, gratis y sin registro</p>
+          <p className="mt-1 text-sm text-text-secondary">Tu archivo no sale de tu dispositivo.</p>
+          <Link
+            href="/es"
+            className="mt-4 inline-flex items-center justify-center min-h-[48px] px-6 rounded-xl bg-primary text-white font-semibold hover:bg-primary-hover transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Firmar PDF
+          </Link>
+        </aside>
 
         {a.faq && a.faq.length > 0 && (
           <section className="mt-12">

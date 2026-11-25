@@ -11,6 +11,10 @@ interface SignatureModalProps {
   dict: Dictionary;
   onApply: (dataUrl: string) => void;
   onClose: () => void;
+  /** Overrides for reuse as the "initials" dialog: other title/button, and no touching the cached signature. */
+  title?: string;
+  applyLabel?: string;
+  persist?: boolean;
 }
 
 // Signature fonts for "type" mode
@@ -34,7 +38,7 @@ function loadSignatureFonts() {
   document.head.appendChild(link);
 }
 
-export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) {
+export function SignatureModal({ dict, onApply, onClose, title, applyLabel, persist = true }: SignatureModalProps) {
   const [activeTab, setActiveTab] = useState<Tab>("draw");
   const [typedName, setTypedName] = useState("");
   const [selectedFont, setSelectedFont] = useState(SIGNATURE_FONTS[0]);
@@ -43,7 +47,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
   const [savedSignature, setSavedSignature] = useState<string | null>(null);
 
   // Read the locally-cached signature on mount — client-only, avoids SSR mismatch.
-  useEffect(() => { setSavedSignature(getSavedSignature()); }, []);
+  useEffect(() => { if (persist) setSavedSignature(getSavedSignature()); }, [persist]);
 
   const handleUseSaved = useCallback(() => {
     if (savedSignature) onApply(savedSignature);
@@ -156,10 +160,10 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
     }
 
     if (dataUrl) {
-      saveSignature(dataUrl);
+      if (persist) saveSignature(dataUrl);
       onApply(dataUrl);
     }
-  }, [activeTab, typedName, selectedFont, uploadedImage, onApply]);
+  }, [activeTab, typedName, selectedFont, uploadedImage, onApply, persist]);
 
   const handleImageUpload = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,7 +203,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           <h3 className="text-lg font-semibold text-text">
-            {dict.signature.title}
+            {title ?? dict.signature.title}
           </h3>
           <button
             onClick={onClose}
@@ -357,7 +361,7 @@ export function SignatureModal({ dict, onApply, onClose }: SignatureModalProps) 
             disabled={!canApply}
             className="px-6 py-2.5 min-h-[44px] bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {dict.signature.apply}
+            {applyLabel ?? dict.signature.apply}
           </button>
         </div>
       </div>

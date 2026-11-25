@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Hero } from "@/components/Hero";
+import { ToolsGrid } from "@/components/ToolsGrid";
 import { HomeSeoIntro } from "@/components/HomeSeoIntro";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Benefits } from "@/components/Benefits";
@@ -43,6 +44,7 @@ export default async function HomePage({
       />
 
       <Hero dict={dict} lang={lang} />
+      <ToolsGrid dict={dict} lang={lang} />
       <HomeSeoIntro lang={lang} />
       <HowItWorks dict={dict} />
       <Benefits dict={dict} />

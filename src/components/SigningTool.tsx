@@ -6,6 +6,8 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { DropZone } from "./DropZone";
 import { PdfViewer } from "./PdfViewer";
 import { SignatureModal } from "./SignatureModal";
+import { FieldsPanel, type FieldKind } from "./FieldsPanel";
+import { FieldModal, type TextFieldKind } from "./FieldModal";
 import {
   SignatureOverlay,
   type SignaturePlacement,
@@ -22,6 +24,16 @@ interface PlacedSignature {
   placement: SignaturePlacement;
 }
 
+// Default width (% of page) per field type: initials/stamps are small, free text wider.
+const FIELD_WIDTH: Record<FieldKind, number> = {
+  signature: 25,
+  initials: 12,
+  name: 24,
+  date: 18,
+  text: 30,
+  stamp: 18,
+};
+
 export function SigningTool({
   dict,
   lang,
@@ -33,7 +45,7 @@ export function SigningTool({
   const [file, setFile] = useState<File | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  const [showSignatureModal, setShowSignatureModal] = useState(false);
+  const [activeField, setActiveField] = useState<FieldKind | null>(null);
   const [signatures, setSignatures] = useState<PlacedSignature[]>([]);
   const [exporting, setExporting] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
@@ -63,7 +75,7 @@ export function SigningTool({
     });
   }, [lang]);
 
-  const handleSignatureApply = useCallback((dataUrl: string) => {
+  const handleSignatureApply = useCallback((dataUrl: string, kind: FieldKind = "signature") => {
     setSignatures((prev) => {
       // Stagger signatures placed on the same page so a second/third one
       // doesn't land exactly on top of the previous — still draggable
@@ -75,12 +87,12 @@ export function SigningTool({
         {
           id: crypto.randomUUID(),
           dataUrl,
-          placement: { x: 50 + offset, y: 70 - offset, width: 25, page: currentPage },
+          placement: { x: 50 + offset, y: 70 - offset, width: FIELD_WIDTH[kind], page: currentPage },
         },
       ];
     });
-    setShowSignatureModal(false);
-    trackEvent("signature_created", { ui_language: lang, flow_step: "signature_modal" });
+    setActiveField(null);
+    trackEvent("signature_created", { ui_language: lang, flow_step: kind === "signature" ? "signature_modal" : `field_${kind}` });
   }, [lang, currentPage]);
 
   const handlePlacementChange = useCallback((id: string, p: SignaturePlacement) => {
@@ -193,15 +205,6 @@ export function SigningTool({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setShowSignatureModal(true)}
-            className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 min-h-[44px] bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-            {signatures.length === 0 ? dict.signature.title : dict.signature.addAnother}
-          </button>
 
           {signatures.length > 0 && (
             <button
@@ -226,6 +229,8 @@ export function SigningTool({
           )}
         </div>
       </div>
+
+      <FieldsPanel dict={dict} onPick={setActiveField} />
 
       {/* Error */}
       {(exportError || pdfError) && (
@@ -296,11 +301,23 @@ export function SigningTool({
       )}
 
       {/* Signature modal */}
-      {showSignatureModal && (
+      {(activeField === "signature" || activeField === "initials") && (
         <SignatureModal
           dict={dict}
-          onApply={handleSignatureApply}
-          onClose={() => setShowSignatureModal(false)}
+          onApply={(url) => handleSignatureApply(url, activeField)}
+          onClose={() => setActiveField(null)}
+          {...(activeField === "initials"
+            ? { title: dict.fields.initials.title, applyLabel: dict.fields.initials.apply, persist: false }
+            : {})}
+        />
+      )}
+      {activeField && activeField !== "signature" && activeField !== "initials" && (
+        <FieldModal
+          kind={activeField as TextFieldKind}
+          dict={dict}
+          lang={lang}
+          onApply={(url) => handleSignatureApply(url, activeField)}
+          onClose={() => setActiveField(null)}
         />
       )}
     </div>

@@ -6,7 +6,17 @@
   "header": {
     "logo": "Firmalo",
     "cta": "Firmar PDF",
-    "blog": "Blog"
+    "blog": "Blog",
+    "tools": "Herramientas",
+    "guides": "Guías",
+    "language": "Idioma",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "viewAllGuides": "Ver todas las guías",
+    "available": "Disponible ahora",
+    "mobileNote": "Sin registro · Sin marca de agua",
+    "mainNav": "Navegación principal",
+    "guidesAll": "Blog y guías"
   },
   "hero": {
     "title": "Firma tu PDF online gratis",
@@ -140,11 +150,26 @@
   "geo": {
     "title": "Firmar PDF online en tu país",
     "countries": [
-      { "name": "México", "flag": "🇲🇽" },
-      { "name": "Colombia", "flag": "🇨🇴" },
-      { "name": "Argentina", "flag": "🇦🇷" },
-      { "name": "Chile", "flag": "🇨🇱" },
-      { "name": "Perú", "flag": "🇵🇪" }
+      {
+        "name": "México",
+        "flag": "🇲🇽"
+      },
+      {
+        "name": "Colombia",
+        "flag": "🇨🇴"
+      },
+      {
+        "name": "Argentina",
+        "flag": "🇦🇷"
+      },
+      {
+        "name": "Chile",
+        "flag": "🇨🇱"
+      },
+      {
+        "name": "Perú",
+        "flag": "🇵🇪"
+      }
     ],
     "description": "Firmalo funciona para cualquier documento PDF sin importar tu ubicación. Miles de usuarios en {country} ya confían en Firmalo para firmar contratos, formularios y documentos oficiales."
   },
@@ -154,7 +179,13 @@
     "terms": "Términos de uso",
     "contact": "Contacto",
     "copyright": "© {year} Firmalo. Todos los derechos reservados.",
-    "tagline": "Firma PDF online gratis"
+    "tagline": "Firma PDF online gratis",
+    "toolsTitle": "Herramientas",
+    "allGuidesTitle": "Guías para firmar PDF",
+    "guidesTitle": "Guías y blog",
+    "legalTitle": "Legal",
+    "languageTitle": "Idioma",
+    "product": "Firma PDF online gratis. Sin registro. Tu archivo nunca sale de tu dispositivo."
   },
   "cta": {
     "primary": "Firmar ahora",
@@ -250,6 +281,60 @@
           "content": "Para consultas sobre estos términos, escríbenos a contacto@firmalo.io."
         }
       ]
+    }
+  },
+  "tools": {
+    "soon": "Próximamente",
+    "groups": {
+      "sign": "Firmar",
+      "convert": "Convertir",
+      "organize": "Organizar",
+      "optimize": "Optimizar"
+    },
+    "tag": "Herramientas",
+    "title": "Todo lo que necesitas para tus PDF",
+    "subtitle": "Pronto, más herramientas. Misma regla: sin registro.",
+    "available": "Disponible ahora"
+  },
+  "fields": {
+    "panelTitle": "Añadir al documento",
+    "cancel": "Cancelar",
+    "add": "Añadir",
+    "close": "Cerrar",
+    "error": "No se pudo crear el campo. Prueba con otro archivo o texto.",
+    "signature": {
+      "button": "Firma",
+      "title": "Crear firma"
+    },
+    "initials": {
+      "button": "Iniciales",
+      "title": "Crear iniciales",
+      "apply": "Añadir iniciales"
+    },
+    "name": {
+      "button": "Nombre",
+      "title": "Añadir nombre",
+      "label": "Nombre completo",
+      "placeholder": "Tu nombre y apellidos"
+    },
+    "date": {
+      "button": "Fecha",
+      "title": "Añadir fecha",
+      "label": "Fecha",
+      "placeholder": "dd/mm/aaaa"
+    },
+    "text": {
+      "button": "Texto",
+      "title": "Añadir texto",
+      "label": "Texto",
+      "placeholder": "Escribe el texto"
+    },
+    "stamp": {
+      "button": "Sello",
+      "title": "Añadir sello",
+      "hint": "PNG, JPG o SVG con el sello de tu empresa",
+      "choose": "Elegir imagen",
+      "change": "Cambiar imagen"
     }
   }
 }
