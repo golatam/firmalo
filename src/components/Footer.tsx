@@ -3,6 +3,9 @@ import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
 import { getSeoPagesByLang } from "@/lib/seo-pages";
 
+const FOOT_LINK =
+  "inline-flex items-center min-h-[44px] px-1 rounded hover:text-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
 export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
   const seoPages = getSeoPagesByLang(lang);
@@ -23,7 +26,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
                 <li key={page.slug}>
                   <Link
                     href={`/${lang}/${page.slug}`}
-                    className="text-sm text-text-secondary hover:text-primary transition-colors"
+                    className="inline-block py-1 text-sm text-text-secondary hover:text-primary transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     {page.heroTitle}
                   </Link>
@@ -41,25 +44,25 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             </span>
           </div>
 
-          <nav className="flex items-center gap-4 text-sm text-text-secondary">
-            <Link href="/blog" className="hover:text-text transition-colors">
+          <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-text-secondary">
+            <Link href="/blog" className={FOOT_LINK}>
               {dict.footer.blog}
             </Link>
             <Link
               href={`/${lang}/privacidad`}
-              className="hover:text-text transition-colors"
+              className={FOOT_LINK}
             >
               {dict.footer.privacy}
             </Link>
             <Link
               href={`/${lang}/terminos`}
-              className="hover:text-text transition-colors"
+              className={FOOT_LINK}
             >
               {dict.footer.terms}
             </Link>
             <Link
               href={`/${lang}/contacto`}
-              className="hover:text-text transition-colors"
+              className={FOOT_LINK}
             >
               {dict.footer.contact}
             </Link>

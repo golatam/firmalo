@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale } from "@/lib/i18n";
+import { locales, defaultLocale, type Locale } from "@/lib/i18n";
 
 const WWW_HOST = "www.firmalo.io";
 const APEX_HOST = "firmalo.io";
@@ -39,15 +39,47 @@ export function proxy(request: NextRequest) {
     return;
   }
 
-  // Detect preferred language from Accept-Language header
-  const acceptLang = request.headers.get("accept-language") || "";
-  const preferred = acceptLang.includes("pt") ? "pt" : defaultLocale;
+  const preferred = pickLocale(request.headers.get("accept-language") || "");
 
-  // Redirect to localized path (308 = permanent, so Google caches the redirect
-  // and stops re-crawling the source URL)
   const url = request.nextUrl.clone();
-  url.pathname = `/${preferred}${pathname}`;
-  return NextResponse.redirect(url, { status: 308 });
+  url.pathname = `/${preferred}${pathname === "/" ? "" : pathname}`;
+
+  // The root redirect depends on the visitor's language, so it must be
+  // temporary and uncacheable: a cached 308 "/" -> "/pt" would stick in the
+  // browser and keep sending a visitor to Portuguese for good.
+  if (pathname === "/") {
+    const res = NextResponse.redirect(url, { status: 307 });
+    res.headers.set("Cache-Control", "no-store");
+    res.headers.append("Vary", "Accept-Language");
+    return res;
+  }
+
+  // Other locale-less paths (old URLs): 308 = permanent, so Google caches the
+  // redirect and stops re-crawling the source URL.
+  const res = NextResponse.redirect(url, { status: 308 });
+  res.headers.append("Vary", "Accept-Language");
+  return res;
+}
+
+// Pick the supported language with the highest q-weight from Accept-Language;
+// fall back to the default. (A plain includes("pt") matched "pt;q=0.1" too.)
+function pickLocale(header: string): Locale {
+  let best: Locale = defaultLocale;
+  let bestQ = -1;
+  for (const part of header.split(",")) {
+    const [tag, ...params] = part.trim().split(";");
+    const primary = tag.trim().toLowerCase().split("-")[0];
+    const locale = locales.find((l) => l === primary);
+    if (!locale) continue;
+    const qParam = params.find((p) => p.trim().startsWith("q="));
+    const q = qParam ? parseFloat(qParam.trim().slice(2)) : 1;
+    // Strictly greater: on a tie the earlier-listed language wins.
+    if (!Number.isNaN(q) && q > bestQ) {
+      best = locale;
+      bestQ = q;
+    }
+  }
+  return best;
 }
 
 export const config = {

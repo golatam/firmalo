@@ -42,6 +42,13 @@ function NavItem({
   );
 }
 
+// Shared look for every control in the header: same height (44px tap target),
+// radius, text size, padding and hover/focus-visible/active states.
+const NAV_BASE =
+  "inline-flex items-center justify-center gap-1.5 min-h-[44px] min-w-[44px] px-3 rounded-lg text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const NAV_FILLED = `${NAV_BASE} bg-primary text-white hover:bg-primary-hover active:bg-primary-dark`;
+const NAV_GHOST = `${NAV_BASE} text-text-secondary hover:bg-primary-light hover:text-primary active:bg-border`;
+
 export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const pathname = usePathname();
 
@@ -69,26 +76,22 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
 
   return (
     <header className="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border">
-      <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-        <NavItem href={`/${lang}`} pathname={pathname} className="flex items-center gap-2">
+      <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
+        <NavItem href={`/${lang}`} pathname={pathname} className="inline-flex shrink-0 items-center min-h-[44px] rounded-lg whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <span className="text-xl font-bold text-primary">✍️ Firmalo</span>
         </NavItem>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-2">
           {/* Language switcher */}
-          <div className="flex items-center gap-1 text-sm">
+          <div className="flex items-center gap-1">
             {locales.map((locale) => (
               <NavItem
                 key={locale}
                 href={getLocalizedPath(locale)}
                 pathname={pathname}
-                className={`px-2 py-1 min-h-[44px] flex items-center rounded-md transition-colors ${
-                  locale === lang
-                    ? "bg-primary text-white font-medium"
-                    : "text-text-secondary hover:bg-primary-light"
-                }`}
+                className={locale === lang ? NAV_FILLED : NAV_GHOST}
               >
-                {localeFlags[locale]} <span className="hidden sm:inline ml-1">{localeNames[locale]}</span>
+                {localeFlags[locale]} <span className="hidden sm:inline">{localeNames[locale]}</span>
               </NavItem>
             ))}
           </div>
@@ -96,7 +99,7 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <NavItem
             href="/blog"
             pathname={pathname}
-            className="px-2 py-1 min-h-[44px] flex items-center text-sm text-text-secondary hover:text-primary transition-colors"
+            className={NAV_GHOST}
           >
             {dict.header.blog}
           </NavItem>
@@ -105,7 +108,7 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <NavItem
             href={`/${lang}`}
             pathname={pathname}
-            className="hidden sm:inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
+            className={`max-sm:hidden ${NAV_FILLED}`}
           >
             {dict.header.cta}
           </NavItem>
