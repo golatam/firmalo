@@ -5,7 +5,8 @@
   },
   "header": {
     "logo": "Firmalo",
-    "cta": "Firmar PDF"
+    "cta": "Firmar PDF",
+    "blog": "Blog"
   },
   "hero": {
     "title": "Firma tu PDF online gratis",
@@ -148,6 +149,7 @@
     "description": "Firmalo funciona para cualquier documento PDF sin importar tu ubicación. Miles de usuarios en {country} ya confían en Firmalo para firmar contratos, formularios y documentos oficiales."
   },
   "footer": {
+    "blog": "Blog",
     "privacy": "Política de privacidad",
     "terms": "Términos de uso",
     "contact": "Contacto",

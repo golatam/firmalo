@@ -42,6 +42,9 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           </div>
 
           <nav className="flex items-center gap-4 text-sm text-text-secondary">
+            <Link href="/blog" className="hover:text-text transition-colors">
+              {dict.footer.blog}
+            </Link>
             <Link
               href={`/${lang}/privacidad`}
               className="hover:text-text transition-colors"
