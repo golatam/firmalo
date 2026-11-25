@@ -45,7 +45,7 @@ export function articleUrl(slug: string): string {
 class SeoFactoryError extends Error {}
 
 function getKey(): string | null {
-  const key = process.env.SEO_FACTORY_API_KEY;
+  const key = process.env.SEO_FACTORY_API_KEY?.trim();
   if (!key) {
     console.warn("[seo-factory] SEO_FACTORY_API_KEY is not set — blog renders without API articles");
     return null;
@@ -94,11 +94,11 @@ function softFail(msg: string): null {
 // Once per process; failure behaves like an unavailable API.
 let handshake: Promise<void> | null = null;
 function ensureHandshake(): Promise<void> {
-  const key = process.env.SEO_FACTORY_API_KEY;
+  const key = process.env.SEO_FACTORY_API_KEY?.trim();
   if (!key) return Promise.resolve();
   handshake ??= fetch(`${API_BASE}/v1/health`, {
     headers: { Authorization: `Bearer ${key}`, "X-SEO-Factory-Client": "nextjs/1" },
-    cache: "no-store",
+    next: { revalidate: BLOG_REVALIDATE }, // no-store would be rejected during ISR rendering, so the request would never be sent
   })
     .then((res) => {
       if (res.status === 401) throw new SeoFactoryError("[seo-factory] 401 unauthorized on handshake");

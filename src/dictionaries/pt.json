@@ -5,7 +5,8 @@
   },
   "header": {
     "logo": "Firmalo",
-    "cta": "Assinar PDF"
+    "cta": "Assinar PDF",
+    "blog": "Blog"
   },
   "hero": {
     "title": "Assine seu PDF online grátis",
@@ -144,6 +145,7 @@
     "description": "O Firmalo funciona para qualquer documento PDF independente da sua localização. Milhares de usuários no {country} já confiam no Firmalo para assinar contratos, formulários e documentos oficiais."
   },
   "footer": {
+    "blog": "Blog",
     "privacy": "Política de privacidade",
     "terms": "Termos de uso",
     "contact": "Contato",

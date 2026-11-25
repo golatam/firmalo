@@ -93,6 +93,14 @@ export function Header({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             ))}
           </div>
 
+          <NavItem
+            href="/blog"
+            pathname={pathname}
+            className="px-2 py-1 min-h-[44px] flex items-center text-sm text-text-secondary hover:text-primary transition-colors"
+          >
+            {dict.header.blog}
+          </NavItem>
+
           {/* CTA button */}
           <NavItem
             href={`/${lang}`}
